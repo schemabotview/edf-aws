@@ -1,0 +1,7 @@
+## Make the units and joins explicit
+
+- **Normalise** — UTC event time and declared measurement units.
+- **Enrich** — Meter, tariff, customer and asset reference joins.
+- **Reject with evidence** — Mandatory-field or relationship failures go to DLQ.
+
+**Decision:** Every transformation rule has a contract, and every rejected row has a reason.

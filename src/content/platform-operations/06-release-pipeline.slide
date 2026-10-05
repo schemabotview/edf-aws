@@ -1,0 +1,7 @@
+## Release code with evidence and a rollback path
+
+- **Pull request checks** — Typecheck, build, data tests and rendered frames.
+- **Deployment approval** — Promote an immutable reviewed job version.
+- **Release validation** — Check accepted output and consumer compatibility.
+
+**Decision:** Promotion succeeds only when code, data contracts and consumers remain compatible.

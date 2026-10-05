@@ -1,0 +1,7 @@
+## Retain evidence of access and transformation
+
+- **Access history** — CloudTrail with required events and retention enabled.
+- **Data lineage** — Source manifest through table and warehouse versions.
+- **Audit answer** — Who accessed which version and how it was produced.
+
+**Decision:** Auditability needs configured event coverage, durable retention and retrievable lineage.

@@ -1,0 +1,7 @@
+## Approve compatible change and isolate breakage
+
+- **Bronze schema** — Compare arrival contract with catalog expectations.
+- **Compatible change** — Approve an additive field after contract checks.
+- **Breaking change** — Quarantine source partition; flag and alert.
+
+**Decision:** Schema compatibility includes meaning, not just matching column types.

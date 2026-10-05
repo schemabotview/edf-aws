@@ -1,0 +1,7 @@
+## Failures remain data with an owner
+
+- **Schema quarantine** — Hold incompatible source partitions.
+- **Record DLQ** — Keep rejected records and explicit reasons.
+- **Reprocess decision** — Fix contract or data; reconcile accepted output.
+
+**Decision:** Explain every held record and make exception clearance auditable.

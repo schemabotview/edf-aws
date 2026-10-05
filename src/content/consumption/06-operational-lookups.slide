@@ -1,0 +1,7 @@
+## A dashboard lookup is not an analytical scan
+
+- **Streaming update** — Conditional latest-reading write.
+- **DynamoDB key** — meter_id plus reading_timestamp.
+- **Operations dashboard** — Freshness timestamp and anomaly context.
+
+**Decision:** Display freshness explicitly and use the API that matches the key design.

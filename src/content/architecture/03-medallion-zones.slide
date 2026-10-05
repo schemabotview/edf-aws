@@ -1,0 +1,7 @@
+## Give each medallion layer one job
+
+- **Bronze raw** — Retain source values and ingest evidence.
+- **Silver cleansed** — Apply contracts and resolve duplicates.
+- **Gold business ready** — Apply agreed metrics and reporting grain.
+
+**Decision:** Bronze records arrivals; Silver resolves records; Gold defines business metrics.

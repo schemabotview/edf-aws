@@ -1,0 +1,7 @@
+## Choose the row grain before aggregation
+
+- **Silver readings** — Validated interval consumption by meter and event time.
+- **Settlement period** — Calendar maps events to the agreed reporting interval.
+- **Gold fact** — One meter row per settlement period.
+
+**Decision:** Ingestion date and business reporting period answer different questions.

@@ -1,0 +1,7 @@
+## Resolve history at fact load time
+
+- **Customer change** — Tariff band or consumption profile changes.
+- **SCD2 versions** — Effective start, effective end and current flag.
+- **Event-time assignment** — Load the fact with the correct customer surrogate key.
+
+**Decision:** History is preserved only when facts reference the correct effective version.

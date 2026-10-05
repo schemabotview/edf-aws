@@ -1,0 +1,7 @@
+## Kafka ordering has a partition boundary
+
+- **Producer contract** — Stable event key, schema and event timestamp.
+- **Kafka topics** — raw, enriched and dlq; partition by chosen key.
+- **Independent consumers** — Connector and Spark maintain separate progress.
+
+**Decision:** Do not confuse partition ordering, schema validation and business correctness.

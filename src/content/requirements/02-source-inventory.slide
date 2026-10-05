@@ -1,0 +1,7 @@
+## Choose ingestion by source capability
+
+- **Database sources** — Billing and transactional change logs.
+- **File and reference feeds** — SCADA extracts, tariffs and asset registry.
+- **Event publishers** — Meter and grid telemetry topics.
+
+**Decision:** Connector choice follows the source contract and supported protocol.

@@ -1,0 +1,7 @@
+## Define evidence before building
+
+- **Source control totals** — Counts, amounts, cut-off and extract identity.
+- **Run evidence** — Input files, schema, rejects and committed snapshot.
+- **Release decision** — Publish only an accepted, traceable version.
+
+**Decision:** Every published dataset needs a reproducible acceptance record.

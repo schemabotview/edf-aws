@@ -1,0 +1,7 @@
+## Recover without skipping or duplicating changes
+
+- **Durable progress** — Source position, file manifest and committed run.
+- **Restart boundary** — Resume only from proven durable output.
+- **Silver merge** — Apply business key, sequence and delete semantics.
+
+**Decision:** Advance processing state only after durable, reconcilable output.

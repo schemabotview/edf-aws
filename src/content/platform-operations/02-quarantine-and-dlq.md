@@ -1,0 +1,15 @@
+# Failures remain data with an owner
+
+## On screen
+
+## Failures remain data with an owner
+
+- **Schema quarantine** — Hold incompatible source partitions.
+- **Record DLQ** — Keep rejected records and explicit reasons.
+- **Reprocess decision** — Fix contract or data; reconcile accepted output.
+
+**Decision:** Explain every held record and make exception clearance auditable.
+
+## Narration
+
+Quarantine isolates a source-level incompatibility; the record DLQ isolates individual invalid rows. Both retain provenance, rejection reason and the contract version that failed. A DynamoDB quarantined flag prevents Silver from consuming an unsafe source until an authorised correction clears it. Monitoring counts these held records and compares them with expected source volume. Reprocessing writes a new accepted version without erasing the fact that the original arrival failed validation.

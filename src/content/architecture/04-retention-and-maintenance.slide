@@ -1,0 +1,7 @@
+## Retention must respect table metadata
+
+- **Raw archive** — Case-study policy: 90 days, then Glacier.
+- **Table maintenance** — Compact files and expire approved snapshots.
+- **Replay window** — Align source, snapshots and audit evidence.
+
+**Decision:** Do not let bucket lifecycle rules invalidate active table snapshots.

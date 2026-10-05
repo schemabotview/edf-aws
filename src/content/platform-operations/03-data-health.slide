@@ -1,0 +1,7 @@
+## Monitor the data, not only infrastructure
+
+- **Source freshness** — Latest expected source cut-off and missing feeds.
+- **Processing health** — Age, lag, retry counts and rejected volume.
+- **Consumer freshness** — Latest accepted period or event timestamp.
+
+**Decision:** End-to-end freshness is a data metric with several contributing delays.

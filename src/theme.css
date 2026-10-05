@@ -1,0 +1,3 @@
+:root { --brand: #65a9ff; --brand-hover: #a1ceff; --accent-2: #ffae65; }
+:root[data-theme='light'] { --brand: #174d92; --brand-hover: #10386d; --accent-2: #9a4b0b; }
+.slide-panel a { color: var(--brand); text-underline-offset: 3px; }

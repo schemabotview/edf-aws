@@ -1,0 +1,7 @@
+## Give each job its own access boundary
+
+- **Storage permissions** — IAM and Lake Formation policies.
+- **Processing identities** — Least-privilege roles for DMS, connectors and jobs.
+- **Warehouse roles** — Consumer grants and PII exclusions.
+
+**Decision:** Table governance, bucket permissions and warehouse grants must agree.

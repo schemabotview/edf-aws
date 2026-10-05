@@ -1,0 +1,7 @@
+## Sequence accepted datasets, not just jobs
+
+- **Bronze ready** — Manifest accepted and table commit recorded.
+- **Silver then Gold** — Schema gate, transformation and reconciled output.
+- **Warehouse and publish** — Load accepted version; test; release consumers.
+
+**Decision:** Dependencies should describe data readiness and version, not merely process completion.

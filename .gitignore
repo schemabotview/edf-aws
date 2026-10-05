@@ -1,0 +1,9 @@
+/node_modules/
+/dist/
+/dist-snapshot/
+/frames/
+/scripts/out/
+/scripts/segments/
+/.tmp/
+*.local
+.DS_Store

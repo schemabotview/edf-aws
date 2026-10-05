@@ -1,0 +1,7 @@
+## Facts and dimensions must share a grain
+
+- **Periodic snapshot facts** — Meter reads and generation output.
+- **Dimensions** — Meter, customer, tariff and asset attributes.
+- **Surrogate-key join** — Fact keys reference a specific dimension version.
+
+**Decision:** The star schema must preserve fact counts and totals across joins.

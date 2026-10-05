@@ -1,0 +1,7 @@
+## Event time and recovery belong to Spark
+
+- **Structured Streaming** — Thirty-second trigger; ten-minute lateness policy.
+- **Enrichment and state** — Reference join; protected query checkpoint.
+- **DynamoDB hot path** — Idempotent latest-reading update per meter.
+
+**Decision:** Restart recovery and multi-sink consistency require separate designs.

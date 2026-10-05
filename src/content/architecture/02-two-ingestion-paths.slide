@@ -1,0 +1,7 @@
+## Two routes into Bronze
+
+- **DMS database route** — Full load plus ongoing CDC to raw S3.
+- **Kafka event route** — MSK Connect S3 sink preserves event records.
+- **Bronze table commit** — A processing job validates and commits Iceberg.
+
+**Decision:** Raw object arrival and committed table visibility are different events.

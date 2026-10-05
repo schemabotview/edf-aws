@@ -1,0 +1,7 @@
+## MSK Connect lands raw events on S3
+
+- **Kafka source** — Records with topic, partition and offset identity.
+- **MSK Connect** — Managed runtime for an S3 sink plugin.
+- **Bronze acceptance** — Validate landed files and commit Iceberg separately.
+
+**Decision:** Connector delivery guarantees must be verified for the selected plugin and configuration.

@@ -1,0 +1,12 @@
+## Why EDF needed to modernise
+
+EDF’s national estate spans **millions of domestic and commercial meters**, generation telemetry and trading systems.
+
+- **Fragmented data** — A dozen heterogeneous systems fed a legacy on-premise estate with no consistent Bronze / Silver / Gold discipline. Analysts hand-assembled Ofgem datasets from extracts.
+- **Stale commercial insight** — Teams routinely worked with data **24–48 hours old**.
+- **Reconciliation failures** — Roughly **6–8% of daily meter reads failed downstream validation each month**. Failures surfaced after billing, causing corrections and customer complaints.
+- **Delayed operational response** — Batch-only meter, grid and generation telemetry exposed anomalies in the next morning’s report, after settlement or safety issues could propagate.
+
+**Business case:** Reduce regulatory risk and reconciliation errors; give operations a current view while preserving deterministic, auditable batch reporting.
+
+*Figures and conditions described in the supplied EDF case study.*

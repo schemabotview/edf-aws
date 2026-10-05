@@ -1,0 +1,5 @@
+meter_id,customer_id,reading_timestamp,consumption_value,unit,reading_type,source_version,source_system,ingested_at,batch_run_id
+MTR-001,CUST-001,2026-10-01T00:00:00Z,1.2,kWh,interval,1,meter-head-end,2026-10-01T00:00:30Z,RUN-001
+MTR-001,CUST-001,2026-10-01T00:00:00Z,1.3,kWh,interval,2,meter-head-end,2026-10-01T00:01:00Z,RUN-001
+MTR-002,CUST-002,2026-10-01T00:00:00Z,800,Wh,interval,1,meter-head-end,2026-10-01T00:00:40Z,RUN-001
+MTR-003,CUST-003,2026-10-01T00:00:00Z,,kWh,interval,1,meter-head-end,2026-10-01T00:00:45Z,RUN-001

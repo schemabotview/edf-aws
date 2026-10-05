@@ -1,0 +1,7 @@
+## Bootstrap once, then capture changes
+
+- **Database source** — Enable supported source change logging.
+- **AWS DMS** — Full load followed by ongoing CDC.
+- **S3 landing** — Preserve operations and source sequence.
+
+**Decision:** CDC is an operation history that must be applied deterministically.

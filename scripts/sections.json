@@ -1,0 +1,218 @@
+[
+  {
+    "course": "requirements",
+    "section": "business-problem",
+    "title": "Why the platform exists",
+    "scene": "requirements-map"
+  },
+  {
+    "course": "requirements",
+    "section": "source-inventory",
+    "title": "Choose ingestion by source capability",
+    "scene": "requirements-map"
+  },
+  {
+    "course": "requirements",
+    "section": "meter-contract",
+    "title": "A meter reading needs a stable identity",
+    "scene": "requirements-map"
+  },
+  {
+    "course": "requirements",
+    "section": "service-objectives",
+    "title": "Make the requirements measurable",
+    "scene": "requirements-map"
+  },
+  {
+    "course": "requirements",
+    "section": "acceptance-evidence",
+    "title": "Define evidence before building",
+    "scene": "requirements-map"
+  },
+  {
+    "course": "architecture",
+    "section": "platform-overview",
+    "title": "Read the platform from left to right",
+    "scene": "edf-aws-codex"
+  },
+  {
+    "course": "architecture",
+    "section": "two-ingestion-paths",
+    "title": "Two routes into Bronze",
+    "scene": "edf-aws-codex"
+  },
+  {
+    "course": "architecture",
+    "section": "medallion-zones",
+    "title": "Give each medallion layer one job",
+    "scene": "edf-aws-codex"
+  },
+  {
+    "course": "architecture",
+    "section": "retention-and-maintenance",
+    "title": "Retention must respect table metadata",
+    "scene": "edf-aws-codex"
+  },
+  {
+    "course": "ingestion",
+    "section": "full-load-and-cdc",
+    "title": "Bootstrap once, then capture changes",
+    "scene": "batch-pipeline"
+  },
+  {
+    "course": "ingestion",
+    "section": "bronze-acceptance",
+    "title": "Accept landed files as a bounded run",
+    "scene": "batch-pipeline"
+  },
+  {
+    "course": "ingestion",
+    "section": "cdc-recovery",
+    "title": "Recover without skipping or duplicating changes",
+    "scene": "batch-pipeline"
+  },
+  {
+    "course": "ingestion",
+    "section": "topics-and-contracts",
+    "title": "Kafka ordering has a partition boundary",
+    "scene": "stream-pipeline"
+  },
+  {
+    "course": "ingestion",
+    "section": "connector-to-bronze",
+    "title": "MSK Connect lands raw events on S3",
+    "scene": "stream-pipeline"
+  },
+  {
+    "course": "ingestion",
+    "section": "event-time-and-hot-path",
+    "title": "Event time and recovery belong to Spark",
+    "scene": "stream-pipeline"
+  },
+  {
+    "course": "transformation",
+    "section": "landing-versus-tables",
+    "title": "An S3 object is not a table commit",
+    "scene": "medallion-pipeline"
+  },
+  {
+    "course": "transformation",
+    "section": "schema-gate",
+    "title": "Approve compatible change and isolate breakage",
+    "scene": "medallion-pipeline"
+  },
+  {
+    "course": "transformation",
+    "section": "cleansing-and-enrichment",
+    "title": "Make the units and joins explicit",
+    "scene": "medallion-pipeline"
+  },
+  {
+    "course": "transformation",
+    "section": "dedupe-and-change-order",
+    "title": "Choose a winner reproducibly",
+    "scene": "medallion-pipeline"
+  },
+  {
+    "course": "transformation",
+    "section": "reporting-grain",
+    "title": "Choose the row grain before aggregation",
+    "scene": "medallion-pipeline"
+  },
+  {
+    "course": "transformation",
+    "section": "business-metrics",
+    "title": "Define consumption and utilisation once",
+    "scene": "medallion-pipeline"
+  },
+  {
+    "course": "transformation",
+    "section": "reconciliation-and-release",
+    "title": "Reconcile before publishing",
+    "scene": "medallion-pipeline"
+  },
+  {
+    "course": "consumption",
+    "section": "lake-to-warehouse",
+    "title": "Make the warehouse load boundary explicit",
+    "scene": "warehouse-model"
+  },
+  {
+    "course": "consumption",
+    "section": "star-schema",
+    "title": "Facts and dimensions must share a grain",
+    "scene": "warehouse-model"
+  },
+  {
+    "course": "consumption",
+    "section": "customer-scd2",
+    "title": "Resolve history at fact load time",
+    "scene": "warehouse-model"
+  },
+  {
+    "course": "consumption",
+    "section": "analytics-and-science",
+    "title": "Choose the access path by workload",
+    "scene": "serving-map"
+  },
+  {
+    "course": "consumption",
+    "section": "ofgem-delivery",
+    "title": "Treat submission as an auditable workflow",
+    "scene": "serving-map"
+  },
+  {
+    "course": "consumption",
+    "section": "operational-lookups",
+    "title": "A dashboard lookup is not an analytical scan",
+    "scene": "serving-map"
+  },
+  {
+    "course": "platform-operations",
+    "section": "dependency-graph",
+    "title": "Sequence accepted datasets, not just jobs",
+    "scene": "control-plane"
+  },
+  {
+    "course": "platform-operations",
+    "section": "quarantine-and-dlq",
+    "title": "Failures remain data with an owner",
+    "scene": "control-plane"
+  },
+  {
+    "course": "platform-operations",
+    "section": "data-health",
+    "title": "Monitor the data, not only infrastructure",
+    "scene": "control-plane"
+  },
+  {
+    "course": "platform-operations",
+    "section": "access-boundaries",
+    "title": "Give each job its own access boundary",
+    "scene": "control-plane"
+  },
+  {
+    "course": "platform-operations",
+    "section": "audit-lineage",
+    "title": "Retain evidence of access and transformation",
+    "scene": "control-plane"
+  },
+  {
+    "course": "platform-operations",
+    "section": "release-pipeline",
+    "title": "Release code with evidence and a rollback path",
+    "scene": "delivery-recovery"
+  },
+  {
+    "course": "platform-operations",
+    "section": "rollback-and-cost",
+    "title": "Plan recovery before scaling the platform",
+    "scene": "delivery-recovery"
+  },
+  {
+    "course": "platform-operations",
+    "section": "restart-and-backfill",
+    "title": "Prove restart and replay converge",
+    "scene": "delivery-recovery"
+  }
+]

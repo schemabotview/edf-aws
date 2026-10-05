@@ -1,0 +1,7 @@
+## Treat submission as an auditable workflow
+
+- **Accepted Gold** — Pin the reconciled reporting version.
+- **MWAA submission task** — Format, validate and record the payload.
+- **Delivery receipt** — Track acceptance, retries and correction history.
+
+**Decision:** Reconciled data and acknowledged delivery are separate milestones.

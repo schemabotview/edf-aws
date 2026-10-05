@@ -1,0 +1,7 @@
+## Choose the access path by workload
+
+- **Power BI** — Warehouse reporting against governed Redshift marts.
+- **Amazon Athena** — Exploration over committed Iceberg tables.
+- **Shared definitions** — Common metric and access contracts.
+
+**Decision:** Different query engines can serve one governed business definition.

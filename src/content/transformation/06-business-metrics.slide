@@ -1,0 +1,7 @@
+## Define consumption and utilisation once
+
+- **Consumption** — Sum accepted interval kWh at the reporting grain.
+- **Generation utilisation** — Output relative to agreed capacity and interval.
+- **Metric contract** — Units, denominator, exclusions and correction policy.
+
+**Decision:** A shared metric is a formula plus its population and exception rules.

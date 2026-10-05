@@ -1,0 +1,7 @@
+## A meter reading needs a stable identity
+
+- **Business key** — meter_id plus reading_timestamp.
+- **Measurement** — consumption_kwh, unit and reading_type.
+- **Audit envelope** — source_system, ingested_at and batch_run_id.
+
+**Decision:** Preserve business identity, measurement semantics and arrival provenance.

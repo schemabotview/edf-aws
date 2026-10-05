@@ -1,0 +1,9 @@
+## Read the platform from left to right
+
+- **Sources and ingestion** — Database changes via DMS; events via Kafka.
+- **Storage and processing** — S3 landing, Iceberg medallion and separate jobs.
+- **Serving and consumers** — Redshift, Athena and DynamoDB access paths.
+
+**Decision:** Keep ingestion, table commits and serving responsibilities explicit.
+
+[Open the full architecture poster](#/edf-aws-codex)

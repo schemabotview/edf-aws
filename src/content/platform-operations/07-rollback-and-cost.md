@@ -1,0 +1,15 @@
+# Plan recovery before scaling the platform
+
+## On screen
+
+## Plan recovery before scaling the platform
+
+- **Rollback boundary** — Job artifact, schema and published data version.
+- **Cost drivers** — Compute duration, scans, storage and connector capacity.
+- **Operating decision** — Measure unit cost with freshness and correctness.
+
+**Decision:** Cost changes are acceptable only while recovery and data objectives remain intact.
+
+## Narration
+
+A rollback plan names the code artifact and accepted output version to restore, then checks whether schema or checkpoint changes prevent that restoration. Cost review uses measured drivers: bytes scanned, compute time, connector capacity, small-file overhead and retained snapshots. Compaction and scheduling can improve cost but must not reduce auditability or violate freshness objectives. Compare cost per accepted reporting period or event volume, rather than treating the cheapest service configuration as the best architecture.

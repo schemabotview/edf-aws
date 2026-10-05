@@ -1,0 +1,7 @@
+## Choose a winner reproducibly
+
+- **Reading key** — meter_id plus reading_timestamp.
+- **Precedence rule** — Source sequence, version and tie-breaker.
+- **Accepted record** — Repeatable merge and visible reject counts.
+
+**Decision:** A deterministic merge survives retries and overlapping ingestion routes.

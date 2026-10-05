@@ -1,0 +1,5 @@
+customer_sk,customer_id,tariff_band,eff_start_date,eff_end_date,is_current
+101,CUST-001,STANDARD,2026-01-01,2026-10-01,false
+102,CUST-001,FLEX,2026-10-01,9999-12-31,true
+201,CUST-002,STANDARD,2026-01-01,9999-12-31,true
+301,CUST-003,STANDARD,2026-01-01,9999-12-31,true

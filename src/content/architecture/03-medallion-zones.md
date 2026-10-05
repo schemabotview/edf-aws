@@ -1,0 +1,15 @@
+# Give each medallion layer one job
+
+## On screen
+
+## Give each medallion layer one job
+
+- **Bronze raw** — Retain source values and ingest evidence.
+- **Silver cleansed** — Apply contracts and resolve duplicates.
+- **Gold business ready** — Apply agreed metrics and reporting grain.
+
+**Decision:** Bronze records arrivals; Silver resolves records; Gold defines business metrics.
+
+## Narration
+
+Bronze preserves what the source delivered, including the envelope needed to replay a load. Silver applies type normalisation, unit rules, validation and deterministic duplicate resolution. Gold aggregates at the business grain and reconciles outputs before publication. The same meter event can reach Bronze from more than one ingestion route, so a raw arrival identifier is not the analytical business key. Keep the layer contracts explicit and use the Silver key and source precedence rule to reconcile overlapping arrivals. Batch processing and streaming processing remain separate panels beneath the horizontal medallion. Each panel retains one row of three cards in the full poster.

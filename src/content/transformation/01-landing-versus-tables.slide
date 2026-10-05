@@ -1,0 +1,7 @@
+## An S3 object is not a table commit
+
+- **Raw landing** — DMS and connector files under isolated prefixes.
+- **Bronze Iceberg** — Processing job commits tracked data files.
+- **Catalog pointer** — Readers resolve the committed table metadata.
+
+**Decision:** Object storage provides durability; the table commit defines reader visibility.

@@ -1,0 +1,137 @@
+{
+  "requirements-business-problem": {
+    "scene": "requirements-map"
+  },
+  "requirements-source-inventory": {
+    "scene": "requirements-map",
+    "focus": "sources"
+  },
+  "requirements-meter-contract": {
+    "scene": "requirements-map",
+    "focus": "contracts"
+  },
+  "requirements-service-objectives": {
+    "scene": "requirements-map",
+    "focus": "objectives"
+  },
+  "requirements-acceptance-evidence": {
+    "scene": "requirements-map",
+    "focus": "evidence"
+  },
+  "architecture-platform-overview": {
+    "scene": "edf-aws-codex"
+  },
+  "architecture-two-ingestion-paths": {
+    "scene": "edf-aws-codex",
+    "focus": "ingestion"
+  },
+  "architecture-medallion-zones": {
+    "scene": "edf-aws-codex",
+    "focus": "lake"
+  },
+  "architecture-retention-and-maintenance": {
+    "scene": "edf-aws-codex",
+    "focus": "s3"
+  },
+  "ingestion-full-load-and-cdc": {
+    "scene": "batch-pipeline"
+  },
+  "ingestion-bronze-acceptance": {
+    "scene": "batch-pipeline",
+    "focus": "commit"
+  },
+  "ingestion-cdc-recovery": {
+    "scene": "batch-pipeline",
+    "focus": "progress"
+  },
+  "ingestion-topics-and-contracts": {
+    "scene": "stream-pipeline"
+  },
+  "ingestion-connector-to-bronze": {
+    "scene": "stream-pipeline",
+    "focus": "connector"
+  },
+  "ingestion-event-time-and-hot-path": {
+    "scene": "stream-pipeline",
+    "focus": "spark"
+  },
+  "transformation-landing-versus-tables": {
+    "scene": "medallion-pipeline"
+  },
+  "transformation-schema-gate": {
+    "scene": "medallion-pipeline",
+    "focus": "schema"
+  },
+  "transformation-cleansing-and-enrichment": {
+    "scene": "medallion-pipeline",
+    "focus": "clean"
+  },
+  "transformation-dedupe-and-change-order": {
+    "scene": "medallion-pipeline",
+    "focus": "silver"
+  },
+  "transformation-reporting-grain": {
+    "scene": "medallion-pipeline",
+    "focus": "gold"
+  },
+  "transformation-business-metrics": {
+    "scene": "medallion-pipeline",
+    "focus": "metrics"
+  },
+  "transformation-reconciliation-and-release": {
+    "scene": "medallion-pipeline",
+    "focus": "release"
+  },
+  "consumption-lake-to-warehouse": {
+    "scene": "warehouse-model"
+  },
+  "consumption-star-schema": {
+    "scene": "warehouse-model",
+    "focus": "facts"
+  },
+  "consumption-customer-scd2": {
+    "scene": "warehouse-model",
+    "focus": "dimensions"
+  },
+  "consumption-analytics-and-science": {
+    "scene": "serving-map"
+  },
+  "consumption-ofgem-delivery": {
+    "scene": "serving-map",
+    "focus": "ofgem"
+  },
+  "consumption-operational-lookups": {
+    "scene": "serving-map",
+    "focus": "dynamo"
+  },
+  "platform-operations-dependency-graph": {
+    "scene": "control-plane"
+  },
+  "platform-operations-quarantine-and-dlq": {
+    "scene": "control-plane",
+    "focus": "quality"
+  },
+  "platform-operations-data-health": {
+    "scene": "control-plane",
+    "focus": "monitor"
+  },
+  "platform-operations-access-boundaries": {
+    "scene": "control-plane",
+    "focus": "security"
+  },
+  "platform-operations-audit-lineage": {
+    "scene": "control-plane",
+    "focus": "audit"
+  },
+  "platform-operations-release-pipeline": {
+    "scene": "delivery-recovery"
+  },
+  "platform-operations-rollback-and-cost": {
+    "scene": "delivery-recovery",
+    "focus": "rollback"
+  },
+  "platform-operations-restart-and-backfill": {
+    "scene": "delivery-recovery",
+    "focus": "replay"
+  }
+}

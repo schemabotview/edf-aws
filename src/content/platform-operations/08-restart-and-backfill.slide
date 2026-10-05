@@ -1,0 +1,7 @@
+## Prove restart and replay converge
+
+- **Injected interruption** — Stop processing around a commit boundary.
+- **Safe restart** — Restore progress; reapply deterministic writes.
+- **Acceptance evidence** — Same keys and totals; no stale hot-path overwrite.
+
+**Decision:** A recovery claim is demonstrated by equivalent accepted results after interruption.

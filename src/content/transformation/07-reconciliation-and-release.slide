@@ -1,0 +1,7 @@
+## Reconcile before publishing
+
+- **Gold totals** — Aggregate accepted data for an agreed scope.
+- **Source billing totals** — Match period, population and unit.
+- **Publish or hold** — Variance above 0.01% blocks submission.
+
+**Decision:** Publication is a decision over a reconciled version, not a job exit code.

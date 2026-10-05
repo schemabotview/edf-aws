@@ -1,0 +1,15 @@
+# Monitor the data, not only infrastructure
+
+## On screen
+
+## Monitor the data, not only infrastructure
+
+- **Source freshness** — Latest expected source cut-off and missing feeds.
+- **Processing health** — Age, lag, retry counts and rejected volume.
+- **Consumer freshness** — Latest accepted period or event timestamp.
+
+**Decision:** End-to-end freshness is a data metric with several contributing delays.
+
+## Narration
+
+A platform can have healthy compute and stale data. Measure source arrival age, connector lag, processing lag and consumer-visible freshness separately. Add metrics for quarantined sources, DLQ volume and reconciliation variance. Infrastructure logs and metrics can be collected through the configured monitoring stack, but the key dashboard question is whether a consumer can use current, accepted data. Record the measurement timestamp and source of each metric so a delayed monitor is not mistaken for a healthy pipeline. Split the two-minute objective across transport, processing and serving. Alerts name the affected output, its owner and the first recovery action.

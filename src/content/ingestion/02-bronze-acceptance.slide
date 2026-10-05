@@ -1,0 +1,7 @@
+## Accept landed files as a bounded run
+
+- **Landing manifest** — File identities and source cut-off.
+- **Batch processing** — Validate envelope and attach run provenance.
+- **Bronze commit** — Publish only the accepted input set.
+
+**Decision:** A batch is defined by accepted inputs, not by the wall-clock folder name alone.
