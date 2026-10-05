@@ -1,14 +1,17 @@
-# Resolve history at fact load time
+# Customer history: SCD Type 2
 
 ## On screen
 
-## Resolve history at fact load time
+## Customer history: SCD Type 2
 
-- **Customer change** — Tariff band or consumption profile changes.
-- **SCD2 versions** — Effective start, effective end and current flag.
-- **Event-time assignment** — Load the fact with the correct customer surrogate key.
+Preserve customer changes without rewriting the meaning of historical facts.
 
-**Decision:** History is preserved only when facts reference the correct effective version.
+- **Customer change** — Example: STANDARD tariff becomes FLEX on 1 October.
+- **Effective-date versions** — Close the previous interval; create a new surrogate-key row.
+- **Event-time assignment** — Resolve each fact to the customer version valid when it occurred.
+- **History validation** — Check non-overlapping intervals; audit late corrections and re-keying.
+
+**Consumption contract:** Assign the version valid at event time; a current flag alone cannot preserve fact history.
 
 ## Narration
 

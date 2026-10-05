@@ -1,7 +1,10 @@
-## Failures remain data with an owner
+## Quality controls and exceptions
 
-- **Schema quarantine** — Hold incompatible source partitions.
-- **Record DLQ** — Keep rejected records and explicit reasons.
-- **Reprocess decision** — Fix contract or data; reconcile accepted output.
+Retain failed data with a reason, owner and controlled route back into accepted processing.
 
-**Decision:** Explain every held record and make exception clearance auditable.
+- **Source quarantine** — Hold incompatible source partitions and preserve provenance.
+- **Record DLQ** — Keep invalid rows, rejection reason and failed contract version.
+- **Source control flag** — Prevent unsafe Silver consumption until authorised clearance.
+- **Controlled reprocessing** — Repair the contract or data; replay a bounded scope and reconcile.
+
+**Operating contract:** Exception clearance is an auditable decision; do not erase the original failed arrival.

@@ -1,14 +1,17 @@
-# Monitor the data, not only infrastructure
+# Monitoring and alerting
 
 ## On screen
 
-## Monitor the data, not only infrastructure
+## Monitoring and alerting
 
-- **Source freshness** — Latest expected source cut-off and missing feeds.
-- **Processing health** — Age, lag, retry counts and rejected volume.
-- **Consumer freshness** — Latest accepted period or event timestamp.
+Measure whether consumers can use current accepted data, alongside infrastructure health.
 
-**Decision:** End-to-end freshness is a data metric with several contributing delays.
+- **Source freshness** — Expected cut-off, missing feeds and connector lag.
+- **Processing health** — Backlog age, retries, DLQ volume and reconciliation variance.
+- **Consumer freshness** — Latest accepted period or visible event timestamp.
+- **Actionable alerts** — Budget transport / processing / serving delay; route with ownership.
+
+**Operating contract:** Every alert names an affected output, an owner and a first recovery action.
 
 ## Narration
 

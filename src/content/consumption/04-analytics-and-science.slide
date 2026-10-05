@@ -1,7 +1,10 @@
-## Choose the access path by workload
+## BI and lakehouse exploration
 
-- **Power BI** — Warehouse reporting against governed Redshift marts.
-- **Amazon Athena** — Exploration over committed Iceberg tables.
-- **Shared definitions** — Common metric and access contracts.
+Choose the access path by workload while preserving shared metric and access definitions.
 
-**Decision:** Different query engines can serve one governed business definition.
+- **Power BI / Redshift** — Governed marts for commercial reporting and analysis.
+- **Amazon Athena** — Explore committed Iceberg tables without warehouse loading.
+- **Shared definitions** — Agree grains, metrics and accepted input versions.
+- **Access and freshness** — Restrict PII consistently and expose published-data freshness.
+
+**Consumption contract:** Different query engines must expose consistent business meaning and accepted versions.

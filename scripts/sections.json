@@ -32,62 +32,62 @@
   {
     "course": "platform-operations",
     "section": "dependency-graph",
-    "title": "Sequence accepted datasets, not just jobs",
-    "scene": "control-plane"
+    "title": "Orchestration and dependencies",
+    "scene": "platform-operations-dependency-graph"
   },
   {
     "course": "platform-operations",
     "section": "quarantine-and-dlq",
-    "title": "Failures remain data with an owner",
-    "scene": "control-plane"
+    "title": "Quality controls and exceptions",
+    "scene": "platform-operations-quarantine-and-dlq"
   },
   {
     "course": "platform-operations",
     "section": "data-health",
-    "title": "Monitor the data, not only infrastructure",
-    "scene": "control-plane"
+    "title": "Monitoring and alerting",
+    "scene": "platform-operations-data-health"
   },
   {
     "course": "platform-operations",
     "section": "access-boundaries",
-    "title": "Give each job its own access boundary",
-    "scene": "control-plane"
+    "title": "Security and access",
+    "scene": "platform-operations-access-boundaries"
   },
   {
     "course": "platform-operations",
     "section": "audit-lineage",
-    "title": "Retain evidence of access and transformation",
-    "scene": "control-plane"
+    "title": "Audit and lineage",
+    "scene": "platform-operations-audit-lineage"
   },
   {
     "course": "platform-operations",
     "section": "environment-contract",
-    "title": "Provision repeatable environments",
-    "scene": "delivery-recovery"
+    "title": "Terraform environments",
+    "scene": "platform-operations-environment-contract"
   },
   {
     "course": "platform-operations",
     "section": "release-pipeline",
-    "title": "Release code with evidence and a rollback path",
-    "scene": "delivery-recovery"
+    "title": "CI/CD and safe promotion",
+    "scene": "platform-operations-release-pipeline"
   },
   {
     "course": "platform-operations",
     "section": "rollback-and-cost",
-    "title": "Plan recovery before scaling the platform",
-    "scene": "delivery-recovery"
+    "title": "Rollback and operating cost",
+    "scene": "platform-operations-rollback-and-cost"
   },
   {
     "course": "platform-operations",
     "section": "schema-incident",
-    "title": "Recover from an unexpected unit change",
-    "scene": "control-plane"
+    "title": "Schema incident recovery",
+    "scene": "platform-operations-schema-incident"
   },
   {
     "course": "platform-operations",
     "section": "restart-and-backfill",
-    "title": "Prove restart and replay converge",
-    "scene": "delivery-recovery"
+    "title": "Restart, replay and backfill",
+    "scene": "platform-operations-restart-and-backfill"
   },
   {
     "course": "ingestion",
@@ -128,38 +128,38 @@
   {
     "course": "consumption",
     "section": "lake-to-warehouse",
-    "title": "Make the warehouse load boundary explicit",
+    "title": "Warehouse loading and dbt",
     "scene": "warehouse-model"
   },
   {
     "course": "consumption",
     "section": "star-schema",
-    "title": "Facts and dimensions must share a grain",
-    "scene": "warehouse-model"
+    "title": "Dimensional model",
+    "scene": "consumption-star-schema"
   },
   {
     "course": "consumption",
     "section": "customer-scd2",
-    "title": "Resolve history at fact load time",
-    "scene": "warehouse-model"
+    "title": "Customer history: SCD Type 2",
+    "scene": "consumption-customer-scd2"
   },
   {
     "course": "consumption",
     "section": "analytics-and-science",
-    "title": "Choose the access path by workload",
-    "scene": "serving-map"
+    "title": "BI and lakehouse exploration",
+    "scene": "consumption-analytics-and-science"
   },
   {
     "course": "consumption",
     "section": "ofgem-delivery",
-    "title": "Treat submission as an auditable workflow",
-    "scene": "serving-map"
+    "title": "Regulatory reporting",
+    "scene": "consumption-ofgem-delivery"
   },
   {
     "course": "consumption",
     "section": "operational-lookups",
-    "title": "A dashboard lookup is not an analytical scan",
-    "scene": "serving-map"
+    "title": "Operational consumption",
+    "scene": "consumption-operational-lookups"
   },
   {
     "course": "transformation",

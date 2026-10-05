@@ -1,14 +1,17 @@
-# Treat submission as an auditable workflow
+# Regulatory reporting
 
 ## On screen
 
-## Treat submission as an auditable workflow
+## Regulatory reporting
 
-- **Accepted Gold** — Pin the reconciled reporting version.
-- **MWAA submission task** — Format, validate and record the payload.
-- **Delivery receipt** — Track acceptance, retries and correction history.
+Submit only a reconciled reporting version through a specified, auditable delivery workflow.
 
-**Decision:** Reconciled data and acknowledged delivery are separate milestones.
+- **Accepted reporting version** — Pin reconciled Gold and the release decision.
+- **Format and validate** — MWAA task builds a versioned payload against the real specification.
+- **Delivery receipt** — Persist payload identity, response and delivery state.
+- **Retry and corrections** — Check prior acceptance; retain revision history and idempotency evidence.
+
+**Consumption contract:** Accepted data and acknowledged delivery are separate milestones; verify actual submission requirements.
 
 ## Narration
 

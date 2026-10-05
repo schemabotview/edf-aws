@@ -1,7 +1,10 @@
-## Release code with evidence and a rollback path
+## CI/CD and safe promotion
 
-- **Pull request checks** — Typecheck, build, data tests and rendered frames.
-- **Deployment approval** — Promote an immutable reviewed job version.
-- **Release validation** — Check accepted output and consumer compatibility.
+Promote reviewed artifacts only after contract, data and consumer compatibility checks.
 
-**Decision:** Promotion succeeds only when code, data contracts and consumers remain compatible.
+- **Reviewed artifacts** — GitHub Actions checks code, contracts and representative output.
+- **Compatibility checks** — Validate catalog schema, checkpoint state and consumer models.
+- **Controlled promotion** — Deploy immutable versions with environment approvals.
+- **Accepted-output validation** — Retain the prior accepted version until release evidence passes.
+
+**Operating contract:** A successful deployment is not permission to publish unreconciled data.

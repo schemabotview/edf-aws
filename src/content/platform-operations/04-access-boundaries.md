@@ -1,14 +1,17 @@
-# Give each job its own access boundary
+# Security and access
 
 ## On screen
 
-## Give each job its own access boundary
+## Security and access
 
-- **Storage permissions** — IAM and Lake Formation policies.
-- **Processing identities** — Least-privilege roles for DMS, connectors and jobs.
-- **Warehouse roles** — Consumer grants and PII exclusions.
+Align storage, processing and warehouse permissions while protecting PII and credentials.
 
-**Decision:** Table governance, bucket permissions and warehouse grants must agree.
+- **Least-privilege identities** — Scope DMS, connector and job roles to required inputs and outputs.
+- **Storage governance** — Secure raw S3 paths and supported Lake Formation table access.
+- **PII and secrets** — Separate identity data; use Secrets Manager and required KMS grants.
+- **Warehouse grants** — Expose appropriate marts; restrict PII consistently across access paths.
+
+**Operating contract:** Verify both permitted and denied access with representative job and consumer identities.
 
 ## Narration
 

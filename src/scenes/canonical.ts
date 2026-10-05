@@ -352,191 +352,6 @@ export const canonicalScenes: Scene[] = [
     "flow": "TB"
   },
   {
-    "id": "serving-map",
-    "title": "Consumption: choose the serving path",
-    "nodes": [
-      {
-        "id": "gold",
-        "label": "Accepted Gold serving",
-        "sub": "Shared definitions \u00b7 approved version",
-        "pattern": "storage",
-        "icon": "database",
-        "children": [
-          {
-            "id": "warehouse",
-            "label": "Redshift / Power BI",
-            "sub": "Governed warehouse marts and reports",
-            "icon": "redshift",
-            "pattern": "storage"
-          },
-          {
-            "id": "athena",
-            "label": "Amazon Athena",
-            "sub": "Explore committed Iceberg tables",
-            "icon": "athena",
-            "pattern": "service"
-          },
-          {
-            "id": "ofgem",
-            "label": "Regulatory delivery",
-            "sub": "MWAA format / validate \u00b7 receipt \u00b7 correction history",
-            "icon": "workflow",
-            "pattern": "service"
-          }
-        ]
-      },
-      {
-        "id": "operational",
-        "label": "Operational serving",
-        "sub": "Independent low-latency route",
-        "pattern": "service",
-        "icon": "none",
-        "children": [
-          {
-            "id": "hot",
-            "label": "Streaming hot path",
-            "sub": "Independent low-latency serving route",
-            "icon": "waves",
-            "pattern": "service"
-          },
-          {
-            "id": "dynamo",
-            "label": "DynamoDB / operations",
-            "sub": "Meter + timestamp \u00b7 latest Query \u00b7 freshness",
-            "icon": "dynamodb",
-            "pattern": "storage"
-          }
-        ],
-        "edges": [
-          {
-            "source": "hot",
-            "target": "dynamo",
-            "route": "step"
-          }
-        ]
-      }
-    ],
-    "edges": [],
-    "padding": 0.1,
-    "cols": 2
-  },
-  {
-    "id": "control-plane",
-    "title": "Platform control plane",
-    "nodes": [
-      {
-        "id": "pipeline",
-        "label": "Data pipeline",
-        "sub": "Bronze \u2192 Silver \u2192 Gold \u2192 consumers",
-        "icon": "layers",
-        "pattern": "storage"
-      },
-      {
-        "id": "mwaa",
-        "label": "Amazon MWAA",
-        "sub": "Data-ready dependencies \u00b7 bounded retries",
-        "icon": "workflow",
-        "pattern": "network"
-      },
-      {
-        "id": "quality",
-        "label": "Quality controls",
-        "sub": "Schema / totals \u00b7 quarantine \u00b7 DLQ \u00b7 ownership",
-        "icon": "shieldcheck",
-        "pattern": "service"
-      },
-      {
-        "id": "monitor",
-        "label": "Data health",
-        "sub": "Freshness \u00b7 lag \u00b7 critical route \u00b7 routed alerts",
-        "icon": "cloudwatch",
-        "pattern": "service"
-      },
-      {
-        "id": "security",
-        "label": "Access and PII",
-        "sub": "IAM / Lake Formation \u00b7 KMS \u00b7 secrets \u00b7 separation",
-        "icon": "lock",
-        "pattern": "user"
-      },
-      {
-        "id": "audit",
-        "label": "Audit and lineage",
-        "sub": "CloudTrail coverage \u00b7 versions \u00b7 retained evidence",
-        "icon": "cloudtrail",
-        "pattern": "storage"
-      }
-    ],
-    "edges": [],
-    "padding": 0.1,
-    "flow": "TB"
-  },
-  {
-    "id": "delivery-recovery",
-    "title": "Delivery and controlled recovery",
-    "nodes": [
-      {
-        "id": "terraform",
-        "label": "Terraform environments",
-        "sub": "Protected state \u00b7 isolated configuration",
-        "icon": "terraform",
-        "pattern": "network"
-      },
-      {
-        "id": "release",
-        "label": "CI/CD release",
-        "sub": "Review \u00b7 contracts \u00b7 tests \u00b7 controlled promotion",
-        "icon": "gitbranch",
-        "pattern": "service"
-      },
-      {
-        "id": "rollback",
-        "label": "Rollback and cost",
-        "sub": "Compatible code / data versions \u00b7 recovery budget",
-        "icon": "clock",
-        "pattern": "service"
-      },
-      {
-        "id": "replay",
-        "label": "Bounded replay",
-        "sub": "Pinned inputs \u00b7 safe retry \u00b7 deterministic rebuild",
-        "icon": "workflow",
-        "pattern": "service"
-      },
-      {
-        "id": "verify",
-        "label": "Reconcile and promote",
-        "sub": "Equivalent accepted output \u00b7 lineage evidence",
-        "icon": "check",
-        "pattern": "storage"
-      }
-    ],
-    "edges": [
-      {
-        "source": "terraform",
-        "target": "release",
-        "route": "step"
-      },
-      {
-        "source": "release",
-        "target": "rollback",
-        "route": "step"
-      },
-      {
-        "source": "rollback",
-        "target": "replay",
-        "route": "step"
-      },
-      {
-        "source": "replay",
-        "target": "verify",
-        "route": "step"
-      }
-    ],
-    "padding": 0.1,
-    "flow": "TB"
-  },
-  {
     "id": "requirements-business-needs",
     "title": "Business needs",
     "cols": 2,
@@ -1415,6 +1230,576 @@ export const canonicalScenes: Scene[] = [
         "label": "Versioned acceptance record",
         "sub": "Retain input snapshots, reject counts, decision and correction history",
         "icon": "table",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "consumption-star-schema",
+    "title": "Dimensional model",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "facts",
+        "label": "Periodic snapshot facts",
+        "sub": "FACT_METER_READS and FACT_GENERATION_OUTPUT use agreed grains",
+        "icon": "table",
+        "pattern": "external"
+      },
+      {
+        "id": "dimensions",
+        "label": "Descriptive dimensions",
+        "sub": "Meter, customer, tariff and asset attributes",
+        "icon": "users",
+        "pattern": "storage"
+      },
+      {
+        "id": "keys",
+        "label": "Surrogate-key joins",
+        "sub": "Each fact references one appropriate dimension version",
+        "icon": "key",
+        "pattern": "service"
+      },
+      {
+        "id": "unknown",
+        "label": "Unresolved keys",
+        "sub": "Use a defined unknown member or held fact; avoid silent row loss",
+        "icon": "shieldcheck",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "consumption-ofgem-delivery",
+    "title": "Regulatory reporting",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "accepted",
+        "label": "Accepted reporting version",
+        "sub": "Pin reconciled Gold and the release decision",
+        "icon": "database",
+        "pattern": "external"
+      },
+      {
+        "id": "payload",
+        "label": "Format and validate",
+        "sub": "MWAA task builds a versioned payload against the real specification",
+        "icon": "workflow",
+        "pattern": "storage"
+      },
+      {
+        "id": "receipt",
+        "label": "Delivery receipt",
+        "sub": "Persist payload identity, response and delivery state",
+        "icon": "check",
+        "pattern": "service"
+      },
+      {
+        "id": "retry",
+        "label": "Retry and corrections",
+        "sub": "Check prior acceptance; retain revision history and idempotency evidence",
+        "icon": "clock",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "consumption-customer-scd2",
+    "title": "Customer history: SCD Type 2",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "change",
+        "label": "Customer change",
+        "sub": "Example: STANDARD tariff becomes FLEX on 1 October",
+        "icon": "users",
+        "pattern": "external"
+      },
+      {
+        "id": "versions",
+        "label": "Effective-date versions",
+        "sub": "Close the previous interval; create a new surrogate-key row",
+        "icon": "clock",
+        "pattern": "storage"
+      },
+      {
+        "id": "assign",
+        "label": "Event-time assignment",
+        "sub": "Resolve each fact to the customer version valid when it occurred",
+        "icon": "key",
+        "pattern": "service"
+      },
+      {
+        "id": "checks",
+        "label": "History validation",
+        "sub": "Check non-overlapping intervals; audit late corrections and re-keying",
+        "icon": "shieldcheck",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "consumption-analytics-and-science",
+    "title": "BI and lakehouse exploration",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "bi",
+        "label": "Power BI / Redshift",
+        "sub": "Governed marts for commercial reporting and analysis",
+        "icon": "redshift",
+        "pattern": "external"
+      },
+      {
+        "id": "lake",
+        "label": "Amazon Athena",
+        "sub": "Explore committed Iceberg tables without warehouse loading",
+        "icon": "athena",
+        "pattern": "storage"
+      },
+      {
+        "id": "meaning",
+        "label": "Shared definitions",
+        "sub": "Agree grains, metrics and accepted input versions",
+        "icon": "table",
+        "pattern": "service"
+      },
+      {
+        "id": "access",
+        "label": "Access and freshness",
+        "sub": "Restrict PII consistently and expose published-data freshness",
+        "icon": "shieldcheck",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "consumption-operational-lookups",
+    "title": "Operational consumption",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "update",
+        "label": "Streaming updates",
+        "sub": "Conditional, repeatable writes protect operational readings",
+        "icon": "waves",
+        "pattern": "external"
+      },
+      {
+        "id": "key",
+        "label": "Meter / timestamp key",
+        "sub": "Partition key meter_id; sort key reading_timestamp",
+        "icon": "key",
+        "pattern": "storage"
+      },
+      {
+        "id": "latest",
+        "label": "Latest-reading access",
+        "sub": "Descending Query with limit 1; GetItem requires the full key",
+        "icon": "dynamodb",
+        "pattern": "service"
+      },
+      {
+        "id": "freshness",
+        "label": "Freshness and retention",
+        "sub": "Show event age and anomalies; case-study hot retention uses 90-day TTL",
+        "icon": "clock",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "platform-operations-release-pipeline",
+    "title": "CI/CD and safe promotion",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "review",
+        "label": "Reviewed artifacts",
+        "sub": "GitHub Actions checks code, contracts and representative output",
+        "icon": "gitbranch",
+        "pattern": "external"
+      },
+      {
+        "id": "compatible",
+        "label": "Compatibility checks",
+        "sub": "Validate catalog schema, checkpoint state and consumer models",
+        "icon": "shieldcheck",
+        "pattern": "storage"
+      },
+      {
+        "id": "promote",
+        "label": "Controlled promotion",
+        "sub": "Deploy immutable versions with environment approvals",
+        "icon": "workflow",
+        "pattern": "service"
+      },
+      {
+        "id": "validate",
+        "label": "Accepted-output validation",
+        "sub": "Retain the prior accepted version until release evidence passes",
+        "icon": "check",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "platform-operations-audit-lineage",
+    "title": "Audit and lineage",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "access",
+        "label": "Access evidence",
+        "sub": "Configure CloudTrail events and required S3 data-event coverage",
+        "icon": "cloudtrail",
+        "pattern": "external"
+      },
+      {
+        "id": "lineage",
+        "label": "Transformation lineage",
+        "sub": "Connect object IDs, contract version, job version and table snapshot",
+        "icon": "layers",
+        "pattern": "storage"
+      },
+      {
+        "id": "warehouse",
+        "label": "Published versions",
+        "sub": "Retain warehouse run, acceptance decision and report revision",
+        "icon": "table",
+        "pattern": "service"
+      },
+      {
+        "id": "retention",
+        "label": "Retention and retrieval",
+        "sub": "Protect the archive; prove historical evidence can be retrieved",
+        "icon": "shieldcheck",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "platform-operations-rollback-and-cost",
+    "title": "Rollback and operating cost",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "rollback",
+        "label": "Rollback boundary",
+        "sub": "Restore compatible job artifact and accepted data version",
+        "icon": "clock",
+        "pattern": "external"
+      },
+      {
+        "id": "state",
+        "label": "Schema and checkpoint state",
+        "sub": "Check whether migrations prevent the proposed rollback",
+        "icon": "database",
+        "pattern": "storage"
+      },
+      {
+        "id": "drivers",
+        "label": "Measured cost drivers",
+        "sub": "Scans, compute time, connector capacity and snapshot retention",
+        "icon": "gauge",
+        "pattern": "service"
+      },
+      {
+        "id": "unit",
+        "label": "Cost per accepted output",
+        "sub": "Compare reporting periods or event volume against service objectives",
+        "icon": "table",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "platform-operations-access-boundaries",
+    "title": "Security and access",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "identity",
+        "label": "Least-privilege identities",
+        "sub": "Scope DMS, connector and job roles to required inputs and outputs",
+        "icon": "iam",
+        "pattern": "external"
+      },
+      {
+        "id": "storage",
+        "label": "Storage governance",
+        "sub": "Secure raw S3 paths and supported Lake Formation table access",
+        "icon": "s3",
+        "pattern": "storage"
+      },
+      {
+        "id": "pii",
+        "label": "PII and secrets",
+        "sub": "Separate identity data; use Secrets Manager and required KMS grants",
+        "icon": "lock",
+        "pattern": "service"
+      },
+      {
+        "id": "consumer",
+        "label": "Warehouse grants",
+        "sub": "Expose appropriate marts; restrict PII consistently across access paths",
+        "icon": "redshift",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "platform-operations-dependency-graph",
+    "title": "Orchestration and dependencies",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "bronze",
+        "label": "Bronze ready",
+        "sub": "Accepted manifest and committed snapshot identify the bounded run",
+        "icon": "s3",
+        "pattern": "external"
+      },
+      {
+        "id": "silver",
+        "label": "Silver and Gold ready",
+        "sub": "Schema checks, trusted records and reconciled metrics",
+        "icon": "layers",
+        "pattern": "storage"
+      },
+      {
+        "id": "serve",
+        "label": "Warehouse and release",
+        "sub": "Load the accepted version; test and release consumers",
+        "icon": "redshift",
+        "pattern": "service"
+      },
+      {
+        "id": "mwaa",
+        "label": "MWAA coordination",
+        "sub": "Pass run IDs and versions; use sensor timeouts and bounded retries",
+        "icon": "workflow",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "platform-operations-data-health",
+    "title": "Monitoring and alerting",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "source",
+        "label": "Source freshness",
+        "sub": "Expected cut-off, missing feeds and connector lag",
+        "icon": "clock",
+        "pattern": "external"
+      },
+      {
+        "id": "processing",
+        "label": "Processing health",
+        "sub": "Backlog age, retries, DLQ volume and reconciliation variance",
+        "icon": "cloudwatch",
+        "pattern": "storage"
+      },
+      {
+        "id": "consumer",
+        "label": "Consumer freshness",
+        "sub": "Latest accepted period or visible event timestamp",
+        "icon": "gauge",
+        "pattern": "service"
+      },
+      {
+        "id": "alerts",
+        "label": "Actionable alerts",
+        "sub": "Budget transport / processing / serving delay; route with ownership",
+        "icon": "bell",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "platform-operations-restart-and-backfill",
+    "title": "Restart, replay and backfill",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "interrupt",
+        "label": "Controlled interruption",
+        "sub": "Compare normal processing with failure near the commit boundary",
+        "icon": "clock",
+        "pattern": "external"
+      },
+      {
+        "id": "restart",
+        "label": "Safe restart",
+        "sub": "Use the same inputs and contracts; restore progress and repeat writes safely",
+        "icon": "workflow",
+        "pattern": "storage"
+      },
+      {
+        "id": "backfill",
+        "label": "Bounded backfill",
+        "sub": "Declare interval and versions; avoid stale hot-path overwrites",
+        "icon": "database",
+        "pattern": "service"
+      },
+      {
+        "id": "evidence",
+        "label": "Recovery acceptance",
+        "sub": "Compare business keys, values, counts and totals before promotion",
+        "icon": "shieldcheck",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "platform-operations-quarantine-and-dlq",
+    "title": "Quality controls and exceptions",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "quarantine",
+        "label": "Source quarantine",
+        "sub": "Hold incompatible source partitions and preserve provenance",
+        "icon": "shieldcheck",
+        "pattern": "external"
+      },
+      {
+        "id": "dlq",
+        "label": "Record DLQ",
+        "sub": "Keep invalid rows, rejection reason and failed contract version",
+        "icon": "database",
+        "pattern": "storage"
+      },
+      {
+        "id": "flag",
+        "label": "Source control flag",
+        "sub": "Prevent unsafe Silver consumption until authorised clearance",
+        "icon": "dynamodb",
+        "pattern": "service"
+      },
+      {
+        "id": "reprocess",
+        "label": "Controlled reprocessing",
+        "sub": "Repair the contract or data; replay a bounded scope and reconcile",
+        "icon": "workflow",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "platform-operations-schema-incident",
+    "title": "Schema incident recovery",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "detect",
+        "label": "Detect the change",
+        "sub": "Gate flags unexpected units or schema against the source contract",
+        "icon": "bell",
+        "pattern": "external"
+      },
+      {
+        "id": "contain",
+        "label": "Contain affected input",
+        "sub": "Quarantine the scope; flag the source and hold unsafe publication",
+        "icon": "shieldcheck",
+        "pattern": "storage"
+      },
+      {
+        "id": "repair",
+        "label": "Approve the repair",
+        "sub": "Confirm meaning and version the corrected contract / transformation",
+        "icon": "layers",
+        "pattern": "service"
+      },
+      {
+        "id": "replay",
+        "label": "Replay and reconcile",
+        "sub": "Rebuild the affected interval; compare totals and record release evidence",
+        "icon": "workflow",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "platform-operations-environment-contract",
+    "title": "Terraform environments",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "estate",
+        "label": "Resource definitions",
+        "sub": "S3, IAM, networking, Glue and required service configuration",
+        "icon": "terraform",
+        "pattern": "external"
+      },
+      {
+        "id": "capture",
+        "label": "Ingestion configuration",
+        "sub": "DMS endpoints / tasks; MSK Connect plugin configuration where supported",
+        "icon": "network",
+        "pattern": "storage"
+      },
+      {
+        "id": "inputs",
+        "label": "Environment inputs",
+        "sub": "Separate dev / production names, capacity, endpoints and secrets",
+        "icon": "lock",
+        "pattern": "service"
+      },
+      {
+        "id": "validate",
+        "label": "Deployment validation",
+        "sub": "Protect state; check connectivity, KMS use and permissions",
+        "icon": "shieldcheck",
         "pattern": "network"
       }
     ],

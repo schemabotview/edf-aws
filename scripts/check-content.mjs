@@ -8,7 +8,7 @@ await build({ stdin: { contents: "export { COURSES, SPINE } from './src/content'
 const { COURSES, SPINE, SCENES } = await import(pathToFileURL(resolve('.tmp/check.mjs')))
 assert.deepEqual(Object.keys(COURSES), [...SPINE])
 assert.equal(SPINE.length, 6)
-assert.equal(Object.keys(SCENES).length, 28)
+assert.equal(Object.keys(SCENES).length, 40)
 const bindings = JSON.parse(await readFile('section-map.json','utf8'))
 const uses = {}
 let sections = 0
@@ -34,7 +34,7 @@ for (const c of Object.values(COURSES)) {
   }
 }
 assert.equal(sections,40)
-for (const [scene, count] of Object.entries(uses)) assert(count >= 2 || scene.startsWith('requirements-') || scene.startsWith('architecture-') || scene === 'edf-aws-codex' || scene.startsWith('ingestion-') || scene === 'batch-pipeline' || scene === 'stream-pipeline' || scene.startsWith('transformation-') || scene === 'medallion-pipeline', 'Canonical scenes must be reused')
+assert.deepEqual(new Set(Object.keys(uses)), new Set(Object.keys(SCENES)), 'Every registered scene must be used')
 const poster=SCENES['edf-aws-codex']; assert(poster)
 const find=(ns,id)=>ns.flatMap(n=>[n,...(n.children?find(n.children,id):[])]).filter(n=>n.id===id)
 // Poster contract: each processing panel has exactly one row of three children.

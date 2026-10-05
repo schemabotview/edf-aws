@@ -1,14 +1,17 @@
-# Retain evidence of access and transformation
+# Audit and lineage
 
 ## On screen
 
-## Retain evidence of access and transformation
+## Audit and lineage
 
-- **Access history** — CloudTrail with required events and retention enabled.
-- **Data lineage** — Source manifest through table and warehouse versions.
-- **Audit answer** — Who accessed which version and how it was produced.
+Explain who accessed a dataset and how each historical output was produced.
 
-**Decision:** Auditability needs configured event coverage, durable retention and retrievable lineage.
+- **Access evidence** — Configure CloudTrail events and required S3 data-event coverage.
+- **Transformation lineage** — Connect object IDs, contract version, job version and table snapshot.
+- **Published versions** — Retain warehouse run, acceptance decision and report revision.
+- **Retention and retrieval** — Protect the archive; prove historical evidence can be retrieved.
+
+**Operating contract:** Case-study seven-year access-log retention requires configured coverage, protected storage and retrieval tests.
 
 ## Narration
 

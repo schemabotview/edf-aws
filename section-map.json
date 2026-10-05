@@ -54,53 +54,43 @@
     "scene": "warehouse-model"
   },
   "consumption-star-schema": {
-    "scene": "warehouse-model",
-    "focus": "facts"
+    "scene": "consumption-star-schema"
   },
   "consumption-customer-scd2": {
-    "scene": "warehouse-model",
-    "focus": "dimensions"
+    "scene": "consumption-customer-scd2"
   },
   "consumption-analytics-and-science": {
-    "scene": "serving-map"
+    "scene": "consumption-analytics-and-science"
   },
   "consumption-ofgem-delivery": {
-    "scene": "serving-map",
-    "focus": "ofgem"
+    "scene": "consumption-ofgem-delivery"
   },
   "consumption-operational-lookups": {
-    "scene": "serving-map",
-    "focus": "dynamo"
+    "scene": "consumption-operational-lookups"
   },
   "platform-operations-dependency-graph": {
-    "scene": "control-plane"
+    "scene": "platform-operations-dependency-graph"
   },
   "platform-operations-quarantine-and-dlq": {
-    "scene": "control-plane",
-    "focus": "quality"
+    "scene": "platform-operations-quarantine-and-dlq"
   },
   "platform-operations-data-health": {
-    "scene": "control-plane",
-    "focus": "monitor"
+    "scene": "platform-operations-data-health"
   },
   "platform-operations-access-boundaries": {
-    "scene": "control-plane",
-    "focus": "security"
+    "scene": "platform-operations-access-boundaries"
   },
   "platform-operations-audit-lineage": {
-    "scene": "control-plane",
-    "focus": "audit"
+    "scene": "platform-operations-audit-lineage"
   },
   "platform-operations-release-pipeline": {
-    "scene": "delivery-recovery"
+    "scene": "platform-operations-release-pipeline"
   },
   "platform-operations-rollback-and-cost": {
-    "scene": "delivery-recovery",
-    "focus": "rollback"
+    "scene": "platform-operations-rollback-and-cost"
   },
   "platform-operations-restart-and-backfill": {
-    "scene": "delivery-recovery",
-    "focus": "replay"
+    "scene": "platform-operations-restart-and-backfill"
   },
   "architecture-service-responsibilities": {
     "scene": "architecture-service-responsibilities"
@@ -109,12 +99,10 @@
     "scene": "transformation-validation-and-exceptions"
   },
   "platform-operations-environment-contract": {
-    "scene": "delivery-recovery",
-    "focus": "terraform"
+    "scene": "platform-operations-environment-contract"
   },
   "platform-operations-schema-incident": {
-    "scene": "control-plane",
-    "focus": "quality"
+    "scene": "platform-operations-schema-incident"
   },
   "requirements-business-problem": {
     "scene": "requirements-map"

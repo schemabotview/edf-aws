@@ -1,7 +1,10 @@
-## Sequence accepted datasets, not just jobs
+## Orchestration and dependencies
 
-- **Bronze ready** — Manifest accepted and table commit recorded.
-- **Silver then Gold** — Schema gate, transformation and reconciled output.
-- **Warehouse and publish** — Load accepted version; test; release consumers.
+Coordinate accepted datasets and their versions, rather than treating a successful process as complete data.
 
-**Decision:** Dependencies should describe data readiness and version, not merely process completion.
+- **Bronze ready** — Accepted manifest and committed snapshot identify the bounded run.
+- **Silver and Gold ready** — Schema checks, trusted records and reconciled metrics.
+- **Warehouse and release** — Load the accepted version; test and release consumers.
+- **MWAA coordination** — Pass run IDs and versions; use sensor timeouts and bounded retries.
+
+**Operating contract:** Daily DAGs wait for cut-off and completeness conditions; ongoing ingestion remains an independent service.

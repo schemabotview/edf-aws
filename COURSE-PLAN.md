@@ -1,6 +1,6 @@
 # EDF AWS course plan
 
-Six courses, 40 sections and 28 diagrams. Eight canonical diagrams are reused outside Requirements. Each Requirements section has its own detailed card scene, as requested.
+Six courses, 40 sections and 40 diagrams. Each section now has a focused scene, following the requested course-by-course refinement. Pipeline and medallion overviews remain diagrams; detailed sections use four-card scenes.
 
 | Course | Coverage | Canonical diagrams |
 |---|---|---|
@@ -65,28 +65,28 @@ Each section expands an explicit promotion contract; the overview retains the ho
 
 ## Consumption: warehouse models and serving paths
 
-| Section | Scene | Highlight |
+| Section | Scene | Format |
 |---|---|---|
-| `lake-to-warehouse` | `warehouse-model` | `Complete scene` |
-| `star-schema` | `warehouse-model` | `facts` |
-| `customer-scd2` | `warehouse-model` | `dimensions` |
-| `analytics-and-science` | `serving-map` | `Complete scene` |
-| `ofgem-delivery` | `serving-map` | `ofgem` |
-| `operational-lookups` | `serving-map` | `dynamo` |
+| `lake-to-warehouse` — Warehouse loading and dbt | `warehouse-model` | Warehouse pipeline |
+| `star-schema` — Dimensional model | `consumption-star-schema` | Four detailed cards |
+| `customer-scd2` — Customer history: SCD Type 2 | `consumption-customer-scd2` | Four detailed cards |
+| `analytics-and-science` — BI and lakehouse exploration | `consumption-analytics-and-science` | Four detailed cards |
+| `ofgem-delivery` — Regulatory reporting | `consumption-ofgem-delivery` | Four detailed cards |
+| `operational-lookups` — Operational consumption | `consumption-operational-lookups` | Four detailed cards |
 
-## Platform operations: orchestration, controls, delivery and recovery
+## Platform operations: control, delivery and recovery
 
-| Section | Scene | Highlight |
+| Section | Scene | Format |
 |---|---|---|
-| `dependency-graph` | `control-plane` | `Complete scene` |
-| `quarantine-and-dlq` | `control-plane` | `quality` |
-| `data-health` | `control-plane` | `monitor` |
-| `access-boundaries` | `control-plane` | `security` |
-| `audit-lineage` | `control-plane` | `audit` |
-| `environment-contract` | `delivery-recovery` | `terraform` |
-| `release-pipeline` | `delivery-recovery` | `Complete scene` |
-| `rollback-and-cost` | `delivery-recovery` | `rollback` |
-| `schema-incident` | `control-plane` | `quality` |
-| `restart-and-backfill` | `delivery-recovery` | `replay` |
+| `dependency-graph` — Orchestration and dependencies | `platform-operations-dependency-graph` | Four detailed cards |
+| `quarantine-and-dlq` — Quality controls and exceptions | `platform-operations-quarantine-and-dlq` | Four detailed cards |
+| `data-health` — Monitoring and alerting | `platform-operations-data-health` | Four detailed cards |
+| `access-boundaries` — Security and access | `platform-operations-access-boundaries` | Four detailed cards |
+| `audit-lineage` — Audit and lineage | `platform-operations-audit-lineage` | Four detailed cards |
+| `environment-contract` — Terraform environments | `platform-operations-environment-contract` | Four detailed cards |
+| `release-pipeline` — CI/CD and safe promotion | `platform-operations-release-pipeline` | Four detailed cards |
+| `rollback-and-cost` — Rollback and operating cost | `platform-operations-rollback-and-cost` | Four detailed cards |
+| `schema-incident` — Schema incident recovery | `platform-operations-schema-incident` | Four detailed cards |
+| `restart-and-backfill` — Restart, replay and backfill | `platform-operations-restart-and-backfill` | Four detailed cards |
 
 Markdown owns slides and narration; section-map.json owns scene and highlight bindings. The full poster retains horizontal medallion and stacked processing panels. Raw landing remains distinct from Iceberg commits; connector ingestion remains distinct from Spark processing. This is an educational repo with synthetic examples, not deployed AWS infrastructure.

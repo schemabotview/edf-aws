@@ -1,14 +1,17 @@
-# Recover from an unexpected unit change
+# Schema incident recovery
 
 ## On screen
 
-## Recover from an unexpected unit change
+## Schema incident recovery
 
-- **Unexpected source** — Vendor changes the declared reading unit.
-- **Containment** — Quarantine, source flag and reporting hold.
-- **Recovery** — Approve contract correction; replay and reconcile.
+Contain an unexpected source unit or schema change before correcting and replaying data.
 
-**Decision:** Contain the bad input before repairing and replaying it.
+- **Detect the change** — Gate flags unexpected units or schema against the source contract.
+- **Contain affected input** — Quarantine the scope; flag the source and hold unsafe publication.
+- **Approve the repair** — Confirm meaning and version the corrected contract / transformation.
+- **Replay and reconcile** — Rebuild the affected interval; compare totals and record release evidence.
+
+**Operating contract:** Confirm source meaning before conversion; retain the last accepted output with an explicit freshness warning.
 
 ## Narration
 

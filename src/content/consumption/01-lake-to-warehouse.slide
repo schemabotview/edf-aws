@@ -1,7 +1,10 @@
-## Make the warehouse load boundary explicit
+## Warehouse loading and dbt
 
-- **Accepted Iceberg snapshot** — Fixed input version for the warehouse run.
-- **Warehouse staging** — Materialise accepted data through a chosen load adapter.
-- **dbt in Redshift** — Build staging, intermediate and mart models.
+Pin an accepted Gold version before loading Redshift and building tested warehouse models.
 
-**Decision:** The load adapter owns movement; dbt owns warehouse model transformations.
+- **Accepted Gold snapshot** — Pin the lakehouse input version and run identity.
+- **Warehouse load adapter** — Validate the chosen transport into Redshift staging.
+- **dbt models** — Build staging, intermediate and mart relations with tests.
+- **Load reconciliation** — Verify warehouse counts and totals against accepted input.
+
+**Consumption contract:** The chosen load adapter owns movement; dbt owns transformations of relations available in Redshift.

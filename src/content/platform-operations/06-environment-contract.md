@@ -1,14 +1,17 @@
-# Provision repeatable environments
+# Terraform environments
 
 ## On screen
 
-## Provision repeatable environments
+## Terraform environments
 
-- **Terraform definitions** — Storage, roles, network and service configuration.
-- **Environment inputs** — Names, capacity, endpoints and protected secrets.
-- **Validation** — Connectivity, permissions and deployment checks.
+Provision repeatable resource boundaries with environment-specific configuration and protected state.
 
-**Decision:** Repeatability includes environment-specific configuration and protected state.
+- **Resource definitions** — S3, IAM, networking, Glue and required service configuration.
+- **Ingestion configuration** — DMS endpoints / tasks; MSK Connect plugin configuration where supported.
+- **Environment inputs** — Separate dev / production names, capacity, endpoints and secrets.
+- **Deployment validation** — Protect state; check connectivity, KMS use and permissions.
+
+**Operating contract:** This learning repo describes the estate; production deployment requires target-account validation.
 
 ## Narration
 

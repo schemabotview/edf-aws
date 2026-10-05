@@ -1,7 +1,10 @@
-## Prove restart and replay converge
+## Restart, replay and backfill
 
-- **Injected interruption** — Stop processing around a commit boundary.
-- **Safe restart** — Restore progress; reapply deterministic writes.
-- **Acceptance evidence** — Same keys and totals; no stale hot-path overwrite.
+Prove recovery converges to equivalent accepted output without overwriting newer operational data.
 
-**Decision:** A recovery claim is demonstrated by equivalent accepted results after interruption.
+- **Controlled interruption** — Compare normal processing with failure near the commit boundary.
+- **Safe restart** — Use the same inputs and contracts; restore progress and repeat writes safely.
+- **Bounded backfill** — Declare interval and versions; avoid stale hot-path overwrites.
+- **Recovery acceptance** — Compare business keys, values, counts and totals before promotion.
+
+**Operating contract:** This is a teaching scenario; production recovery needs repeatable integration evidence.

@@ -1,14 +1,17 @@
-# A dashboard lookup is not an analytical scan
+# Operational consumption
 
 ## On screen
 
-## A dashboard lookup is not an analytical scan
+## Operational consumption
 
-- **Streaming update** — Conditional latest-reading write.
-- **DynamoDB key** — meter_id plus reading_timestamp.
-- **Operations dashboard** — Freshness timestamp and anomaly context.
+Serve current meter views by key and make stale data visible to the operator.
 
-**Decision:** Display freshness explicitly and use the API that matches the key design.
+- **Streaming updates** — Conditional, repeatable writes protect operational readings.
+- **Meter / timestamp key** — Partition key meter_id; sort key reading_timestamp.
+- **Latest-reading access** — Descending Query with limit 1; GetItem requires the full key.
+- **Freshness and retention** — Show event age and anomalies; case-study hot retention uses 90-day TTL.
+
+**Consumption contract:** Operational lookups differ from analytical scans; asynchronous TTL is not a correctness guarantee.
 
 ## Narration
 

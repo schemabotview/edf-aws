@@ -1,7 +1,10 @@
-## Plan recovery before scaling the platform
+## Rollback and operating cost
 
-- **Rollback boundary** — Job artifact, schema and published data version.
-- **Cost drivers** — Compute duration, scans, storage and connector capacity.
-- **Operating decision** — Measure unit cost with freshness and correctness.
+Name the recovery boundary before optimising compute, storage or connector capacity.
 
-**Decision:** Cost changes are acceptable only while recovery and data objectives remain intact.
+- **Rollback boundary** — Restore compatible job artifact and accepted data version.
+- **Schema and checkpoint state** — Check whether migrations prevent the proposed rollback.
+- **Measured cost drivers** — Scans, compute time, connector capacity and snapshot retention.
+- **Cost per accepted output** — Compare reporting periods or event volume against service objectives.
+
+**Operating contract:** Cost changes are acceptable only while freshness, recovery and correctness remain intact.

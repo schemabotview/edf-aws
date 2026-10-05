@@ -1,7 +1,10 @@
-## Facts and dimensions must share a grain
+## Dimensional model
 
-- **Periodic snapshot facts** — Meter reads and generation output.
-- **Dimensions** — Meter, customer, tariff and asset attributes.
-- **Surrogate-key join** — Fact keys reference a specific dimension version.
+Serve measurements at an explicit grain through facts and descriptive dimensions.
 
-**Decision:** The star schema must preserve fact counts and totals across joins.
+- **Periodic snapshot facts** — FACT_METER_READS and FACT_GENERATION_OUTPUT use agreed grains.
+- **Descriptive dimensions** — Meter, customer, tariff and asset attributes.
+- **Surrogate-key joins** — Each fact references one appropriate dimension version.
+- **Unresolved keys** — Use a defined unknown member or held fact; avoid silent row loss.
+
+**Consumption contract:** Dimension joins must preserve fact counts and measurement totals.
