@@ -118,5 +118,9 @@
   },
   "requirements-acceptance-criteria": {
     "scene": "requirements-acceptance-criteria"
+  },
+  "ingestion-platform-context": {
+    "scene": "edf-aws-codex",
+    "focus": "ingestion"
   }
 }

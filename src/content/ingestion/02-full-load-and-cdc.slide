@@ -1,0 +1,10 @@
+## Batch ingestion: implementation settings
+
+**Illustrative profile:** PostgreSQL → DMS → raw S3 CSV → Bronze Iceberg; validate against the actual source engine.
+
+- **Source DB** — `wal_level=logical`; size replication slots / WAL senders; grant replication and table-read access. RDS: `rds.logical_replication=1`; monitor retained WAL.
+- **DMS task** — `MigrationType=full-load-and-cdc`; explicit table mappings; `MaxFullLoadSubTasks=8` as a starting point; keep both full-load stop flags `false`.
+- **S3 endpoint** — Set bucket / prefix and service role; use KMS encryption. `PreserveTransactions=true` + `CdcPath=cdc` keeps ordered CDC as CSV; disable date partitioning and headers.
+- **Acceptance** — Retain operations and provenance, reconcile inputs, commit Bronze separately, then advance durable progress.
+
+**Tuning:** `CdcMaxBatchInterval=60` seconds is a starting point, not an end-to-end SLA.

@@ -91,6 +91,12 @@
   },
   {
     "course": "ingestion",
+    "section": "platform-context",
+    "title": "Ingestion in the full platform",
+    "scene": "edf-aws-codex"
+  },
+  {
+    "course": "ingestion",
     "section": "full-load-and-cdc",
     "title": "Batch ingestion: full load and CDC",
     "scene": "batch-pipeline"

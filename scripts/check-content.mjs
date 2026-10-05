@@ -33,7 +33,7 @@ for (const c of Object.values(COURSES)) {
     sections++
   }
 }
-assert.equal(sections,40)
+assert.equal(sections,41)
 assert.deepEqual(new Set(Object.keys(uses)), new Set(Object.keys(SCENES)), 'Every registered scene must be used')
 const poster=SCENES['edf-aws-codex']; assert(poster)
 const find=(ns,id)=>ns.flatMap(n=>[n,...(n.children?find(n.children,id):[])]).filter(n=>n.id===id)

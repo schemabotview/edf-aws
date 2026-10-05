@@ -1,0 +1,14 @@
+{
+  "FullLoadSettings": {
+    "TargetTablePrepMode": "DO_NOTHING",
+    "MaxFullLoadSubTasks": 8,
+    "StopTaskCachedChangesApplied": false,
+    "StopTaskCachedChangesNotApplied": false
+  },
+  "TargetMetadata": {
+    "BatchApplyEnabled": false
+  },
+  "Logging": {
+    "EnableLogging": true
+  }
+}

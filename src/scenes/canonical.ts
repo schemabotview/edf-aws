@@ -50,65 +50,88 @@ export const canonicalScenes: Scene[] = [
     "title": "Batch ingestion: source changes to Bronze",
     "nodes": [
       {
-        "id": "source",
-        "label": "Database source",
-        "sub": "Supported engine \u00b7 keys \u00b7 change logging",
-        "icon": "database",
-        "pattern": "external"
+        "id": "capture-row",
+        "label": "1. Capture and land",
+        "icon": "none",
+        "pattern": "group",
+        "flow": "LR",
+        "children": [
+          {
+            "id": "source",
+            "label": "PostgreSQL source (example)",
+            "sub": "Logical WAL \u00b7 replication grants \u00b7 retained WAL monitoring",
+            "icon": "database",
+            "pattern": "external"
+          },
+          {
+            "id": "dms",
+            "label": "AWS DMS",
+            "sub": "full-load-and-cdc \u00b7 explicit mappings \u00b7 8 subtasks to start",
+            "icon": "dms",
+            "pattern": "network"
+          },
+          {
+            "id": "landing",
+            "label": "Raw S3 landing",
+            "sub": "CSV \u00b7 PreserveTransactions \u00b7 CdcPath \u00b7 role / KMS",
+            "icon": "s3",
+            "pattern": "storage"
+          }
+        ],
+        "edges": [
+          {
+            "source": "source",
+            "target": "dms",
+            "route": "step"
+          },
+          {
+            "source": "dms",
+            "target": "landing",
+            "route": "step"
+          }
+        ]
       },
       {
-        "id": "dms",
-        "label": "AWS DMS",
-        "sub": "Full load + CDC \u00b7 incremental changes",
-        "icon": "dms",
-        "pattern": "network"
-      },
-      {
-        "id": "landing",
-        "label": "Raw S3 landing",
-        "sub": "Operation \u00b7 source sequence \u00b7 arrival evidence",
-        "icon": "s3",
-        "pattern": "storage"
-      },
-      {
-        "id": "commit",
-        "label": "Bronze acceptance job",
-        "sub": "Bounded files \u00b7 validation \u00b7 Iceberg commit",
-        "icon": "glue",
-        "pattern": "service"
-      },
-      {
-        "id": "progress",
-        "label": "Durable progress",
-        "sub": "Advance after commit \u00b7 replay deterministically",
-        "icon": "check",
-        "pattern": "storage"
+        "id": "accept-row",
+        "label": "2. Accept and record progress",
+        "icon": "none",
+        "pattern": "group",
+        "flow": "LR",
+        "children": [
+          {
+            "id": "commit",
+            "label": "Bronze acceptance job",
+            "sub": "Bounded files \u00b7 validation \u00b7 Iceberg commit",
+            "icon": "glue",
+            "pattern": "service"
+          },
+          {
+            "id": "progress",
+            "label": "Durable progress",
+            "sub": "Advance after commit \u00b7 replay deterministically",
+            "icon": "check",
+            "pattern": "storage"
+          }
+        ],
+        "edges": [
+          {
+            "source": "commit",
+            "target": "progress",
+            "route": "step"
+          }
+        ]
       }
     ],
     "edges": [
       {
-        "source": "source",
-        "target": "dms",
-        "route": "step"
-      },
-      {
-        "source": "dms",
-        "target": "landing",
-        "route": "step"
-      },
-      {
-        "source": "landing",
-        "target": "commit",
-        "route": "step"
-      },
-      {
-        "source": "commit",
-        "target": "progress",
+        "source": "capture-row",
+        "target": "accept-row",
         "route": "step"
       }
     ],
     "padding": 0.1,
-    "flow": "TB"
+    "flow": "TB",
+    "framed": true
   },
   {
     "id": "stream-pipeline",

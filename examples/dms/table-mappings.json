@@ -1,0 +1,14 @@
+{
+  "rules": [
+    {
+      "rule-type": "selection",
+      "rule-id": "1",
+      "rule-name": "include-meter-readings",
+      "object-locator": {
+        "schema-name": "public",
+        "table-name": "meter_readings"
+      },
+      "rule-action": "include"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+## Ingestion in the full platform
+
+The highlighted **Ingestion** container connects EDF’s source systems to the storage and processing layer.
+
+- **Database capture** — AWS DMS handles supported full-load and CDC sources; raw files land on S3 before Bronze acceptance.
+- **Event capture** — Kafka / MSK carries meter and grid events; MSK Connect lands raw events, while Databricks independently processes the operational hot path.
+- **Supporting controls** — DynamoDB retains progress and quarantined-source flags; Secrets Manager protects source credentials.
+- **Next boundary** — Processing validates arrivals and commits Bronze Iceberg. Connector delivery alone does not publish a table.
+
+**Course path:** Batch capture → Bronze acceptance → recovery → event contracts → connector landing → event processing.
+
+[Open the full-size architecture](#/edf-aws-codex)

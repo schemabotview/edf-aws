@@ -1,0 +1,16 @@
+{
+  "BucketName": "REPLACE_WITH_RAW_BUCKET",
+  "BucketFolder": "edf/database-source",
+  "ServiceAccessRoleArn": "REPLACE_WITH_DMS_S3_ROLE_ARN",
+  "ExpectedBucketOwner": "REPLACE_WITH_ACCOUNT_ID",
+  "DataFormat": "csv",
+  "PreserveTransactions": true,
+  "CdcPath": "cdc",
+  "IncludeOpForFullLoad": true,
+  "DatePartitionEnabled": false,
+  "AddColumnName": false,
+  "GlueCatalogGeneration": false,
+  "CdcMaxBatchInterval": 60,
+  "EncryptionMode": "SSE_KMS",
+  "ServerSideEncryptionKmsKeyId": "REPLACE_WITH_KMS_KEY_ARN"
+}

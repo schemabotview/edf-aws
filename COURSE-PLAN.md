@@ -1,6 +1,6 @@
 # EDF AWS course plan
 
-Six courses, 40 sections and 40 diagrams. Each section now has a focused scene, following the requested course-by-course refinement. Pipeline and medallion overviews remain diagrams; detailed sections use four-card scenes.
+Six courses, 41 sections and 40 diagrams. Each section now has a focused scene, following the requested course-by-course refinement. Pipeline and medallion overviews remain diagrams; detailed sections use four-card scenes.
 
 | Course | Coverage | Canonical diagrams |
 |---|---|---|
@@ -39,6 +39,7 @@ Architecture establishes responsibilities and boundaries; later courses explain 
 
 | Section | Scene | Format |
 |---|---|---|
+| `platform-context` — Ingestion in the full platform | `edf-aws-codex` | Ingestion container highlighted |
 | `full-load-and-cdc` — Batch ingestion: full load and CDC | `batch-pipeline` | Pipeline |
 | `bronze-acceptance` — Bronze acceptance | `ingestion-bronze-acceptance` | Four detailed cards |
 | `cdc-recovery` — CDC recovery and safe replay | `ingestion-cdc-recovery` | Four detailed cards |
