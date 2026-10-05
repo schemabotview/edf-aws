@@ -1,0 +1,15 @@
+# Recover from an unexpected unit change
+
+## On screen
+
+## Recover from an unexpected unit change
+
+- **Unexpected source** — Vendor changes the declared reading unit.
+- **Containment** — Quarantine, source flag and reporting hold.
+- **Recovery** — Approve contract correction; replay and reconcile.
+
+**Decision:** Contain the bad input before repairing and replaying it.
+
+## Narration
+
+The incident starts when a vendor changes the unit or schema without the expected contract update. The gate quarantines affected input and flags the source, while consumers retain the last accepted version with a freshness warning. Confirm the source meaning before implementing a conversion rule. Replay only the affected interval from retained raw inputs, compare corrected values and control totals, then release the new version. The incident record includes the cause, contract change, rejected scope and evidence supporting promotion.

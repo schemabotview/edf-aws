@@ -1,0 +1,10 @@
+## Acceptance criteria
+
+Every release needs evidence that its inputs, transformations and published results satisfy the agreed contract.
+
+- **Complete inputs** — Record source cut-off, extract identity, file manifest and control totals; flag missing feeds.
+- **Explainable validation** — Account for accepted and rejected records, schema checks and reason-coded exceptions.
+- **Reconciled outputs** — Compare counts and amounts over matching populations, periods and units; hold results that fail the release gate.
+- **Traceable release** — Retain job and table versions, the acceptance decision and delivery receipt; demonstrate safe replay.
+
+**Acceptance decision:** Publish only an accepted, reproducible version with an owner for every unresolved exception.

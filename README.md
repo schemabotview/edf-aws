@@ -1,6 +1,6 @@
 # EDF AWS data platform
 
-A GraphL project walkthrough covering smart metering, generation, trading and customer analytics. **6 courses, 36 sections**, each with a diagram, slide and narration script. The project follows the supplied EDF case study and the user-approved `edf-aws-codex` architecture, including its DMS and MSK Connect extensions.
+A GraphL project walkthrough covering smart metering, generation, trading and customer analytics. **6 courses, 40 sections**, each with a diagram, slide and narration script. The project follows the supplied EDF case study and the user-approved `edf-aws-codex` architecture, including its DMS and MSK Connect extensions.
 
 ## Run
 
@@ -29,7 +29,7 @@ See [COURSE-PLAN.md](COURSE-PLAN.md) for the section inventory and [SOURCES.md](
 
 Each section is a declarative scene plus a slide and narration. The shared published `@graphlearning/flow` and `@graphlearning/shell` packages own layout and presentation. No engine or shell internals are copied into this repo.
 
-`src/content/<course>/<section>.md` is the content source. Its explicit On screen and Narration blocks derive the adjacent `.ts`, `.slide` and `.tts` files through `npm run content:sync`. Nine canonical diagrams live in `src/scenes/`. `section-map.json` binds each section to a shared scene and an optional highlighted node. Course and section IDs define stable hash routes.
+`src/content/<course>/<section>.md` is the content source. Its explicit On screen and Narration blocks derive the adjacent `.ts`, `.slide` and `.tts` files through `npm run content:sync`. Thirteen diagrams: five dedicated Requirements card scenes and eight shared canonical scenes live in `src/scenes/`. `section-map.json` binds each section to a shared scene and an optional highlighted node. Course and section IDs define stable hash routes.
 
 The architecture poster preserves horizontal Bronze → Silver → Gold with vertically stacked processing panels, each containing one row of three cards. Section diagrams simplify individual decisions for the scene-and-slide view. No list nodes or hand-authored layout coordinates are used.
 

@@ -1,0 +1,7 @@
+## Validate before promoting Bronze to Silver
+
+- **Contract checks** — Required identity, event time, unit and supported schema.
+- **Record checks** — Valid measurements and resolvable reference keys.
+- **Exceptions** — Hold incompatible source partitions; retain rejected rows with reasons.
+
+**Promotion:** Only accepted records enter Silver; every rejected arrival remains traceable.

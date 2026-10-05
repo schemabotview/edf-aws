@@ -2,56 +2,92 @@
   {
     "course": "requirements",
     "section": "business-problem",
-    "title": "Why the platform exists",
+    "title": "Why EDF needed to modernise",
     "scene": "requirements-map"
   },
   {
     "course": "requirements",
-    "section": "source-inventory",
-    "title": "Choose ingestion by source capability",
-    "scene": "requirements-map"
+    "section": "business-needs",
+    "title": "Business needs",
+    "scene": "requirements-business-needs"
   },
   {
     "course": "requirements",
-    "section": "meter-contract",
-    "title": "A meter reading needs a stable identity",
-    "scene": "requirements-map"
+    "section": "source-systems",
+    "title": "Source systems",
+    "scene": "requirements-source-systems"
   },
   {
     "course": "requirements",
-    "section": "service-objectives",
-    "title": "Make the requirements measurable",
-    "scene": "requirements-map"
+    "section": "slas",
+    "title": "SLAs",
+    "scene": "requirements-slas"
   },
   {
     "course": "requirements",
-    "section": "acceptance-evidence",
-    "title": "Define evidence before building",
-    "scene": "requirements-map"
+    "section": "acceptance-criteria",
+    "title": "Acceptance criteria",
+    "scene": "requirements-acceptance-criteria"
   },
   {
-    "course": "architecture",
-    "section": "platform-overview",
-    "title": "Read the platform from left to right",
-    "scene": "edf-aws-codex"
+    "course": "platform-operations",
+    "section": "dependency-graph",
+    "title": "Sequence accepted datasets, not just jobs",
+    "scene": "control-plane"
   },
   {
-    "course": "architecture",
-    "section": "two-ingestion-paths",
-    "title": "Two routes into Bronze",
-    "scene": "edf-aws-codex"
+    "course": "platform-operations",
+    "section": "quarantine-and-dlq",
+    "title": "Failures remain data with an owner",
+    "scene": "control-plane"
   },
   {
-    "course": "architecture",
-    "section": "medallion-zones",
-    "title": "Give each medallion layer one job",
-    "scene": "edf-aws-codex"
+    "course": "platform-operations",
+    "section": "data-health",
+    "title": "Monitor the data, not only infrastructure",
+    "scene": "control-plane"
   },
   {
-    "course": "architecture",
-    "section": "retention-and-maintenance",
-    "title": "Retention must respect table metadata",
-    "scene": "edf-aws-codex"
+    "course": "platform-operations",
+    "section": "access-boundaries",
+    "title": "Give each job its own access boundary",
+    "scene": "control-plane"
+  },
+  {
+    "course": "platform-operations",
+    "section": "audit-lineage",
+    "title": "Retain evidence of access and transformation",
+    "scene": "control-plane"
+  },
+  {
+    "course": "platform-operations",
+    "section": "environment-contract",
+    "title": "Provision repeatable environments",
+    "scene": "delivery-recovery"
+  },
+  {
+    "course": "platform-operations",
+    "section": "release-pipeline",
+    "title": "Release code with evidence and a rollback path",
+    "scene": "delivery-recovery"
+  },
+  {
+    "course": "platform-operations",
+    "section": "rollback-and-cost",
+    "title": "Plan recovery before scaling the platform",
+    "scene": "delivery-recovery"
+  },
+  {
+    "course": "platform-operations",
+    "section": "schema-incident",
+    "title": "Recover from an unexpected unit change",
+    "scene": "control-plane"
+  },
+  {
+    "course": "platform-operations",
+    "section": "restart-and-backfill",
+    "title": "Prove restart and replay converge",
+    "scene": "delivery-recovery"
   },
   {
     "course": "ingestion",
@@ -90,48 +126,6 @@
     "scene": "stream-pipeline"
   },
   {
-    "course": "transformation",
-    "section": "landing-versus-tables",
-    "title": "An S3 object is not a table commit",
-    "scene": "medallion-pipeline"
-  },
-  {
-    "course": "transformation",
-    "section": "schema-gate",
-    "title": "Approve compatible change and isolate breakage",
-    "scene": "medallion-pipeline"
-  },
-  {
-    "course": "transformation",
-    "section": "cleansing-and-enrichment",
-    "title": "Make the units and joins explicit",
-    "scene": "medallion-pipeline"
-  },
-  {
-    "course": "transformation",
-    "section": "dedupe-and-change-order",
-    "title": "Choose a winner reproducibly",
-    "scene": "medallion-pipeline"
-  },
-  {
-    "course": "transformation",
-    "section": "reporting-grain",
-    "title": "Choose the row grain before aggregation",
-    "scene": "medallion-pipeline"
-  },
-  {
-    "course": "transformation",
-    "section": "business-metrics",
-    "title": "Define consumption and utilisation once",
-    "scene": "medallion-pipeline"
-  },
-  {
-    "course": "transformation",
-    "section": "reconciliation-and-release",
-    "title": "Reconcile before publishing",
-    "scene": "medallion-pipeline"
-  },
-  {
     "course": "consumption",
     "section": "lake-to-warehouse",
     "title": "Make the warehouse load boundary explicit",
@@ -168,51 +162,81 @@
     "scene": "serving-map"
   },
   {
-    "course": "platform-operations",
-    "section": "dependency-graph",
-    "title": "Sequence accepted datasets, not just jobs",
-    "scene": "control-plane"
+    "course": "transformation",
+    "section": "landing-versus-tables",
+    "title": "An S3 object is not a table commit",
+    "scene": "medallion-pipeline"
   },
   {
-    "course": "platform-operations",
-    "section": "quarantine-and-dlq",
-    "title": "Failures remain data with an owner",
-    "scene": "control-plane"
+    "course": "transformation",
+    "section": "schema-gate",
+    "title": "Approve compatible change and isolate breakage",
+    "scene": "medallion-pipeline"
   },
   {
-    "course": "platform-operations",
-    "section": "data-health",
-    "title": "Monitor the data, not only infrastructure",
-    "scene": "control-plane"
+    "course": "transformation",
+    "section": "validation-and-exceptions",
+    "title": "Validate before promoting Bronze to Silver",
+    "scene": "medallion-pipeline"
   },
   {
-    "course": "platform-operations",
-    "section": "access-boundaries",
-    "title": "Give each job its own access boundary",
-    "scene": "control-plane"
+    "course": "transformation",
+    "section": "cleansing-and-enrichment",
+    "title": "Make the units and joins explicit",
+    "scene": "medallion-pipeline"
   },
   {
-    "course": "platform-operations",
-    "section": "audit-lineage",
-    "title": "Retain evidence of access and transformation",
-    "scene": "control-plane"
+    "course": "transformation",
+    "section": "dedupe-and-change-order",
+    "title": "Choose a winner reproducibly",
+    "scene": "medallion-pipeline"
   },
   {
-    "course": "platform-operations",
-    "section": "release-pipeline",
-    "title": "Release code with evidence and a rollback path",
-    "scene": "delivery-recovery"
+    "course": "transformation",
+    "section": "reporting-grain",
+    "title": "Choose the row grain before aggregation",
+    "scene": "medallion-pipeline"
   },
   {
-    "course": "platform-operations",
-    "section": "rollback-and-cost",
-    "title": "Plan recovery before scaling the platform",
-    "scene": "delivery-recovery"
+    "course": "transformation",
+    "section": "business-metrics",
+    "title": "Define consumption and utilisation once",
+    "scene": "medallion-pipeline"
   },
   {
-    "course": "platform-operations",
-    "section": "restart-and-backfill",
-    "title": "Prove restart and replay converge",
-    "scene": "delivery-recovery"
+    "course": "transformation",
+    "section": "reconciliation-and-release",
+    "title": "Reconcile before publishing",
+    "scene": "medallion-pipeline"
+  },
+  {
+    "course": "architecture",
+    "section": "platform-overview",
+    "title": "Read the platform from left to right",
+    "scene": "edf-aws-codex"
+  },
+  {
+    "course": "architecture",
+    "section": "service-responsibilities",
+    "title": "Assign every platform service a responsibility",
+    "scene": "edf-aws-codex"
+  },
+  {
+    "course": "architecture",
+    "section": "two-ingestion-paths",
+    "title": "Two routes into Bronze",
+    "scene": "edf-aws-codex"
+  },
+  {
+    "course": "architecture",
+    "section": "medallion-zones",
+    "title": "Give each medallion layer one job",
+    "scene": "edf-aws-codex"
+  },
+  {
+    "course": "architecture",
+    "section": "retention-and-maintenance",
+    "title": "Retention must respect table metadata",
+    "scene": "edf-aws-codex"
   }
 ]

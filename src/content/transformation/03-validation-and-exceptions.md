@@ -1,0 +1,15 @@
+# Validate before promoting Bronze to Silver
+
+## On screen
+
+## Validate before promoting Bronze to Silver
+
+- **Contract checks** — Required identity, event time, unit and supported schema.
+- **Record checks** — Valid measurements and resolvable reference keys.
+- **Exceptions** — Hold incompatible source partitions; retain rejected rows with reasons.
+
+**Promotion:** Only accepted records enter Silver; every rejected arrival remains traceable.
+
+## Narration
+
+Validation protects the transition from raw arrivals to trusted Silver records. Check the declared schema and mandatory fields before interpreting the measurement. Verify units and reference relationships before enrichment. An incompatible schema can hold a source partition, while row-level failures go to a reason-coded exception dataset. Preserve the original arrival and run identity so accepted plus rejected counts reconcile to the input. Repair requires an explicit owner and a bounded replay. A successful processing job alone is not evidence that the data satisfies its contract.

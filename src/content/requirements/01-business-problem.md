@@ -1,4 +1,4 @@
-# Why the platform exists
+# Why EDF needed to modernise
 
 ## On screen
 

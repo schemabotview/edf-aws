@@ -1,0 +1,7 @@
+## Recover from an unexpected unit change
+
+- **Unexpected source** — Vendor changes the declared reading unit.
+- **Containment** — Quarantine, source flag and reporting hold.
+- **Recovery** — Approve contract correction; replay and reconcile.
+
+**Decision:** Contain the bad input before repairing and replaying it.

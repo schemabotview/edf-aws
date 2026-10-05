@@ -1,23 +1,4 @@
 {
-  "requirements-business-problem": {
-    "scene": "requirements-map"
-  },
-  "requirements-source-inventory": {
-    "scene": "requirements-map",
-    "focus": "sources"
-  },
-  "requirements-meter-contract": {
-    "scene": "requirements-map",
-    "focus": "contracts"
-  },
-  "requirements-service-objectives": {
-    "scene": "requirements-map",
-    "focus": "objectives"
-  },
-  "requirements-acceptance-evidence": {
-    "scene": "requirements-map",
-    "focus": "evidence"
-  },
   "architecture-platform-overview": {
     "scene": "edf-aws-codex"
   },
@@ -133,5 +114,36 @@
   "platform-operations-restart-and-backfill": {
     "scene": "delivery-recovery",
     "focus": "replay"
+  },
+  "architecture-service-responsibilities": {
+    "scene": "edf-aws-codex",
+    "focus": "processing"
+  },
+  "transformation-validation-and-exceptions": {
+    "scene": "medallion-pipeline",
+    "focus": "schema"
+  },
+  "platform-operations-environment-contract": {
+    "scene": "delivery-recovery",
+    "focus": "terraform"
+  },
+  "platform-operations-schema-incident": {
+    "scene": "control-plane",
+    "focus": "quality"
+  },
+  "requirements-business-problem": {
+    "scene": "requirements-map"
+  },
+  "requirements-business-needs": {
+    "scene": "requirements-business-needs"
+  },
+  "requirements-source-systems": {
+    "scene": "requirements-source-systems"
+  },
+  "requirements-slas": {
+    "scene": "requirements-slas"
+  },
+  "requirements-acceptance-criteria": {
+    "scene": "requirements-acceptance-criteria"
   }
 }

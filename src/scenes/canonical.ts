@@ -535,5 +535,157 @@ export const canonicalScenes: Scene[] = [
     ],
     "padding": 0.1,
     "flow": "TB"
+  },
+  {
+    "id": "requirements-business-needs",
+    "title": "Business needs",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "regulatory",
+        "label": "Regulatory confidence",
+        "sub": "Reconciled Ofgem datasets; traceable numbers and auditable releases",
+        "icon": "shieldcheck",
+        "pattern": "user"
+      },
+      {
+        "id": "billing",
+        "label": "Reliable billing",
+        "sub": "Detect meter failures before billing; reduce corrections and complaints",
+        "icon": "database",
+        "pattern": "storage"
+      },
+      {
+        "id": "operations",
+        "label": "Current operations",
+        "sub": "Timely meter, grid and generation anomaly visibility",
+        "icon": "waves",
+        "pattern": "network"
+      },
+      {
+        "id": "commercial",
+        "label": "Commercial insight",
+        "sub": "Consistent consumption, trading and customer analytics",
+        "icon": "users",
+        "pattern": "service"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "requirements-source-systems",
+    "title": "Source systems",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "metering",
+        "label": "Smart metering",
+        "sub": "Meter readings and consumption; stable identity, event time and units",
+        "icon": "database",
+        "pattern": "storage"
+      },
+      {
+        "id": "generation",
+        "label": "Generation and grid",
+        "sub": "Asset telemetry, plant performance and grid events",
+        "icon": "waves",
+        "pattern": "network"
+      },
+      {
+        "id": "trading-billing",
+        "label": "Trading and billing",
+        "sub": "Market data, trades, customers and payments; supported database changes",
+        "icon": "users",
+        "pattern": "external"
+      },
+      {
+        "id": "reference",
+        "label": "Reference data",
+        "sub": "Tariffs, asset registries and external feeds; effective version history",
+        "icon": "table",
+        "pattern": "storage"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "requirements-slas",
+    "title": "Slas",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "batch",
+        "label": "Batch ingestion <1 hour",
+        "sub": "Source cut-off to accepted Bronze data; case-study objective",
+        "icon": "clock",
+        "pattern": "service"
+      },
+      {
+        "id": "freshness",
+        "label": "Operational freshness <2 minutes",
+        "sub": "Event creation to consumer availability; case-study objective",
+        "icon": "waves",
+        "pattern": "network"
+      },
+      {
+        "id": "reconciliation",
+        "label": "Reconciliation variance \u22640.01%",
+        "sub": "Above the threshold, hold submission for matching scope and units",
+        "icon": "shieldcheck",
+        "pattern": "storage"
+      },
+      {
+        "id": "measurement",
+        "label": "End-to-end measurement",
+        "sub": "Missing feeds, processing delay and consumer freshness; not job status alone",
+        "icon": "cloudwatch",
+        "pattern": "service"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "requirements-acceptance-criteria",
+    "title": "Acceptance criteria",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "inputs",
+        "label": "Complete inputs",
+        "sub": "Source cut-off, extract identity, file manifest and control totals",
+        "icon": "database",
+        "pattern": "external"
+      },
+      {
+        "id": "validation",
+        "label": "Explainable validation",
+        "sub": "Accepted / rejected counts, schema checks and reason-coded exceptions",
+        "icon": "shieldcheck",
+        "pattern": "service"
+      },
+      {
+        "id": "outputs",
+        "label": "Reconciled outputs",
+        "sub": "Match counts and amounts by population, period and units",
+        "icon": "table",
+        "pattern": "storage"
+      },
+      {
+        "id": "release",
+        "label": "Traceable release",
+        "sub": "Job and table versions, acceptance decision, delivery receipt and safe replay",
+        "icon": "workflow",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
   }
 ]

@@ -1,0 +1,10 @@
+## SLAs
+
+Measure the service at the data consumer, with explicit start and end points for each target.
+
+- **Batch ingestion** — Case-study objective: complete ingestion in **under one hour** from the agreed source cut-off to accepted Bronze data.
+- **Operational freshness** — Case-study objective: make meter and grid events visible in **under two minutes** from event creation to consumer availability.
+- **Reconciliation gate** — A variance **above 0.01%** blocks regulatory submission for the agreed population, period and units.
+- **Measurement evidence** — Track missing feeds, processing delay and consumer freshness alongside job status.
+
+**Service target:** Validate these objectives against representative volumes; a successful job alone does not prove an SLA was met.

@@ -1,8 +1,8 @@
 {
-  "requirements": "Requirements: sources, outcomes and acceptance",
-  "architecture": "Architecture: the complete EDF AWS platform",
-  "ingestion": "Ingestion: batch and streaming into Bronze",
+  "requirements": "Requirements: business needs, source systems, SLAs and acceptance criteria",
+  "architecture": "Architecture: platform responsibilities, storage and medallion",
+  "ingestion": "Ingestion: batch, streaming, Bronze acceptance and recovery",
   "transformation": "Transformation: Bronze \u2192 Silver \u2192 Gold",
   "consumption": "Consumption: warehouse models and serving paths",
-  "platform-operations": "Platform operations: control, delivery and recovery"
+  "platform-operations": "Platform operations: orchestration, controls, delivery and recovery"
 }

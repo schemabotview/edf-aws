@@ -4,7 +4,9 @@ import { section2 } from './02-quarantine-and-dlq'
 import { section3 } from './03-data-health'
 import { section4 } from './04-access-boundaries'
 import { section5 } from './05-audit-lineage'
-import { section6 } from './06-release-pipeline'
-import { section7 } from './07-rollback-and-cost'
-import { section8 } from './08-restart-and-backfill'
-export const course: Course = { id: "platform-operations", title: "Platform operations: control, delivery and recovery", sections: [section1, section2, section3, section4, section5, section6, section7, section8] }
+import { section6 } from './06-environment-contract'
+import { section7 } from './07-release-pipeline'
+import { section8 } from './08-rollback-and-cost'
+import { section9 } from './09-schema-incident'
+import { section10 } from './10-restart-and-backfill'
+export const course: Course = { id: "platform-operations", title: "Platform operations: orchestration, controls, delivery and recovery", sections: [section1, section2, section3, section4, section5, section6, section7, section8, section9, section10] }

@@ -1,33 +1,41 @@
 # EDF AWS course plan
 
-Six courses, 36 sections, nine canonical diagrams. Sections reuse the same scene ID and use the shell’s `focus` feature to highlight one relevant node; an overview has no focus. No section-specific scene copies or coordinates.
+Six courses, 40 sections and 13 diagrams. Eight canonical diagrams are reused outside Requirements. Each Requirements section has its own detailed card scene, as requested.
 
-The full architecture remains the approved `edf-aws-codex` poster. Simplified canonical scenes clarify execution boundaries rather than replacing it.
-
-## Requirements: sources, outcomes and acceptance
-
-Canonical scene: five framed problem cards covering fragmentation, stale data, failed validation, delayed anomaly visibility and manual Ofgem reporting. Later sections highlight the problem their requirement addresses.
-
-| Section | Canonical scene | Highlight |
+| Course | Coverage | Canonical diagrams |
 |---|---|---|
-| `business-problem` | `requirements-map` | `Complete scene` |
-| `source-inventory` | `requirements-map` | `sources` |
-| `meter-contract` | `requirements-map` | `contracts` |
-| `service-objectives` | `requirements-map` | `objectives` |
-| `acceptance-evidence` | `requirements-map` | `evidence` |
+| Requirements | Business needs, sources, SLAs, acceptance | Five dedicated card scenes |
+| Architecture | Full platform, responsibilities, storage, medallion | Full edf-aws-codex architecture |
+| Ingestion | Batch full load/CDC, streaming, Bronze, recovery | Batch pipeline; streaming pipeline |
+| Transformation | Bronze → Silver → Gold, validation, enrichment, reconciliation | Horizontal medallion |
+| Consumption | Redshift/dbt, dimensions, BI, Athena, operational access, reporting | Warehouse model; serving architecture |
+| Platform Operations | Orchestration, quality, monitoring, security, Terraform, CI/CD, incidents | Control plane; delivery and recovery |
 
-## Architecture: the complete EDF AWS platform
+## Requirements: business needs, source systems, SLAs and acceptance criteria
 
-| Section | Canonical scene | Highlight |
+The opening retains its detailed problem cards and slide. Each following section has its own framed 2×2 scene with four detailed cards, and a matching expanded slide.
+
+| Section | Scene | Highlight |
+|---|---|---|
+| `business-problem` — Why EDF needed to modernise | `requirements-map` | Complete scene |
+| `business-needs` | `requirements-business-needs` | Complete scene |
+| `source-systems` | `requirements-source-systems` | Complete scene |
+| `slas` | `requirements-slas` | Complete scene |
+| `acceptance-criteria` | `requirements-acceptance-criteria` | Complete scene |
+
+## Architecture: platform responsibilities, storage and medallion
+
+| Section | Scene | Highlight |
 |---|---|---|
 | `platform-overview` | `edf-aws-codex` | `Complete scene` |
+| `service-responsibilities` | `edf-aws-codex` | `processing` |
 | `two-ingestion-paths` | `edf-aws-codex` | `ingestion` |
 | `medallion-zones` | `edf-aws-codex` | `lake` |
 | `retention-and-maintenance` | `edf-aws-codex` | `s3` |
 
-## Ingestion: batch and streaming into Bronze
+## Ingestion: batch, streaming, Bronze acceptance and recovery
 
-| Section | Canonical scene | Highlight |
+| Section | Scene | Highlight |
 |---|---|---|
 | `full-load-and-cdc` | `batch-pipeline` | `Complete scene` |
 | `bronze-acceptance` | `batch-pipeline` | `commit` |
@@ -38,10 +46,11 @@ Canonical scene: five framed problem cards covering fragmentation, stale data, f
 
 ## Transformation: Bronze → Silver → Gold
 
-| Section | Canonical scene | Highlight |
+| Section | Scene | Highlight |
 |---|---|---|
 | `landing-versus-tables` | `medallion-pipeline` | `Complete scene` |
 | `schema-gate` | `medallion-pipeline` | `schema` |
+| `validation-and-exceptions` | `medallion-pipeline` | `schema` |
 | `cleansing-and-enrichment` | `medallion-pipeline` | `clean` |
 | `dedupe-and-change-order` | `medallion-pipeline` | `silver` |
 | `reporting-grain` | `medallion-pipeline` | `gold` |
@@ -50,7 +59,7 @@ Canonical scene: five framed problem cards covering fragmentation, stale data, f
 
 ## Consumption: warehouse models and serving paths
 
-| Section | Canonical scene | Highlight |
+| Section | Scene | Highlight |
 |---|---|---|
 | `lake-to-warehouse` | `warehouse-model` | `Complete scene` |
 | `star-schema` | `warehouse-model` | `facts` |
@@ -59,23 +68,19 @@ Canonical scene: five framed problem cards covering fragmentation, stale data, f
 | `ofgem-delivery` | `serving-map` | `ofgem` |
 | `operational-lookups` | `serving-map` | `dynamo` |
 
-## Platform operations: control, delivery and recovery
+## Platform operations: orchestration, controls, delivery and recovery
 
-| Section | Canonical scene | Highlight |
+| Section | Scene | Highlight |
 |---|---|---|
 | `dependency-graph` | `control-plane` | `Complete scene` |
 | `quarantine-and-dlq` | `control-plane` | `quality` |
 | `data-health` | `control-plane` | `monitor` |
 | `access-boundaries` | `control-plane` | `security` |
 | `audit-lineage` | `control-plane` | `audit` |
+| `environment-contract` | `delivery-recovery` | `terraform` |
 | `release-pipeline` | `delivery-recovery` | `Complete scene` |
 | `rollback-and-cost` | `delivery-recovery` | `rollback` |
+| `schema-incident` | `control-plane` | `quality` |
 | `restart-and-backfill` | `delivery-recovery` | `replay` |
 
-## Consolidation decisions
-
-Source systems move into Requirements; storage moves into Architecture and Transformation. Quality gates are taught at their pipeline boundaries, with exception ownership in Operations. Retry, backfill, release gates, latency, secrets and environment configuration are folded into their owning sections. The standalone capstone course is removed; recovery becomes an operations section. Distinct batch/streaming and warehouse/serving structures retain separate canonical diagrams.
-
-Markdown remains the source for slides and narration; `section-map.json` owns scene/highlight bindings. Original section IDs are preserved where possible; moving courses changes their route prefix. Old routes are recorded in `route-migration.json`. Audio and recording manifests are regenerated for the new course structure.
-
-This is an educational repo, not deployed AWS infrastructure. Case-study metrics remain attributed; synthetic examples are retained. Run check, build and frames, and inspect every rendered section.
+Markdown owns slides and narration; section-map.json owns scene and highlight bindings. The full poster retains horizontal medallion and stacked processing panels. Raw landing remains distinct from Iceberg commits; connector ingestion remains distinct from Spark processing. This is an educational repo with synthetic examples, not deployed AWS infrastructure.

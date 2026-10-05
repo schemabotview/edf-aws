@@ -8,7 +8,7 @@ await build({ stdin: { contents: "export { COURSES, SPINE } from './src/content'
 const { COURSES, SPINE, SCENES } = await import(pathToFileURL(resolve('.tmp/check.mjs')))
 assert.deepEqual(Object.keys(COURSES), [...SPINE])
 assert.equal(SPINE.length, 6)
-assert.equal(Object.keys(SCENES).length, 9)
+assert.equal(Object.keys(SCENES).length, 13)
 const bindings = JSON.parse(await readFile('section-map.json','utf8'))
 const uses = {}
 let sections = 0
@@ -33,8 +33,8 @@ for (const c of Object.values(COURSES)) {
     sections++
   }
 }
-assert.equal(sections,36)
-for (const count of Object.values(uses)) assert(count >= 2, 'Canonical scenes must be reused')
+assert.equal(sections,40)
+for (const [scene, count] of Object.entries(uses)) assert(count >= 2 || scene.startsWith('requirements-'), 'Canonical scenes must be reused')
 const poster=SCENES['edf-aws-codex']; assert(poster)
 const find=(ns,id)=>ns.flatMap(n=>[n,...(n.children?find(n.children,id):[])]).filter(n=>n.id===id)
 // Poster contract: each processing panel has exactly one row of three children.

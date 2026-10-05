@@ -1,0 +1,10 @@
+## Business needs
+
+EDF needs trustworthy reporting and current operational visibility across its metering, generation, trading and customer estate.
+
+- **Regulatory confidence** — Reduce Ofgem reporting risk with reconciled, traceable datasets and auditable release decisions.
+- **Reliable billing** — Detect meter validation and reconciliation failures before billing; reduce corrections and customer complaints.
+- **Current operations** — Give teams a timely view of meter, grid and generation anomalies.
+- **Commercial insight** — Provide consistent consumption, trading and customer analytics instead of stale extracts.
+
+**Business need:** Improve freshness and correctness while preserving deterministic batch reporting.

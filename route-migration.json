@@ -1,9 +1,9 @@
 {
   "requirements-business-problem": "requirements-business-problem",
-  "source-systems-source-inventory": "requirements-source-inventory",
-  "source-systems-meter-contract": "requirements-meter-contract",
-  "requirements-service-objectives": "requirements-service-objectives",
-  "requirements-acceptance-evidence": "requirements-acceptance-evidence",
+  "source-systems-source-inventory": "requirements-source-systems",
+  "source-systems-meter-contract": "requirements-source-systems",
+  "requirements-service-objectives": "requirements-slas",
+  "requirements-acceptance-evidence": "requirements-acceptance-criteria",
   "architecture-platform-overview": "architecture-platform-overview",
   "architecture-two-ingestion-paths": "architecture-two-ingestion-paths",
   "storage-medallion-zones": "architecture-medallion-zones",
@@ -34,5 +34,8 @@
   "security-governance-audit-lineage": "platform-operations-audit-lineage",
   "infrastructure-delivery-release-pipeline": "platform-operations-release-pipeline",
   "infrastructure-delivery-rollback-and-cost": "platform-operations-rollback-and-cost",
-  "operations-capstone-restart-and-backfill": "platform-operations-restart-and-backfill"
+  "operations-capstone-restart-and-backfill": "platform-operations-restart-and-backfill",
+  "requirements-business-outcomes": "requirements-business-needs",
+  "requirements-source-inventory": "requirements-source-systems",
+  "requirements-meter-contract": "requirements-source-systems"
 }

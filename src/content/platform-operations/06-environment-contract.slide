@@ -1,0 +1,7 @@
+## Provision repeatable environments
+
+- **Terraform definitions** — Storage, roles, network and service configuration.
+- **Environment inputs** — Names, capacity, endpoints and protected secrets.
+- **Validation** — Connectivity, permissions and deployment checks.
+
+**Decision:** Repeatability includes environment-specific configuration and protected state.

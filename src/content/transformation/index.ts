@@ -1,9 +1,10 @@
 import type { Course } from '../types'
 import { section1 } from './01-landing-versus-tables'
 import { section2 } from './02-schema-gate'
-import { section3 } from './03-cleansing-and-enrichment'
-import { section4 } from './04-dedupe-and-change-order'
-import { section5 } from './05-reporting-grain'
-import { section6 } from './06-business-metrics'
-import { section7 } from './07-reconciliation-and-release'
-export const course: Course = { id: "transformation", title: "Transformation: Bronze \u2192 Silver \u2192 Gold", sections: [section1, section2, section3, section4, section5, section6, section7] }
+import { section3 } from './03-validation-and-exceptions'
+import { section4 } from './04-cleansing-and-enrichment'
+import { section5 } from './05-dedupe-and-change-order'
+import { section6 } from './06-reporting-grain'
+import { section7 } from './07-business-metrics'
+import { section8 } from './08-reconciliation-and-release'
+export const course: Course = { id: "transformation", title: "Transformation: Bronze \u2192 Silver \u2192 Gold", sections: [section1, section2, section3, section4, section5, section6, section7, section8] }
