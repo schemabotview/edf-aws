@@ -101,7 +101,7 @@
       "course": "transformation",
       "section": "landing-versus-tables",
       "file": "transformation/landing-versus-tables.wav",
-      "narration": "S3 stores objects; Iceberg supplies table metadata and snapshots. Keep raw landing prefixes separate from managed table locations. A landing manifest identifies which source files a run consumed, and the Bronze commit records the accepted rows with provenance. Readers must use the table catalog rather than list arbitrary Parquet files. This distinction prevents a partially landed batch from becoming visible as a complete table and prevents a connector-written file from being mistaken for an Iceberg-managed file."
+      "narration": "The horizontal medallion separates raw evidence, trusted records and business meaning. Bronze preserves accepted source arrivals and provenance. Raw S3 landing is distinct from a managed Iceberg commit, and readers resolve committed metadata through the catalog. The Bronze to Silver boundary checks schema, validates measurement meaning, normalises units and time, joins effective reference versions and resolves duplicates deterministically. Silver to Gold establishes row grain and metric definitions, then reconciles before publication. The following sections expand those decisions with focused cards. Every promotion retains input versions and exceptions so a trusted number can be explained and reproduced."
     },
     {
       "course": "transformation",

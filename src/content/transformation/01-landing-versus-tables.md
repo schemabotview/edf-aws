@@ -1,15 +1,18 @@
-# An S3 object is not a table commit
+# Transformation overview: Bronze → Silver → Gold
 
 ## On screen
 
-## An S3 object is not a table commit
+## Transformation overview: Bronze → Silver → Gold
 
-- **Raw landing** — DMS and connector files under isolated prefixes.
-- **Bronze Iceberg** — Processing job commits tracked data files.
-- **Catalog pointer** — Readers resolve the committed table metadata.
+Turn replayable source arrivals into trusted records and reconciled business metrics.
 
-**Decision:** Object storage provides durability; the table commit defines reader visibility.
+- **Bronze** — Preserve source values and provenance in managed Iceberg tables; raw S3 landing remains a separate boundary.
+- **Bronze → Silver** — Gate schema changes, validate records, normalise units, enrich references and resolve duplicates.
+- **Silver → Gold** — Establish reporting grain, calculate versioned business metrics and reconcile before release.
+- **Promotion evidence** — Retain input versions, exceptions and acceptance decisions so outputs can be explained and replayed.
+
+**Transformation contract:** Table commits define visibility; each medallion layer has an explicit acceptance contract.
 
 ## Narration
 
-S3 stores objects; Iceberg supplies table metadata and snapshots. Keep raw landing prefixes separate from managed table locations. A landing manifest identifies which source files a run consumed, and the Bronze commit records the accepted rows with provenance. Readers must use the table catalog rather than list arbitrary Parquet files. This distinction prevents a partially landed batch from becoming visible as a complete table and prevents a connector-written file from being mistaken for an Iceberg-managed file.
+The horizontal medallion separates raw evidence, trusted records and business meaning. Bronze preserves accepted source arrivals and provenance. Raw S3 landing is distinct from a managed Iceberg commit, and readers resolve committed metadata through the catalog. The Bronze to Silver boundary checks schema, validates measurement meaning, normalises units and time, joins effective reference versions and resolves duplicates deterministically. Silver to Gold establishes row grain and metric definitions, then reconciles before publication. The following sections expand those decisions with focused cards. Every promotion retains input versions and exceptions so a trusted number can be explained and reproduced.

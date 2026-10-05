@@ -1,7 +1,10 @@
-## Validate before promoting Bronze to Silver
+## Validation and exceptions
 
-- **Contract checks** — Required identity, event time, unit and supported schema.
-- **Record checks** — Valid measurements and resolvable reference keys.
-- **Exceptions** — Hold incompatible source partitions; retain rejected rows with reasons.
+Account for every arrival before promoting accepted records into Silver.
 
-**Promotion:** Only accepted records enter Silver; every rejected arrival remains traceable.
+- **Mandatory identity** — Check source, meter key, event time and arrival provenance.
+- **Valid measurement** — Verify units, required values and source-specific measurement rules.
+- **Reference integrity** — Resolve valid meter, tariff, customer and asset relationships.
+- **Reason-coded exceptions** — Quarantine incompatible inputs; retain DLQ rows with owner and run ID.
+
+**Transformation contract:** Accepted plus rejected records must reconcile to the bounded input set.

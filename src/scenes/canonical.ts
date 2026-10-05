@@ -1153,5 +1153,271 @@ export const canonicalScenes: Scene[] = [
         "route": "step"
       }
     ]
+  },
+  {
+    "id": "transformation-schema-gate",
+    "title": "Schema compatibility",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "expected",
+        "label": "Expected contract",
+        "sub": "Compare declared fields, types and units with catalog expectations",
+        "icon": "table",
+        "pattern": "storage"
+      },
+      {
+        "id": "compatible",
+        "label": "Compatible change",
+        "sub": "Approve additive fields under a versioned contract",
+        "icon": "check",
+        "pattern": "service"
+      },
+      {
+        "id": "breaking",
+        "label": "Breaking change",
+        "sub": "Hold dropped fields, incompatible types or changed units",
+        "icon": "shieldcheck",
+        "pattern": "external"
+      },
+      {
+        "id": "approval",
+        "label": "Controlled evolution",
+        "sub": "Record the decision; update metadata through supported table APIs",
+        "icon": "workflow",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "transformation-validation-and-exceptions",
+    "title": "Validation and exceptions",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "identity",
+        "label": "Mandatory identity",
+        "sub": "Check source, meter key, event time and arrival provenance",
+        "icon": "key",
+        "pattern": "external"
+      },
+      {
+        "id": "measurement",
+        "label": "Valid measurement",
+        "sub": "Verify units, required values and source-specific measurement rules",
+        "icon": "gauge",
+        "pattern": "service"
+      },
+      {
+        "id": "references",
+        "label": "Reference integrity",
+        "sub": "Resolve valid meter, tariff, customer and asset relationships",
+        "icon": "database",
+        "pattern": "storage"
+      },
+      {
+        "id": "exceptions",
+        "label": "Reason-coded exceptions",
+        "sub": "Quarantine incompatible inputs; retain DLQ rows with owner and run ID",
+        "icon": "shieldcheck",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "transformation-cleansing-and-enrichment",
+    "title": "Cleansing and enrichment",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "units",
+        "label": "Normalise units",
+        "sub": "Example: declared 1,200 Wh becomes 1.2 kWh",
+        "icon": "gauge",
+        "pattern": "service"
+      },
+      {
+        "id": "time",
+        "label": "Normalise event time",
+        "sub": "Retain UTC event timestamps; preserve source time provenance",
+        "icon": "clock",
+        "pattern": "network"
+      },
+      {
+        "id": "join",
+        "label": "Enrich from references",
+        "sub": "Meter, tariff, customer and asset joins use effective-date rules",
+        "icon": "layers",
+        "pattern": "storage"
+      },
+      {
+        "id": "evidence",
+        "label": "Preserve rule evidence",
+        "sub": "Keep transformation version and reason-coded relationship failures",
+        "icon": "shieldcheck",
+        "pattern": "external"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "transformation-dedupe-and-change-order",
+    "title": "Deduplication and change order",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "key",
+        "label": "Business identity",
+        "sub": "Meter ID + reading timestamp; database CDC uses its own business key",
+        "icon": "key",
+        "pattern": "external"
+      },
+      {
+        "id": "precedence",
+        "label": "Deterministic precedence",
+        "sub": "Source version / sequence and an explicit tie-breaker",
+        "icon": "clock",
+        "pattern": "network"
+      },
+      {
+        "id": "merge",
+        "label": "Changes and deletes",
+        "sub": "Apply late corrections and delete operations explicitly",
+        "icon": "database",
+        "pattern": "storage"
+      },
+      {
+        "id": "replay",
+        "label": "Replay equivalence",
+        "sub": "Same input set produces the same accepted keys and values",
+        "icon": "check",
+        "pattern": "service"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "transformation-reporting-grain",
+    "title": "Reporting grain",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "interval",
+        "label": "Accepted interval readings",
+        "sub": "Distinguish interval consumption from cumulative counters",
+        "icon": "gauge",
+        "pattern": "storage"
+      },
+      {
+        "id": "calendar",
+        "label": "Settlement calendar",
+        "sub": "Map UTC events to agreed periods and local-time boundaries",
+        "icon": "clock",
+        "pattern": "network"
+      },
+      {
+        "id": "grain",
+        "label": "Gold row identity",
+        "sub": "One meter row per settlement period in the sample fact",
+        "icon": "table",
+        "pattern": "storage"
+      },
+      {
+        "id": "checks",
+        "label": "Grain checks",
+        "sub": "Prevent repeated intervals and inconsistent daily / period totals",
+        "icon": "shieldcheck",
+        "pattern": "service"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "transformation-business-metrics",
+    "title": "Business metrics",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "consumption",
+        "label": "Consumption",
+        "sub": "Sum accepted interval kWh at the agreed reporting grain",
+        "icon": "gauge",
+        "pattern": "storage"
+      },
+      {
+        "id": "utilisation",
+        "label": "Generation utilisation",
+        "sub": "Output relative to agreed capacity over the defined interval",
+        "icon": "activity",
+        "pattern": "service"
+      },
+      {
+        "id": "exceptions",
+        "label": "Denominators and exclusions",
+        "sub": "Define zero capacity, missing values and unavailable assets",
+        "icon": "shieldcheck",
+        "pattern": "external"
+      },
+      {
+        "id": "corrections",
+        "label": "Versioned metric contract",
+        "sub": "Retain formulas, populations and late-correction rules",
+        "icon": "table",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "transformation-reconciliation-and-release",
+    "title": "Reconciliation and release",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "scope",
+        "label": "Match the comparison scope",
+        "sub": "Same population, period and measurement unit",
+        "icon": "layers",
+        "pattern": "external"
+      },
+      {
+        "id": "variance",
+        "label": "Calculate defined variance",
+        "sub": "Document the baseline; use an absolute tolerance for zero source totals",
+        "icon": "gauge",
+        "pattern": "service"
+      },
+      {
+        "id": "gate",
+        "label": "Publish or hold",
+        "sub": "Case-study gate: variance above 0.01% blocks Ofgem submission",
+        "icon": "shieldcheck",
+        "pattern": "storage"
+      },
+      {
+        "id": "audit",
+        "label": "Versioned acceptance record",
+        "sub": "Retain input snapshots, reject counts, decision and correction history",
+        "icon": "table",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
   }
 ]

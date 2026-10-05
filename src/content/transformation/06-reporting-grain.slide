@@ -1,7 +1,10 @@
-## Choose the row grain before aggregation
+## Reporting grain
 
-- **Silver readings** — Validated interval consumption by meter and event time.
-- **Settlement period** — Calendar maps events to the agreed reporting interval.
-- **Gold fact** — One meter row per settlement period.
+Choose what one Gold row represents before aggregating Silver readings.
 
-**Decision:** Ingestion date and business reporting period answer different questions.
+- **Accepted interval readings** — Distinguish interval consumption from cumulative counters.
+- **Settlement calendar** — Map UTC events to agreed periods and local-time boundaries.
+- **Gold row identity** — One meter row per settlement period in the sample fact.
+- **Grain checks** — Prevent repeated intervals and inconsistent daily / period totals.
+
+**Transformation contract:** Arrival date is an ingestion attribute; event period defines the reporting grain.

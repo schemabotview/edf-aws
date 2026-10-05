@@ -1,7 +1,10 @@
-## Define consumption and utilisation once
+## Business metrics
 
-- **Consumption** — Sum accepted interval kWh at the reporting grain.
-- **Generation utilisation** — Output relative to agreed capacity and interval.
-- **Metric contract** — Units, denominator, exclusions and correction policy.
+Define each Gold metric with its population, units, denominator and correction policy.
 
-**Decision:** A shared metric is a formula plus its population and exception rules.
+- **Consumption** — Sum accepted interval kWh at the agreed reporting grain.
+- **Generation utilisation** — Output relative to agreed capacity over the defined interval.
+- **Denominators and exclusions** — Define zero capacity, missing values and unavailable assets.
+- **Versioned metric contract** — Retain formulas, populations and late-correction rules.
+
+**Transformation contract:** A metric is a reproducible contract, not simply a calculation.

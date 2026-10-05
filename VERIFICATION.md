@@ -17,3 +17,5 @@ The six-course coverage table was applied explicitly: business outcomes, platfor
 Architecture refinement: all five sections have updated slides and narration, with four focused diagrams and the unchanged full poster. Type/content checks and production build passed. All five routes passed desktop, 4K and mobile checks; both complete contact sheets were visually reviewed.
 
 Ingestion refinement: all six sections use focused pipelines or four-card scenes with expanded slides. Type/content checks, production build and all six desktop/4K/mobile renders passed; both complete contact sheets were visually reviewed.
+
+Transformation refinement: horizontal medallion overview plus seven dedicated four-card scenes with expanded slides. Type/content checks, build and all eight desktop/4K/mobile renders passed. All three complete contact sheets were visually reviewed.

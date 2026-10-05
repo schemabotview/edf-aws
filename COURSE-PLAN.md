@@ -1,6 +1,6 @@
 # EDF AWS course plan
 
-Six courses, 40 sections and 21 diagrams. Eight canonical diagrams are reused outside Requirements. Each Requirements section has its own detailed card scene, as requested.
+Six courses, 40 sections and 28 diagrams. Eight canonical diagrams are reused outside Requirements. Each Requirements section has its own detailed card scene, as requested.
 
 | Course | Coverage | Canonical diagrams |
 |---|---|---|
@@ -50,16 +50,18 @@ Each section has a focused scene and detailed slide. Raw landing, managed table 
 
 ## Transformation: Bronze → Silver → Gold
 
-| Section | Scene | Highlight |
+| Section | Scene | Format |
 |---|---|---|
-| `landing-versus-tables` | `medallion-pipeline` | `Complete scene` |
-| `schema-gate` | `medallion-pipeline` | `schema` |
-| `validation-and-exceptions` | `medallion-pipeline` | `schema` |
-| `cleansing-and-enrichment` | `medallion-pipeline` | `clean` |
-| `dedupe-and-change-order` | `medallion-pipeline` | `silver` |
-| `reporting-grain` | `medallion-pipeline` | `gold` |
-| `business-metrics` | `medallion-pipeline` | `metrics` |
-| `reconciliation-and-release` | `medallion-pipeline` | `release` |
+| `landing-versus-tables` — Transformation overview | `medallion-pipeline` | Horizontal medallion |
+| `schema-gate` — Schema compatibility | `transformation-schema-gate` | Four detailed cards |
+| `validation-and-exceptions` — Validation and exceptions | `transformation-validation-and-exceptions` | Four detailed cards |
+| `cleansing-and-enrichment` — Cleansing and enrichment | `transformation-cleansing-and-enrichment` | Four detailed cards |
+| `dedupe-and-change-order` — Deduplication and change order | `transformation-dedupe-and-change-order` | Four detailed cards |
+| `reporting-grain` — Reporting grain | `transformation-reporting-grain` | Four detailed cards |
+| `business-metrics` — Business metrics | `transformation-business-metrics` | Four detailed cards |
+| `reconciliation-and-release` — Reconciliation and release | `transformation-reconciliation-and-release` | Four detailed cards |
+
+Each section expands an explicit promotion contract; the overview retains the horizontal medallion.
 
 ## Consumption: warehouse models and serving paths
 

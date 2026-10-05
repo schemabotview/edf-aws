@@ -1,7 +1,10 @@
-## Approve compatible change and isolate breakage
+## Schema compatibility
 
-- **Bronze schema** — Compare arrival contract with catalog expectations.
-- **Compatible change** — Approve an additive field after contract checks.
-- **Breaking change** — Quarantine source partition; flag and alert.
+Check the Bronze arrival contract before allowing a source change into Silver.
 
-**Decision:** Schema compatibility includes meaning, not just matching column types.
+- **Expected contract** — Compare declared fields, types and units with catalog expectations.
+- **Compatible change** — Approve additive fields under a versioned contract.
+- **Breaking change** — Hold dropped fields, incompatible types or changed units.
+- **Controlled evolution** — Record the decision; update metadata through supported table APIs.
+
+**Transformation contract:** Compatibility includes business meaning, not just matching column types.

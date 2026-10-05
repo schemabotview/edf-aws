@@ -1,7 +1,10 @@
-## Reconcile before publishing
+## Reconciliation and release
 
-- **Gold totals** — Aggregate accepted data for an agreed scope.
-- **Source billing totals** — Match period, population and unit.
-- **Publish or hold** — Variance above 0.01% blocks submission.
+Compare matched source and Gold totals before publishing an accepted reporting version.
 
-**Decision:** Publication is a decision over a reconciled version, not a job exit code.
+- **Match the comparison scope** — Same population, period and measurement unit.
+- **Calculate defined variance** — Document the baseline; use an absolute tolerance for zero source totals.
+- **Publish or hold** — Case-study gate: variance above 0.01% blocks Ofgem submission.
+- **Versioned acceptance record** — Retain input snapshots, reject counts, decision and correction history.
+
+**Transformation contract:** A failed gate holds publication and preserves the last trustworthy output.

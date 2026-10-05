@@ -164,50 +164,50 @@
   {
     "course": "transformation",
     "section": "landing-versus-tables",
-    "title": "An S3 object is not a table commit",
+    "title": "Transformation overview: Bronze \u2192 Silver \u2192 Gold",
     "scene": "medallion-pipeline"
   },
   {
     "course": "transformation",
     "section": "schema-gate",
-    "title": "Approve compatible change and isolate breakage",
-    "scene": "medallion-pipeline"
+    "title": "Schema compatibility",
+    "scene": "transformation-schema-gate"
   },
   {
     "course": "transformation",
     "section": "validation-and-exceptions",
-    "title": "Validate before promoting Bronze to Silver",
-    "scene": "medallion-pipeline"
+    "title": "Validation and exceptions",
+    "scene": "transformation-validation-and-exceptions"
   },
   {
     "course": "transformation",
     "section": "cleansing-and-enrichment",
-    "title": "Make the units and joins explicit",
-    "scene": "medallion-pipeline"
+    "title": "Cleansing and enrichment",
+    "scene": "transformation-cleansing-and-enrichment"
   },
   {
     "course": "transformation",
     "section": "dedupe-and-change-order",
-    "title": "Choose a winner reproducibly",
-    "scene": "medallion-pipeline"
+    "title": "Deduplication and change order",
+    "scene": "transformation-dedupe-and-change-order"
   },
   {
     "course": "transformation",
     "section": "reporting-grain",
-    "title": "Choose the row grain before aggregation",
-    "scene": "medallion-pipeline"
+    "title": "Reporting grain",
+    "scene": "transformation-reporting-grain"
   },
   {
     "course": "transformation",
     "section": "business-metrics",
-    "title": "Define consumption and utilisation once",
-    "scene": "medallion-pipeline"
+    "title": "Business metrics",
+    "scene": "transformation-business-metrics"
   },
   {
     "course": "transformation",
     "section": "reconciliation-and-release",
-    "title": "Reconcile before publishing",
-    "scene": "medallion-pipeline"
+    "title": "Reconciliation and release",
+    "scene": "transformation-reconciliation-and-release"
   },
   {
     "course": "architecture",

@@ -1,14 +1,17 @@
-# Make the units and joins explicit
+# Cleansing and enrichment
 
 ## On screen
 
-## Make the units and joins explicit
+## Cleansing and enrichment
 
-- **Normalise** — UTC event time and declared measurement units.
-- **Enrich** — Meter, tariff, customer and asset reference joins.
-- **Reject with evidence** — Mandatory-field or relationship failures go to DLQ.
+Apply explicit unit and time rules, then join the reference version valid for the event.
 
-**Decision:** Every transformation rule has a contract, and every rejected row has a reason.
+- **Normalise units** — Example: declared 1,200 Wh becomes 1.2 kWh.
+- **Normalise event time** — Retain UTC event timestamps; preserve source time provenance.
+- **Enrich from references** — Meter, tariff, customer and asset joins use effective-date rules.
+- **Preserve rule evidence** — Keep transformation version and reason-coded relationship failures.
+
+**Transformation contract:** Never silently discard invalid readings or guess measurement meaning.
 
 ## Narration
 

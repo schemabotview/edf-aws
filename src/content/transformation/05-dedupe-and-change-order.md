@@ -1,14 +1,17 @@
-# Choose a winner reproducibly
+# Deduplication and change order
 
 ## On screen
 
-## Choose a winner reproducibly
+## Deduplication and change order
 
-- **Reading key** — meter_id plus reading_timestamp.
-- **Precedence rule** — Source sequence, version and tie-breaker.
-- **Accepted record** — Repeatable merge and visible reject counts.
+Resolve corrected and overlapping arrivals into a repeatable accepted record.
 
-**Decision:** A deterministic merge survives retries and overlapping ingestion routes.
+- **Business identity** — Meter ID + reading timestamp; database CDC uses its own business key.
+- **Deterministic precedence** — Source version / sequence and an explicit tie-breaker.
+- **Changes and deletes** — Apply late corrections and delete operations explicitly.
+- **Replay equivalence** — Same input set produces the same accepted keys and values.
+
+**Transformation contract:** Latest means a defined source version or sequence, not the last Spark task to finish.
 
 ## Narration
 

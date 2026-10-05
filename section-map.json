@@ -33,28 +33,22 @@
     "scene": "medallion-pipeline"
   },
   "transformation-schema-gate": {
-    "scene": "medallion-pipeline",
-    "focus": "schema"
+    "scene": "transformation-schema-gate"
   },
   "transformation-cleansing-and-enrichment": {
-    "scene": "medallion-pipeline",
-    "focus": "clean"
+    "scene": "transformation-cleansing-and-enrichment"
   },
   "transformation-dedupe-and-change-order": {
-    "scene": "medallion-pipeline",
-    "focus": "silver"
+    "scene": "transformation-dedupe-and-change-order"
   },
   "transformation-reporting-grain": {
-    "scene": "medallion-pipeline",
-    "focus": "gold"
+    "scene": "transformation-reporting-grain"
   },
   "transformation-business-metrics": {
-    "scene": "medallion-pipeline",
-    "focus": "metrics"
+    "scene": "transformation-business-metrics"
   },
   "transformation-reconciliation-and-release": {
-    "scene": "medallion-pipeline",
-    "focus": "release"
+    "scene": "transformation-reconciliation-and-release"
   },
   "consumption-lake-to-warehouse": {
     "scene": "warehouse-model"
@@ -112,8 +106,7 @@
     "scene": "architecture-service-responsibilities"
   },
   "transformation-validation-and-exceptions": {
-    "scene": "medallion-pipeline",
-    "focus": "schema"
+    "scene": "transformation-validation-and-exceptions"
   },
   "platform-operations-environment-contract": {
     "scene": "delivery-recovery",
