@@ -92,37 +92,37 @@
   {
     "course": "ingestion",
     "section": "full-load-and-cdc",
-    "title": "Bootstrap once, then capture changes",
+    "title": "Batch ingestion: full load and CDC",
     "scene": "batch-pipeline"
   },
   {
     "course": "ingestion",
     "section": "bronze-acceptance",
-    "title": "Accept landed files as a bounded run",
-    "scene": "batch-pipeline"
+    "title": "Bronze acceptance",
+    "scene": "ingestion-bronze-acceptance"
   },
   {
     "course": "ingestion",
     "section": "cdc-recovery",
-    "title": "Recover without skipping or duplicating changes",
-    "scene": "batch-pipeline"
+    "title": "CDC recovery and safe replay",
+    "scene": "ingestion-cdc-recovery"
   },
   {
     "course": "ingestion",
     "section": "topics-and-contracts",
-    "title": "Kafka ordering has a partition boundary",
-    "scene": "stream-pipeline"
+    "title": "Streaming event contracts",
+    "scene": "ingestion-topics-and-contracts"
   },
   {
     "course": "ingestion",
     "section": "connector-to-bronze",
-    "title": "MSK Connect lands raw events on S3",
-    "scene": "stream-pipeline"
+    "title": "MSK Connect to Bronze",
+    "scene": "ingestion-connector-to-bronze"
   },
   {
     "course": "ingestion",
     "section": "event-time-and-hot-path",
-    "title": "Event time and recovery belong to Spark",
+    "title": "Spark event processing and operational output",
     "scene": "stream-pipeline"
   },
   {
@@ -212,31 +212,31 @@
   {
     "course": "architecture",
     "section": "platform-overview",
-    "title": "Read the platform from left to right",
+    "title": "Full platform architecture",
     "scene": "edf-aws-codex"
   },
   {
     "course": "architecture",
     "section": "service-responsibilities",
-    "title": "Assign every platform service a responsibility",
-    "scene": "edf-aws-codex"
+    "title": "Service responsibilities",
+    "scene": "architecture-service-responsibilities"
   },
   {
     "course": "architecture",
     "section": "two-ingestion-paths",
-    "title": "Two routes into Bronze",
-    "scene": "edf-aws-codex"
+    "title": "Batch and streaming ingestion paths",
+    "scene": "architecture-two-ingestion-paths"
   },
   {
     "course": "architecture",
     "section": "medallion-zones",
-    "title": "Give each medallion layer one job",
-    "scene": "edf-aws-codex"
+    "title": "Medallion storage and processing",
+    "scene": "architecture-medallion-zones"
   },
   {
     "course": "architecture",
     "section": "retention-and-maintenance",
-    "title": "Retention must respect table metadata",
-    "scene": "edf-aws-codex"
+    "title": "Data lifecycle and replay",
+    "scene": "architecture-retention-and-maintenance"
   }
 ]

@@ -1,17 +1,20 @@
-# Read the platform from left to right
+# Full platform architecture
 
 ## On screen
 
-## Read the platform from left to right
+## Full platform architecture
 
-- **Sources and ingestion** — Database changes via DMS; events via Kafka.
-- **Storage and processing** — S3 landing, Iceberg medallion and separate jobs.
-- **Serving and consumers** — Redshift, Athena and DynamoDB access paths.
+The EDF platform connects source capture, lakehouse processing and distinct serving paths, with shared controls across the estate.
 
-**Decision:** Keep ingestion, table commits and serving responsibilities explicit.
+- **Sources and ingestion** — Metering, generation, trading and billing feed database, file and event routes.
+- **Storage and processing** — S3 raw landing and Iceberg Bronze / Silver / Gold; batch and streaming have separate execution responsibilities.
+- **Serving and consumers** — Redshift / Power BI reporting, Athena exploration and DynamoDB operational access.
+- **Shared controls** — MWAA orchestration, quality gates, IAM / Lake Formation, audit evidence and Terraform / CI/CD.
 
-[Open the full architecture poster](#/edf-aws-codex)
+**Architecture decision:** Read the complete platform here, then use the following sections for readable views of each boundary.
+
+[Open the full-size architecture](#/edf-aws-codex)
 
 ## Narration
 
-The full poster in this repo is copied from the approved edf-aws-codex fixture. Read the complete canonical scene from sources through ingestion, storage and processing to serving; later sections highlight those same containers. Database sources use DMS; event publishers use Kafka. Both paths preserve raw data on S3 before analytical transformations create Iceberg tables. Redshift serves warehouse models, Athena reads the lakehouse and DynamoDB serves operational keys. MWAA, quality gates and access controls apply across these paths rather than acting as another data transformation.
+The full platform diagram is the approved edf-aws-codex architecture. Read it from source systems through ingestion to storage and processing, then serving and business users. Database changes and event streams have different capture mechanisms. Raw S3 landing preserves arrivals; Iceberg commits define managed table visibility. Bronze records source evidence, Silver resolves trusted records and Gold defines reconciled business metrics. Redshift and Power BI serve reporting, Athena supports lakehouse exploration and DynamoDB supports operational keys. The foundation supplies orchestration, security, audit and delivery controls across these paths. The next four sections expand these boundaries so their details remain readable beside the slide.

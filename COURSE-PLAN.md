@@ -1,6 +1,6 @@
 # EDF AWS course plan
 
-Six courses, 40 sections and 13 diagrams. Eight canonical diagrams are reused outside Requirements. Each Requirements section has its own detailed card scene, as requested.
+Six courses, 40 sections and 21 diagrams. Eight canonical diagrams are reused outside Requirements. Each Requirements section has its own detailed card scene, as requested.
 
 | Course | Coverage | Canonical diagrams |
 |---|---|---|
@@ -23,26 +23,30 @@ The opening retains its detailed problem cards and slide. Each following section
 | `slas` | `requirements-slas` | Complete scene |
 | `acceptance-criteria` | `requirements-acceptance-criteria` | Complete scene |
 
-## Architecture: platform responsibilities, storage and medallion
+## Architecture: full platform and focused boundaries
 
-| Section | Scene | Highlight |
+| Section | Scene | Format |
 |---|---|---|
-| `platform-overview` | `edf-aws-codex` | `Complete scene` |
-| `service-responsibilities` | `edf-aws-codex` | `processing` |
-| `two-ingestion-paths` | `edf-aws-codex` | `ingestion` |
-| `medallion-zones` | `edf-aws-codex` | `lake` |
-| `retention-and-maintenance` | `edf-aws-codex` | `s3` |
+| `platform-overview` — Full platform architecture | `edf-aws-codex` | Approved full poster |
+| `service-responsibilities` | `architecture-service-responsibilities` | Four responsibility cards |
+| `two-ingestion-paths` | `architecture-two-ingestion-paths` | Parallel batch / streaming columns |
+| `medallion-zones` | `architecture-medallion-zones` | Horizontal medallion above stacked 3-column processing panels |
+| `retention-and-maintenance` | `architecture-retention-and-maintenance` | Four lifecycle cards |
 
-## Ingestion: batch, streaming, Bronze acceptance and recovery
+Architecture establishes responsibilities and boundaries; later courses explain execution and recovery mechanics.
 
-| Section | Scene | Highlight |
+## Ingestion: batch and streaming into Bronze
+
+| Section | Scene | Format |
 |---|---|---|
-| `full-load-and-cdc` | `batch-pipeline` | `Complete scene` |
-| `bronze-acceptance` | `batch-pipeline` | `commit` |
-| `cdc-recovery` | `batch-pipeline` | `progress` |
-| `topics-and-contracts` | `stream-pipeline` | `Complete scene` |
-| `connector-to-bronze` | `stream-pipeline` | `connector` |
-| `event-time-and-hot-path` | `stream-pipeline` | `spark` |
+| `full-load-and-cdc` — Batch ingestion: full load and CDC | `batch-pipeline` | Pipeline |
+| `bronze-acceptance` — Bronze acceptance | `ingestion-bronze-acceptance` | Four detailed cards |
+| `cdc-recovery` — CDC recovery and safe replay | `ingestion-cdc-recovery` | Four detailed cards |
+| `topics-and-contracts` — Streaming event contracts | `ingestion-topics-and-contracts` | Four detailed cards |
+| `connector-to-bronze` — MSK Connect to Bronze | `ingestion-connector-to-bronze` | Pipeline |
+| `event-time-and-hot-path` — Spark event processing and operational output | `stream-pipeline` | Pipeline |
+
+Each section has a focused scene and detailed slide. Raw landing, managed table acceptance and independent event processing remain explicit.
 
 ## Transformation: Bronze → Silver → Gold
 

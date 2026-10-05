@@ -1,17 +1,18 @@
-# Assign every platform service a responsibility
+# Service responsibilities
 
 ## On screen
 
-## Assign every platform service a responsibility
+## Service responsibilities
 
-- **DMS and Kafka** — Capture supported database changes and event streams.
-- **S3 and Iceberg** — Durable landing and managed Bronze / Silver / Gold tables.
-- **Glue and Databricks** — Batch transformations and event-time processing.
-- **MWAA and dbt** — Orchestrate accepted datasets and build warehouse models.
-- **Redshift, Athena and DynamoDB** — Serve reporting, exploration and operational keys.
+Each service owns a specific boundary; group related services without confusing capture, storage, computation and access.
 
-**Boundary:** Landing files, committing tables, processing events and serving consumers are separate responsibilities.
+- **Capture and land** — DMS captures supported database changes; Kafka transports events; MSK Connect runs the configured S3 sink.
+- **Store and commit** — S3 holds objects; Iceberg manages table commits and snapshots; Glue Catalog exposes metadata.
+- **Process and coordinate** — Glue transforms batches; Databricks processes event time; MWAA coordinates data-ready dependencies.
+- **Model and serve** — dbt builds tested Redshift marts; Athena reads the lakehouse; DynamoDB serves operational keys.
+
+**Architecture decision:** Connector delivery, table acceptance, transformation completion and consumer availability need separate evidence.
 
 ## Narration
 
-Read the full architecture as ownership boundaries. DMS extracts database changes; Kafka carries event streams. S3 retains landed objects, while Iceberg metadata defines committed table visibility. Glue runs batch transformations, and Databricks processes event time and streaming state. MWAA schedules dependencies and recovery; dbt builds tested Redshift models. Redshift serves warehouse analytics, Athena reads committed lakehouse data, and DynamoDB serves operational access by key. The storage and processing container groups related responsibilities without implying that a connector performs Spark transformations or commits Iceberg metadata directly. Each boundary needs an owner and evidence of completion.
+The four cards separate platform responsibilities. Capture services move supported source changes or events, but do not automatically validate business meaning. S3 stores files, while Iceberg metadata controls which committed data readers can see. Glue and Databricks execute transformations; MWAA coordinates their dependencies and recovery. dbt owns warehouse model transformations rather than the transport into Redshift. Consumer access follows workload: warehouse reporting, lakehouse exploration or operational key lookup. Every boundary needs an owner and an acceptance signal. Treating these responsibilities separately makes failures easier to diagnose and avoids assuming that a landed object is already a published analytical record.

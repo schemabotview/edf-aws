@@ -13,3 +13,7 @@ The revised structure contains six courses, 40 sections and ten diagrams (nine c
 Render evidence is stored in the ignored frames directory. Old retained section routes and their new course prefixes are recorded in route-migration.json.
 
 The six-course coverage table was applied explicitly: business outcomes, platform responsibilities, transformation validation, Terraform environments and schema incident sections were added. New and changed sections were visually reviewed after all 40 routes passed the three-viewpoint sweep.
+
+Architecture refinement: all five sections have updated slides and narration, with four focused diagrams and the unchanged full poster. Type/content checks and production build passed. All five routes passed desktop, 4K and mobile checks; both complete contact sheets were visually reviewed.
+
+Ingestion refinement: all six sections use focused pipelines or four-card scenes with expanded slides. Type/content checks, production build and all six desktop/4K/mobile renders passed; both complete contact sheets were visually reviewed.

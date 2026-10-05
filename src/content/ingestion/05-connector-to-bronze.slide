@@ -1,7 +1,10 @@
-## MSK Connect lands raw events on S3
+## MSK Connect to Bronze
 
-- **Kafka source** — Records with topic, partition and offset identity.
-- **MSK Connect** — Managed runtime for an S3 sink plugin.
-- **Bronze acceptance** — Validate landed files and commit Iceberg separately.
+The S3 sink lands raw Kafka records; a separate acceptance job creates the managed Bronze snapshot.
 
-**Decision:** Connector delivery guarantees must be verified for the selected plugin and configuration.
+- **Connector configuration** — Select and test the sink plugin, authentication, permissions, output format and rotation policy.
+- **Landing identity** — Retain topic / partition / offset where supported, or define an equivalent deterministic identity.
+- **Latency and visibility** — File rotation contributes to end-to-end delay; writing an object is not an Iceberg transaction.
+- **Bronze acceptance** — Validate landed files, retain provenance and commit accepted data with an Iceberg-capable job.
+
+**Ingestion contract:** Verify delivery and retry behaviour for the chosen plugin; do not assume cross-system exactly-once delivery.

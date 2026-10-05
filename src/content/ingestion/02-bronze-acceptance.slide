@@ -1,7 +1,10 @@
-## Accept landed files as a bounded run
+## Bronze acceptance
 
-- **Landing manifest** — File identities and source cut-off.
-- **Batch processing** — Validate envelope and attach run provenance.
-- **Bronze commit** — Publish only the accepted input set.
+Turn a bounded set of landed files into an accepted, replayable Bronze table version.
 
-**Decision:** A batch is defined by accepted inputs, not by the wall-clock folder name alone.
+- **Manifest** — Record source cut-off, object identities and the job / run version before processing.
+- **Validation** — Check required envelope and supported input structure; quarantine incompatible arrivals.
+- **Table commit** — Preserve raw values and source provenance, then commit only the accepted inputs through an Iceberg-capable job.
+- **Evidence and retry** — Reconcile input, accepted and rejected counts; reuse deterministic arrival identities on retry.
+
+**Ingestion contract:** Object arrival and table visibility are separate events. A run is defined by its input manifest, not its folder timestamp.

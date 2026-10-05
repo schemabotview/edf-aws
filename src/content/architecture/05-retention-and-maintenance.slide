@@ -1,7 +1,10 @@
-## Retention must respect table metadata
+## Data lifecycle and replay
 
-- **Raw archive** — Case-study policy: 90 days, then Glacier.
-- **Table maintenance** — Compact files and expire approved snapshots.
-- **Replay window** — Align source, snapshots and audit evidence.
+Retention must support recovery and historical evidence without invalidating active Iceberg tables.
 
-**Decision:** Do not let bucket lifecycle rules invalidate active table snapshots.
+- **Raw archive** — Apply the case-study 90-day-to-Glacier policy to its intended raw-input scope; plan restoration before replay.
+- **Table maintenance** — Compact files and expire approved snapshots through table-aware operations.
+- **Replay window** — Agree how far back sources and table versions support a deterministic rebuild.
+- **Audit evidence** — Preserve manifests, job versions and acceptance decisions separately from queryable table snapshots.
+
+**Architecture decision:** Bucket lifecycle rules must not remove files referenced by active table metadata.

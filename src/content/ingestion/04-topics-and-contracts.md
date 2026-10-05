@@ -1,14 +1,17 @@
-# Kafka ordering has a partition boundary
+# Streaming event contracts
 
 ## On screen
 
-## Kafka ordering has a partition boundary
+## Streaming event contracts
 
-- **Producer contract** — Stable event key, schema and event timestamp.
-- **Kafka topics** — raw, enriched and dlq; partition by chosen key.
-- **Independent consumers** — Connector and Spark maintain separate progress.
+Define event identity and partition behaviour before configuring connectors or Spark consumers.
 
-**Decision:** Do not confuse partition ordering, schema validation and business correctness.
+- **Event envelope** — Preserve meter key, event timestamp, measurement unit and source correction version.
+- **Topic strategy** — raw, enriched and dlq topics; choose a partition key for required per-meter ordering.
+- **Schema contract** — Avro / Schema Registry validates structure; unit meaning and reference relationships still need processing checks.
+- **Consumer independence** — MSK Connect and Spark have separate offsets, failure behaviour and recovery state.
+
+**Ingestion contract:** Case-study settings of 3 brokers, replication factor 3 and 24 partitions are reference configuration, not a capacity guarantee.
 
 ## Narration
 

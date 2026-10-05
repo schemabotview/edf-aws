@@ -1,9 +1,10 @@
-## Assign every platform service a responsibility
+## Service responsibilities
 
-- **DMS and Kafka** — Capture supported database changes and event streams.
-- **S3 and Iceberg** — Durable landing and managed Bronze / Silver / Gold tables.
-- **Glue and Databricks** — Batch transformations and event-time processing.
-- **MWAA and dbt** — Orchestrate accepted datasets and build warehouse models.
-- **Redshift, Athena and DynamoDB** — Serve reporting, exploration and operational keys.
+Each service owns a specific boundary; group related services without confusing capture, storage, computation and access.
 
-**Boundary:** Landing files, committing tables, processing events and serving consumers are separate responsibilities.
+- **Capture and land** — DMS captures supported database changes; Kafka transports events; MSK Connect runs the configured S3 sink.
+- **Store and commit** — S3 holds objects; Iceberg manages table commits and snapshots; Glue Catalog exposes metadata.
+- **Process and coordinate** — Glue transforms batches; Databricks processes event time; MWAA coordinates data-ready dependencies.
+- **Model and serve** — dbt builds tested Redshift marts; Athena reads the lakehouse; DynamoDB serves operational keys.
+
+**Architecture decision:** Connector delivery, table acceptance, transformation completion and consumer availability need separate evidence.

@@ -3,38 +3,31 @@
     "scene": "edf-aws-codex"
   },
   "architecture-two-ingestion-paths": {
-    "scene": "edf-aws-codex",
-    "focus": "ingestion"
+    "scene": "architecture-two-ingestion-paths"
   },
   "architecture-medallion-zones": {
-    "scene": "edf-aws-codex",
-    "focus": "lake"
+    "scene": "architecture-medallion-zones"
   },
   "architecture-retention-and-maintenance": {
-    "scene": "edf-aws-codex",
-    "focus": "s3"
+    "scene": "architecture-retention-and-maintenance"
   },
   "ingestion-full-load-and-cdc": {
     "scene": "batch-pipeline"
   },
   "ingestion-bronze-acceptance": {
-    "scene": "batch-pipeline",
-    "focus": "commit"
+    "scene": "ingestion-bronze-acceptance"
   },
   "ingestion-cdc-recovery": {
-    "scene": "batch-pipeline",
-    "focus": "progress"
+    "scene": "ingestion-cdc-recovery"
   },
   "ingestion-topics-and-contracts": {
-    "scene": "stream-pipeline"
+    "scene": "ingestion-topics-and-contracts"
   },
   "ingestion-connector-to-bronze": {
-    "scene": "stream-pipeline",
-    "focus": "connector"
+    "scene": "ingestion-connector-to-bronze"
   },
   "ingestion-event-time-and-hot-path": {
-    "scene": "stream-pipeline",
-    "focus": "spark"
+    "scene": "stream-pipeline"
   },
   "transformation-landing-versus-tables": {
     "scene": "medallion-pipeline"
@@ -116,8 +109,7 @@
     "focus": "replay"
   },
   "architecture-service-responsibilities": {
-    "scene": "edf-aws-codex",
-    "focus": "processing"
+    "scene": "architecture-service-responsibilities"
   },
   "transformation-validation-and-exceptions": {
     "scene": "medallion-pipeline",

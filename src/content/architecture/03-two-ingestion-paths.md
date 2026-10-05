@@ -1,15 +1,18 @@
-# Two routes into Bronze
+# Batch and streaming ingestion paths
 
 ## On screen
 
-## Two routes into Bronze
+## Batch and streaming ingestion paths
 
-- **DMS database route** — Full load plus ongoing CDC to raw S3.
-- **Kafka event route** — MSK Connect S3 sink preserves event records.
-- **Bronze table commit** — A processing job validates and commits Iceberg.
+Both routes preserve replayable arrivals before managed Bronze acceptance; the connector is not the table commit.
 
-**Decision:** Raw object arrival and committed table visibility are different events.
+- **Batch route** — AWS DMS performs full load and CDC for supported databases, preserving source changes in raw S3 files.
+- **Streaming route** — Kafka / MSK carries events; MSK Connect uses a configured sink plugin to land raw files on S3.
+- **Bronze acceptance** — A separate job validates inputs, records provenance and commits an Iceberg table.
+- **Operational hot path** — Databricks independently processes Kafka events for low-latency operational output.
+
+**Architecture decision:** Raw object arrival and committed Bronze visibility are separate milestones; detailed execution belongs in Ingestion.
 
 ## Narration
 
-The latest architecture adds DMS and MSK Connect to the original case study. These additions change the ingestion mechanism, not the need for a replay point. DMS writes source rows and changes to S3 files; a Kafka S3 sink connector writes event files. Neither generic S3 landing route automatically makes an Iceberg transaction. A processing job records file provenance and commits the Bronze table. Spark event-time processing remains a separate consumer responsibility; MSK Connect is a managed Kafka Connect runtime, not a Spark execution engine.
+The two columns explain the architectural entry routes. DMS bootstraps supported database records with a full load, then continues with captured changes. Kafka carries keyed event streams, and MSK Connect runs a separately configured S3 sink plugin. Both routes land raw files that retain source or event provenance. A processing job accepts bounded inputs and commits Bronze Iceberg metadata. File and reference sources still need their supported adapters. The independent Databricks consumer handles event-time enrichment and operational serving; MSK Connect does not execute Spark logic. Detailed ordering, retries and state recovery are covered in the Ingestion course.

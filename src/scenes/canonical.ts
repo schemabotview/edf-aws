@@ -687,5 +687,471 @@ export const canonicalScenes: Scene[] = [
       }
     ],
     "edges": []
+  },
+  {
+    "id": "architecture-service-responsibilities",
+    "title": "Platform service responsibilities",
+    "nodes": [
+      {
+        "id": "capture",
+        "label": "Capture and land",
+        "sub": "DMS database changes; Kafka events; MSK Connect S3 sink",
+        "icon": "dms",
+        "pattern": "network"
+      },
+      {
+        "id": "lake",
+        "label": "Store and commit",
+        "sub": "S3 raw objects; Iceberg table metadata; Glue Catalog discovery",
+        "icon": "s3",
+        "pattern": "storage"
+      },
+      {
+        "id": "compute",
+        "label": "Process and coordinate",
+        "sub": "Glue batch; Databricks event-time processing; MWAA dependencies",
+        "icon": "glue",
+        "pattern": "service"
+      },
+      {
+        "id": "serve",
+        "label": "Model and serve",
+        "sub": "dbt / Redshift marts; Athena exploration; DynamoDB operational keys",
+        "icon": "redshift",
+        "pattern": "storage"
+      }
+    ],
+    "edges": [],
+    "padding": 0.09,
+    "framed": true,
+    "cols": 2
+  },
+  {
+    "id": "architecture-two-ingestion-paths",
+    "title": "Batch and streaming entry paths",
+    "nodes": [
+      {
+        "id": "batch",
+        "label": "Batch route",
+        "sub": "Supported database sources",
+        "icon": "dms",
+        "pattern": "network",
+        "flow": "TB",
+        "children": [
+          {
+            "id": "dms",
+            "label": "AWS DMS",
+            "sub": "Full load + CDC / incremental changes",
+            "icon": "dms",
+            "pattern": "network"
+          },
+          {
+            "id": "batch-landing",
+            "label": "Raw S3 landing",
+            "sub": "Files retain source operations and sequence",
+            "icon": "s3",
+            "pattern": "storage"
+          },
+          {
+            "id": "batch-commit",
+            "label": "Bronze acceptance",
+            "sub": "Validate a bounded input set; commit Iceberg",
+            "icon": "glue",
+            "pattern": "service"
+          }
+        ],
+        "edges": [
+          {
+            "source": "dms",
+            "target": "batch-landing",
+            "route": "step"
+          },
+          {
+            "source": "batch-landing",
+            "target": "batch-commit",
+            "route": "step"
+          }
+        ]
+      },
+      {
+        "id": "stream",
+        "label": "Streaming route",
+        "sub": "Meter and grid events",
+        "icon": "waves",
+        "pattern": "network",
+        "flow": "TB",
+        "children": [
+          {
+            "id": "kafka",
+            "label": "Kafka / Amazon MSK",
+            "sub": "Keyed events and schema contracts",
+            "icon": "network",
+            "pattern": "network"
+          },
+          {
+            "id": "connector",
+            "label": "MSK Connect \u2192 S3",
+            "sub": "Configured sink lands raw event files",
+            "icon": "s3",
+            "pattern": "storage"
+          },
+          {
+            "id": "stream-commit",
+            "label": "Bronze acceptance",
+            "sub": "Separate processing job commits Iceberg",
+            "icon": "glue",
+            "pattern": "service"
+          }
+        ],
+        "edges": [
+          {
+            "source": "kafka",
+            "target": "connector",
+            "route": "step"
+          },
+          {
+            "source": "connector",
+            "target": "stream-commit",
+            "route": "step"
+          }
+        ]
+      }
+    ],
+    "edges": [],
+    "padding": 0.09,
+    "framed": true,
+    "cols": 2
+  },
+  {
+    "id": "architecture-medallion-zones",
+    "title": "Storage and processing",
+    "nodes": [
+      {
+        "id": "platform",
+        "label": "Storage and processing",
+        "sub": "Horizontal medallion; separate execution responsibilities",
+        "icon": "s3",
+        "pattern": "storage",
+        "children": [
+          {
+            "id": "tables",
+            "label": "S3 / Apache Iceberg",
+            "sub": "Managed table layers",
+            "icon": "s3",
+            "pattern": "storage",
+            "flow": "LR",
+            "children": [
+              {
+                "id": "bronze",
+                "label": "Bronze",
+                "sub": "Source arrivals",
+                "icon": "s3",
+                "pattern": "storage",
+                "variant": "tile"
+              },
+              {
+                "id": "silver",
+                "label": "Silver",
+                "sub": "Trusted records",
+                "icon": "database",
+                "pattern": "storage",
+                "variant": "tile"
+              },
+              {
+                "id": "gold",
+                "label": "Gold",
+                "sub": "Business metrics",
+                "icon": "table",
+                "pattern": "storage",
+                "variant": "tile"
+              }
+            ],
+            "edges": [
+              {
+                "source": "bronze",
+                "target": "silver",
+                "route": "step"
+              },
+              {
+                "source": "silver",
+                "target": "gold",
+                "route": "step"
+              }
+            ]
+          },
+          {
+            "id": "batch",
+            "label": "Batch processing",
+            "sub": "Accepted inputs \u2192 deterministic reporting",
+            "icon": "glue",
+            "pattern": "service",
+            "cols": 3,
+            "children": [
+              {
+                "id": "schema",
+                "label": "Schema / quality",
+                "sub": "Validate and hold failures",
+                "icon": "shieldcheck",
+                "pattern": "service"
+              },
+              {
+                "id": "glue",
+                "label": "AWS Glue",
+                "sub": "Clean and enrich",
+                "icon": "glue",
+                "pattern": "service"
+              },
+              {
+                "id": "dbt",
+                "label": "dbt models",
+                "sub": "Test warehouse marts",
+                "icon": "layers",
+                "pattern": "service"
+              }
+            ]
+          },
+          {
+            "id": "stream",
+            "label": "Streaming processing",
+            "sub": "Connector landing and event processing are distinct",
+            "icon": "waves",
+            "pattern": "service",
+            "cols": 3,
+            "children": [
+              {
+                "id": "connect",
+                "label": "MSK Connect",
+                "sub": "Raw S3 event landing",
+                "icon": "network",
+                "pattern": "service"
+              },
+              {
+                "id": "spark",
+                "label": "Databricks",
+                "sub": "Event-time enrichment",
+                "icon": "databricks",
+                "pattern": "service"
+              },
+              {
+                "id": "checkpoint",
+                "label": "Checkpoint / state",
+                "sub": "Recover query progress",
+                "icon": "clock",
+                "pattern": "service"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "edges": [],
+    "padding": 0.09,
+    "framed": true
+  },
+  {
+    "id": "architecture-retention-and-maintenance",
+    "title": "Data lifecycle and replay",
+    "nodes": [
+      {
+        "id": "raw",
+        "label": "Raw archive",
+        "sub": "Case-study policy: 90 days, then Glacier; restoration affects replay time",
+        "icon": "s3",
+        "pattern": "storage"
+      },
+      {
+        "id": "tables",
+        "label": "Iceberg maintenance",
+        "sub": "Compact small files; expire approved snapshots; table-aware cleanup",
+        "icon": "database",
+        "pattern": "storage"
+      },
+      {
+        "id": "replay",
+        "label": "Replay window",
+        "sub": "Align source availability, table versions and the required recovery interval",
+        "icon": "clock",
+        "pattern": "service"
+      },
+      {
+        "id": "audit",
+        "label": "Audit evidence",
+        "sub": "Retain input manifests, job versions and acceptance records; distinct from snapshots",
+        "icon": "shieldcheck",
+        "pattern": "user"
+      }
+    ],
+    "edges": [],
+    "padding": 0.09,
+    "framed": true,
+    "cols": 2
+  },
+  {
+    "id": "ingestion-bronze-acceptance",
+    "title": "Bronze acceptance",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "manifest",
+        "label": "Bounded input manifest",
+        "sub": "Source cut-off, object identities and run version",
+        "icon": "table",
+        "pattern": "external"
+      },
+      {
+        "id": "validate",
+        "label": "Validate arrivals",
+        "sub": "Required envelope, schema and file acceptance; hold failures",
+        "icon": "shieldcheck",
+        "pattern": "service"
+      },
+      {
+        "id": "commit",
+        "label": "Commit Bronze Iceberg",
+        "sub": "Preserve raw values and provenance; publish accepted inputs",
+        "icon": "s3",
+        "pattern": "storage"
+      },
+      {
+        "id": "evidence",
+        "label": "Acceptance evidence",
+        "sub": "Input = accepted + rejected; retain snapshot and safe retry identity",
+        "icon": "check",
+        "pattern": "storage"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "ingestion-cdc-recovery",
+    "title": "Cdc recovery",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "markers",
+        "label": "Separate progress markers",
+        "sub": "Source log position, DMS progress, landed files and job commit",
+        "icon": "clock",
+        "pattern": "network"
+      },
+      {
+        "id": "restart",
+        "label": "Safe restart boundary",
+        "sub": "Resume from proven durable output; repeat incomplete acceptance safely",
+        "icon": "workflow",
+        "pattern": "service"
+      },
+      {
+        "id": "order",
+        "label": "Apply changes deterministically",
+        "sub": "Business keys, source sequence and explicit delete semantics",
+        "icon": "database",
+        "pattern": "storage"
+      },
+      {
+        "id": "resnapshot",
+        "label": "Missing-history recovery",
+        "sub": "Expired source logs require controlled resnapshot and reconciliation",
+        "icon": "shieldcheck",
+        "pattern": "external"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "ingestion-topics-and-contracts",
+    "title": "Topics and contracts",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "identity",
+        "label": "Event identity",
+        "sub": "Meter key, event timestamp, unit and source version",
+        "icon": "key",
+        "pattern": "external"
+      },
+      {
+        "id": "topics",
+        "label": "Topics and partitions",
+        "sub": "raw / enriched / dlq; ordering stays within each partition",
+        "icon": "network",
+        "pattern": "network"
+      },
+      {
+        "id": "schema",
+        "label": "Schema and meaning",
+        "sub": "Avro / Schema Registry checks structure; processing validates business rules",
+        "icon": "shieldcheck",
+        "pattern": "service"
+      },
+      {
+        "id": "consumers",
+        "label": "Independent consumers",
+        "sub": "MSK Connect and Spark keep separate offsets, recovery and monitoring",
+        "icon": "waves",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "ingestion-connector-to-bronze",
+    "title": "MSK Connect landing and Bronze acceptance",
+    "flow": "TB",
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "kafka",
+        "label": "Kafka / Amazon MSK",
+        "sub": "Topic, partition, offset and event contract",
+        "icon": "network",
+        "pattern": "network"
+      },
+      {
+        "id": "connect",
+        "label": "MSK Connect S3 sink",
+        "sub": "Configured plugin, format, permissions and rotation",
+        "icon": "waves",
+        "pattern": "service"
+      },
+      {
+        "id": "raw",
+        "label": "Raw S3 files",
+        "sub": "Retain deterministic record identity and landing provenance",
+        "icon": "s3",
+        "pattern": "storage"
+      },
+      {
+        "id": "bronze",
+        "label": "Bronze acceptance job",
+        "sub": "Validate landed inputs; commit Iceberg separately",
+        "icon": "glue",
+        "pattern": "service"
+      }
+    ],
+    "edges": [
+      {
+        "source": "kafka",
+        "target": "connect",
+        "route": "step"
+      },
+      {
+        "source": "connect",
+        "target": "raw",
+        "route": "step"
+      },
+      {
+        "source": "raw",
+        "target": "bronze",
+        "route": "step"
+      }
+    ]
   }
 ]

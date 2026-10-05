@@ -1,7 +1,10 @@
-## Recover without skipping or duplicating changes
+## CDC recovery and safe replay
 
-- **Durable progress** — Source position, file manifest and committed run.
-- **Restart boundary** — Resume only from proven durable output.
-- **Silver merge** — Apply business key, sequence and delete semantics.
+Recover from interruptions without skipping changes, applying them twice or resurrecting deleted records.
 
-**Decision:** Advance processing state only after durable, reconcilable output.
+- **Progress markers** — Track source log position, DMS task progress, landed files and processing commit separately.
+- **Restart boundary** — Resume only from proven durable output; make a crash after commit but before progress update safe to retry.
+- **Change application** — Use business key, source sequence and explicit delete handling in Silver.
+- **Missing history** — If logs expired, perform a controlled resnapshot and reconcile the rebuilt population.
+
+**Ingestion contract:** Advance processing progress only after durable, reconcilable output.

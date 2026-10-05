@@ -1,9 +1,12 @@
-## Read the platform from left to right
+## Full platform architecture
 
-- **Sources and ingestion** — Database changes via DMS; events via Kafka.
-- **Storage and processing** — S3 landing, Iceberg medallion and separate jobs.
-- **Serving and consumers** — Redshift, Athena and DynamoDB access paths.
+The EDF platform connects source capture, lakehouse processing and distinct serving paths, with shared controls across the estate.
 
-**Decision:** Keep ingestion, table commits and serving responsibilities explicit.
+- **Sources and ingestion** — Metering, generation, trading and billing feed database, file and event routes.
+- **Storage and processing** — S3 raw landing and Iceberg Bronze / Silver / Gold; batch and streaming have separate execution responsibilities.
+- **Serving and consumers** — Redshift / Power BI reporting, Athena exploration and DynamoDB operational access.
+- **Shared controls** — MWAA orchestration, quality gates, IAM / Lake Formation, audit evidence and Terraform / CI/CD.
 
-[Open the full architecture poster](#/edf-aws-codex)
+**Architecture decision:** Read the complete platform here, then use the following sections for readable views of each boundary.
+
+[Open the full-size architecture](#/edf-aws-codex)

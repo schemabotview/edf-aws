@@ -1,7 +1,11 @@
-## Give each medallion layer one job
+## Medallion storage and processing
 
-- **Bronze raw** — Retain source values and ingest evidence.
-- **Silver cleansed** — Apply contracts and resolve duplicates.
-- **Gold business ready** — Apply agreed metrics and reporting grain.
+Keep Bronze → Silver → Gold visible horizontally, with batch and streaming processing beneath the same storage and processing boundary.
 
-**Decision:** Bronze records arrivals; Silver resolves records; Gold defines business metrics.
+- **Bronze** — Preserve arrivals, source values and ingestion evidence.
+- **Silver** — Normalise units and timestamps, resolve keys, validate and deduplicate deterministically.
+- **Gold** — Define business grain, metrics and reconciled reporting datasets.
+- **Batch processing** — Schema / quality checks, Glue transformations and dbt warehouse models.
+- **Streaming processing** — MSK Connect landing, Databricks event-time processing and checkpointed recovery.
+
+**Architecture decision:** The diagram groups responsibilities; connectors, lakehouse transformations and warehouse models still execute at separate boundaries.

@@ -1,14 +1,17 @@
-# Bootstrap once, then capture changes
+# Batch ingestion: full load and CDC
 
 ## On screen
 
-## Bootstrap once, then capture changes
+## Batch ingestion: full load and CDC
 
-- **Database source** — Enable supported source change logging.
-- **AWS DMS** — Full load followed by ongoing CDC.
-- **S3 landing** — Preserve operations and source sequence.
+Bootstrap supported database sources, then capture changes without treating raw files as a current-state table.
 
-**Decision:** CDC is an operation history that must be applied deterministically.
+- **Source readiness** — Confirm supported engine, change logging, permissions and source-log retention.
+- **Full load** — Establish the initial dataset with a controlled transition into captured changes.
+- **CDC / incremental changes** — Preserve inserts, updates, deletes and source ordering metadata in S3 landing.
+- **Downstream acceptance** — Validate landed files, commit Bronze and apply changes deterministically in Silver.
+
+**Ingestion contract:** A change history needs explicit ordering and delete semantics; arbitrary file order is not business order.
 
 ## Narration
 

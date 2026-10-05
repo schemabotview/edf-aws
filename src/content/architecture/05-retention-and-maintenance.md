@@ -1,15 +1,18 @@
-# Retention must respect table metadata
+# Data lifecycle and replay
 
 ## On screen
 
-## Retention must respect table metadata
+## Data lifecycle and replay
 
-- **Raw archive** — Case-study policy: 90 days, then Glacier.
-- **Table maintenance** — Compact files and expire approved snapshots.
-- **Replay window** — Align source, snapshots and audit evidence.
+Retention must support recovery and historical evidence without invalidating active Iceberg tables.
 
-**Decision:** Do not let bucket lifecycle rules invalidate active table snapshots.
+- **Raw archive** — Apply the case-study 90-day-to-Glacier policy to its intended raw-input scope; plan restoration before replay.
+- **Table maintenance** — Compact files and expire approved snapshots through table-aware operations.
+- **Replay window** — Agree how far back sources and table versions support a deterministic rebuild.
+- **Audit evidence** — Preserve manifests, job versions and acceptance decisions separately from queryable table snapshots.
+
+**Architecture decision:** Bucket lifecycle rules must not remove files referenced by active table metadata.
 
 ## Narration
 
-The case study retains raw inputs for ninety days before an archive transition. Apply this lifecycle to the raw archive scope, not indiscriminately to active Iceberg files. Snapshot expiration and orphan cleanup must follow the table engine and agreed audit window. Compaction reduces small-file overhead but must preserve committed table semantics. An archived object may require restoration before replay, so recovery time belongs in the retention decision. A seven-year audit record is also different from a promise to retain every queryable table snapshot for seven years.
+The four cards distinguish raw archive, managed table maintenance, replay availability and audit evidence. The supplied case study describes ninety days of raw retention before an archive transition. Apply that policy to the intended raw scope rather than to all Iceberg files. Active table snapshots may still reference data files, so snapshot expiration and orphan cleanup require table-aware maintenance. Historical replay also depends on source availability and archive restoration time. Audit records preserve the input manifest, job version and acceptance decision; retaining those records is different from retaining every queryable table snapshot. Agree these policies together so storage savings do not undermine recovery or historical reporting.
