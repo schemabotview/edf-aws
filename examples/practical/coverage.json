@@ -1,0 +1,248 @@
+[
+  {
+    "course": "requirements",
+    "after": "acceptance-criteria",
+    "id": "source-contract-example",
+    "file": "source-contract.json",
+    "coverage": [
+      "business-needs",
+      "source-systems",
+      "slas",
+      "acceptance-criteria"
+    ]
+  },
+  {
+    "course": "architecture",
+    "after": "medallion-zones",
+    "id": "iceberg-table-example",
+    "file": "bronze-table.sql",
+    "coverage": [
+      "service-responsibilities",
+      "two-ingestion-paths",
+      "medallion-zones"
+    ]
+  },
+  {
+    "course": "architecture",
+    "after": "retention-and-maintenance",
+    "id": "maintenance-example",
+    "file": "maintenance.sql",
+    "coverage": [
+      "retention-and-maintenance"
+    ]
+  },
+  {
+    "course": "ingestion",
+    "after": "bronze-acceptance",
+    "id": "manifest-example",
+    "file": "bronze-manifest.json",
+    "coverage": [
+      "bronze-acceptance"
+    ]
+  },
+  {
+    "course": "ingestion",
+    "after": "cdc-recovery",
+    "id": "cdc-resume-example",
+    "file": "resume-dms.sh",
+    "coverage": [
+      "cdc-recovery",
+      "dms-verification"
+    ]
+  },
+  {
+    "course": "ingestion",
+    "after": "topics-and-contracts",
+    "id": "event-schema-example",
+    "file": "meter-event.avsc",
+    "coverage": [
+      "topics-and-contracts"
+    ]
+  },
+  {
+    "course": "ingestion",
+    "after": "connector-to-bronze",
+    "id": "connector-settings-example",
+    "file": "s3-sink.properties",
+    "coverage": [
+      "connector-to-bronze"
+    ]
+  },
+  {
+    "course": "ingestion",
+    "after": "event-time-and-hot-path",
+    "id": "spark-stream-example",
+    "file": "streaming.py",
+    "coverage": [
+      "event-time-and-hot-path"
+    ]
+  },
+  {
+    "course": "transformation",
+    "after": "validation-and-exceptions",
+    "id": "validation-code-example",
+    "file": "validate.py",
+    "coverage": [
+      "schema-gate",
+      "validation-and-exceptions"
+    ]
+  },
+  {
+    "course": "transformation",
+    "after": "cleansing-and-enrichment",
+    "id": "normalisation-code-example",
+    "file": "normalise.sql",
+    "coverage": [
+      "cleansing-and-enrichment"
+    ]
+  },
+  {
+    "course": "transformation",
+    "after": "dedupe-and-change-order",
+    "id": "merge-code-example",
+    "file": "silver-merge.sql",
+    "coverage": [
+      "dedupe-and-change-order"
+    ]
+  },
+  {
+    "course": "transformation",
+    "after": "business-metrics",
+    "id": "gold-model-example",
+    "file": "gold-meter-period.sql",
+    "coverage": [
+      "reporting-grain",
+      "business-metrics"
+    ]
+  },
+  {
+    "course": "transformation",
+    "after": "reconciliation-and-release",
+    "id": "reconciliation-code-example",
+    "file": "reconcile.py",
+    "coverage": [
+      "reconciliation-and-release"
+    ]
+  },
+  {
+    "course": "consumption",
+    "after": "lake-to-warehouse",
+    "id": "warehouse-load-example",
+    "file": "warehouse-load.sql",
+    "coverage": [
+      "lake-to-warehouse",
+      "star-schema"
+    ]
+  },
+  {
+    "course": "consumption",
+    "after": "customer-scd2",
+    "id": "history-join-example",
+    "file": "customer-history.sql",
+    "coverage": [
+      "star-schema",
+      "customer-scd2"
+    ]
+  },
+  {
+    "course": "consumption",
+    "after": "analytics-and-science",
+    "id": "athena-snapshot-example",
+    "file": "accepted-query.sql",
+    "coverage": [
+      "analytics-and-science"
+    ]
+  },
+  {
+    "course": "consumption",
+    "after": "ofgem-delivery",
+    "id": "delivery-state-example",
+    "file": "delivery-state.json",
+    "coverage": [
+      "ofgem-delivery"
+    ]
+  },
+  {
+    "course": "consumption",
+    "after": "operational-lookups",
+    "id": "dynamodb-query-example",
+    "file": "meter-access.py",
+    "coverage": [
+      "operational-lookups"
+    ]
+  },
+  {
+    "course": "platform-operations",
+    "after": "dependency-graph",
+    "id": "dag-code-example",
+    "file": "daily-dag.py",
+    "coverage": [
+      "dependency-graph"
+    ]
+  },
+  {
+    "course": "platform-operations",
+    "after": "schema-incident",
+    "id": "exception-ledger-example",
+    "file": "exception-ledger.json",
+    "coverage": [
+      "quarantine-and-dlq",
+      "schema-incident"
+    ]
+  },
+  {
+    "course": "platform-operations",
+    "after": "data-health",
+    "id": "cloudwatch-example",
+    "file": "freshness-alarm.sh",
+    "coverage": [
+      "data-health"
+    ]
+  },
+  {
+    "course": "platform-operations",
+    "after": "access-boundaries",
+    "id": "iam-policy-example",
+    "file": "raw-reader-policy.json",
+    "coverage": [
+      "access-boundaries"
+    ]
+  },
+  {
+    "course": "platform-operations",
+    "after": "audit-lineage",
+    "id": "cloudtrail-example",
+    "file": "s3-data-events.json",
+    "coverage": [
+      "audit-lineage"
+    ]
+  },
+  {
+    "course": "platform-operations",
+    "after": "environment-contract",
+    "id": "terraform-state-example",
+    "file": "backend.tf",
+    "coverage": [
+      "environment-contract"
+    ]
+  },
+  {
+    "course": "platform-operations",
+    "after": "release-pipeline",
+    "id": "ci-workflow-example",
+    "file": "contract-checks.yml",
+    "coverage": [
+      "release-pipeline"
+    ]
+  },
+  {
+    "course": "platform-operations",
+    "after": "restart-and-backfill",
+    "id": "recovery-plan-example",
+    "file": "recovery-plan.json",
+    "coverage": [
+      "rollback-and-cost",
+      "restart-and-backfill"
+    ]
+  }
+]

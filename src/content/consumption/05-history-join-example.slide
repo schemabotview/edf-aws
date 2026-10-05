@@ -1,0 +1,10 @@
+## Implementation: event-time dimension assignment
+
+Resolve facts to historical dimension versions and detect overlapping effective intervals.
+
+- **History construction** — Close the prior row and insert a new surrogate-key version in a controlled transaction or validated snapshot process.
+- **Time choice** — This sample assigns period_start. Split facts if a dimension change inside the period must affect attribution.
+- **No silent loss** — Left joins reveal missing versions; choose a governed unknown member or hold the fact.
+- **Tests** — Require one match per fact, unique surrogate keys, non-overlapping intervals and preserved totals.
+
+**Implementation scope:** The excerpt reads existing SCD2 history; it does not claim to implement the full change-capture or history-write transaction.

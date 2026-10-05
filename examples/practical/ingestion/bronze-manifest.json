@@ -1,0 +1,17 @@
+{
+  "run_id": "meter-2026-10-05-001",
+  "source_cutoff": "2026-10-05T23:59:59Z",
+  "contract_version": "1.0",
+  "job_version": "git:EXAMPLE_SHA",
+  "objects": [{
+    "bucket": "REPLACE_RAW_BUCKET",
+    "key": "raw/meter/LOAD0001.csv",
+    "version_id": "REPLACE_VERSION_ID",
+    "sha256": "REPLACE_CONTENT_DIGEST",
+    "expected_rows": 100
+  }],
+  "counts": {
+    "input": 100, "accepted": 98, "rejected": 2
+  },
+  "state": "VALIDATED_NOT_COMMITTED"
+}

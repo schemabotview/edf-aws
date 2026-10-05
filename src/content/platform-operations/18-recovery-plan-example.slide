@@ -1,0 +1,10 @@
+## Implementation: bounded backfill and rollback
+
+Rebuild a declared scope in isolation and compare it with the accepted baseline before promotion.
+
+- **Replay** — Reuse immutable inputs and contracts; test interruption after commit but before progress update.
+- **Rollback** — Restore only compatible artifacts / data pointers; changed schema or checkpoint state may block rollback.
+- **Hot path** — Backfill stays isolated here. Any operational replay needs event-time and correction guards against stale overwrites.
+- **Cost** — Record compute, scanned bytes, archive restoration and cost per accepted output; preserve correctness and freshness.
+
+**Implementation scope:** This recovery plan is a proposed project contract, not an automatically executable rollback command.

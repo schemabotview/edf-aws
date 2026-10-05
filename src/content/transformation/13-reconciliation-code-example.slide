@@ -1,0 +1,10 @@
+## Implementation: a release gate with a zero baseline
+
+Calculate variance only after matching the population, period and measurement unit.
+
+- **Precision** — Pass decimal strings; do not convert financial or reconciliation totals through binary floats.
+- **Threshold** — Relative tolerance 0.0001 equals 0.01%. Negative baselines use their absolute magnitude.
+- **Zero source** — Use an agreed absolute tolerance; 0.01 kWh is only a proposed example.
+- **Publication** — Combine this comparison with completeness, grain and exception gates; preserve the last accepted version on failure.
+
+**Implementation scope:** The function is a local, executable teaching example. It is one gate, not proof of regulatory compliance.

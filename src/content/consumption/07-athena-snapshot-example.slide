@@ -1,0 +1,10 @@
+## Implementation: query the accepted Iceberg version
+
+Use snapshot-aware exploration and keep BI publication tied to the same accepted version.
+
+- **Version** — Replace the example snapshot ID with a retained, accepted version from the release record.
+- **Athena** — Use an engine / table-format combination that supports the query; configure workgroup output encryption and access.
+- **BI** — Expose warehouse run and freshness alongside governed metrics; refresh only after warehouse acceptance.
+- **Governance** — Validate denied PII access and export permissions, not just successful SELECT queries.
+
+**Implementation scope:** Snapshot availability depends on retention. A latest snapshot is not necessarily an accepted reporting release.

@@ -1,0 +1,10 @@
+## Implementation: settlement grain and metrics
+
+Aggregate accepted interval energy at an explicit meter / settlement-period grain.
+
+- **Calendar** — Join approved UTC boundaries; do not assume all local days have the same interval count.
+- **Population** — Filter deleted / rejected readings and resolve source corrections before aggregation.
+- **Coverage** — Compare against the expected meter-period population, including meters with no readings.
+- **Metrics** — Define capacity denominator, exclusions, units and correction policy for generation utilisation.
+
+**Implementation scope:** The calendar is supplied project reference data; this SQL does not encode an actual market or regulator specification.

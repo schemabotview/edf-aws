@@ -1,0 +1,17 @@
+{
+  "source": "meter_interval_example",
+  "owner": "metering-data-team",
+  "contract_version": "1.0",
+  "keys": ["meter_id", "event_time"],
+  "measure": "interval_consumption",
+  "unit": "kWh",
+  "timezone": "UTC",
+  "correction_order": "source_version",
+  "freshness_seconds": {
+    "batch": 3600, "operational": 120
+  },
+  "release_gate": {
+    "relative_variance": 0.0001,
+    "zero_baseline_absolute_kwh": 0.01
+  }
+}

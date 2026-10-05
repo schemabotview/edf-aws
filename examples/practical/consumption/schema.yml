@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: fact_meter_period
+    columns:
+      - name: fact_key
+        data_tests: [not_null, unique]
+      - name: customer_sk
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_sk
+# Also test grain, totals and interval completeness.
+# Requires a compatible dbt version for arguments syntax.

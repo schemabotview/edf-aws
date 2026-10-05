@@ -1,0 +1,10 @@
+## Batch ingestion: full load and CDC
+
+Bootstrap the agreed database tables, capture ongoing changes and accept bounded files into Bronze.
+
+- **Capture and land** — A supported database feeds DMS full load + CDC, producing operation-aware raw S3 files.
+- **Accept** — Validate a manifest of arrivals and commit accepted records through an Iceberg-capable job.
+- **Record progress** — Advance downstream progress only after a successful commit; retain identities for replay.
+- **Configure next** — Inspect source readiness, task settings and the S3 endpoint in the following code scenes.
+
+**Contract:** Raw arrival, Bronze table visibility and deterministic Silver change application are separate boundaries.

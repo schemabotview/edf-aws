@@ -1,0 +1,10 @@
+## AWS DMS in brief
+
+DMS is a general replication service. It moves data between a **source endpoint** and a **target endpoint** — same engine on both sides, or two different engines.
+
+- **Many sources** — Oracle, SQL Server, MySQL/MariaDB, PostgreSQL, Db2, SAP ASE, MongoDB; self-managed, on RDS/Aurora, on another cloud, or Amazon S3.
+- **Many targets** — those engines again, plus S3, Redshift, DynamoDB, OpenSearch, Neptune, Kinesis and Kafka/MSK.
+- **Two limits** — one endpoint must be on an AWS service, and supported pairs are a matrix, not every combination.
+- **Migration type** — full load, CDC only, or full load + CDC, chosen per task.
+
+**Scope:** EDF uses one corner of that matrix — an illustrative PostgreSQL → S3 task. DMS writes raw files; a separate job commits Bronze Iceberg.

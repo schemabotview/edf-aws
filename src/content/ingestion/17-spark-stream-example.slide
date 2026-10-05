@@ -1,0 +1,10 @@
+## Implementation: event time and checkpoints
+
+Show where event-time state, durable query progress and sink retry semantics are configured.
+
+- **Decode and enrich** — Adapter validates Avro, retains topic / partition / offset and resolves reference history.
+- **Watermark** — Ten minutes manages aggregation state; update mode emits revisions, not final regulatory totals.
+- **Checkpoint** — One durable path per compatible query; startingOffsets applies only to a new query without checkpoint progress.
+- **Sink** — foreachBatch can retry a batch. Stable keys and source / window revisions must prevent duplicate or stale writes.
+
+**Implementation scope:** Runtime adapters and Kafka auth are explicit prerequisites. Watermarks alone do not deduplicate corrected readings.

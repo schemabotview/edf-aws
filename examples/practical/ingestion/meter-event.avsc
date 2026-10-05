@@ -1,0 +1,11 @@
+{
+  "type": "record", "name": "MeterEvent",
+  "namespace": "example.edf",
+  "fields": [
+    {"name": "meter_id", "type": "string"},
+    {"name": "event_time_ms", "type": "long"},
+    {"name": "interval_kwh", "type": "double"},
+    {"name": "source_version", "type": "long"},
+    {"name": "schema_version", "type": "string"}
+  ]
+}

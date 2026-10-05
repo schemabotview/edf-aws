@@ -1,0 +1,10 @@
+## Implementation: inspect and resume DMS capture
+
+Inspect durable task and table evidence before choosing a recovery action.
+
+- **Inspect** — Capture task status, recovery checkpoint, table errors and source-log availability.
+- **Resume** — Use `resume-processing` only for a previously started resumable task; do not confuse it with reload-target.
+- **Reconcile** — Compare landed files and committed Bronze progress, then replay the unaccepted manifest safely.
+- **Missing history** — Hold promotion and rebuild from a controlled baseline if required logs expired.
+
+**Implementation scope:** Commands are examples only. A recovery checkpoint is evidence to inspect, not permission to ignore source retention.

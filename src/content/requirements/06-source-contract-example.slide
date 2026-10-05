@@ -1,0 +1,10 @@
+## Implementation: a versioned source contract
+
+Translate source ownership, business meaning and acceptance criteria into a versioned contract.
+
+- **Identity** — Meter + UTC interval time; corrections use source version, not arrival time.
+- **Measurement** — This sample is interval energy, not a cumulative register or instantaneous power.
+- **Objectives** — One hour / two minutes are design targets. Measure agreed start and consumer-visible end boundaries.
+- **Acceptance** — 0.0001 is 0.01%; the zero-baseline absolute tolerance is a proposed teaching value.
+
+**Implementation scope:** A contract records targets and rules; it does not prove they have been met.

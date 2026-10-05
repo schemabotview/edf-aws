@@ -1,0 +1,10 @@
+## Implementation: raw retention and table maintenance
+
+Treat raw-object archiving and Iceberg maintenance as separate controls.
+
+- **Raw lifecycle** — Companion JSON transitions only `raw/` objects to GLACIER after 90 days; small-object defaults and retrieval costs matter.
+- **Compaction** — Rewrite data files through the table engine; measure small files and scan cost first.
+- **Expiration** — The date and ten retained snapshots are illustrative. Retain versions needed by readers, recovery and audit.
+- **Replay** — Restore archived inputs before replay; keep manifests and long-term evidence outside snapshot expiration.
+
+**Implementation scope:** Do not run maintenance with an arbitrary cut-off; these are reviewable configuration examples.

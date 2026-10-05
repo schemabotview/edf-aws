@@ -30,190 +30,10 @@
     "scene": "requirements-acceptance-criteria"
   },
   {
-    "course": "platform-operations",
-    "section": "dependency-graph",
-    "title": "Orchestration and dependencies",
-    "scene": "platform-operations-dependency-graph"
-  },
-  {
-    "course": "platform-operations",
-    "section": "quarantine-and-dlq",
-    "title": "Quality controls and exceptions",
-    "scene": "platform-operations-quarantine-and-dlq"
-  },
-  {
-    "course": "platform-operations",
-    "section": "data-health",
-    "title": "Monitoring and alerting",
-    "scene": "platform-operations-data-health"
-  },
-  {
-    "course": "platform-operations",
-    "section": "access-boundaries",
-    "title": "Security and access",
-    "scene": "platform-operations-access-boundaries"
-  },
-  {
-    "course": "platform-operations",
-    "section": "audit-lineage",
-    "title": "Audit and lineage",
-    "scene": "platform-operations-audit-lineage"
-  },
-  {
-    "course": "platform-operations",
-    "section": "environment-contract",
-    "title": "Terraform environments",
-    "scene": "platform-operations-environment-contract"
-  },
-  {
-    "course": "platform-operations",
-    "section": "release-pipeline",
-    "title": "CI/CD and safe promotion",
-    "scene": "platform-operations-release-pipeline"
-  },
-  {
-    "course": "platform-operations",
-    "section": "rollback-and-cost",
-    "title": "Rollback and operating cost",
-    "scene": "platform-operations-rollback-and-cost"
-  },
-  {
-    "course": "platform-operations",
-    "section": "schema-incident",
-    "title": "Schema incident recovery",
-    "scene": "platform-operations-schema-incident"
-  },
-  {
-    "course": "platform-operations",
-    "section": "restart-and-backfill",
-    "title": "Restart, replay and backfill",
-    "scene": "platform-operations-restart-and-backfill"
-  },
-  {
-    "course": "ingestion",
-    "section": "platform-context",
-    "title": "Ingestion in the full platform",
-    "scene": "edf-aws-codex"
-  },
-  {
-    "course": "ingestion",
-    "section": "full-load-and-cdc",
-    "title": "Batch ingestion: full load and CDC",
-    "scene": "batch-pipeline"
-  },
-  {
-    "course": "ingestion",
-    "section": "bronze-acceptance",
-    "title": "Bronze acceptance",
-    "scene": "ingestion-bronze-acceptance"
-  },
-  {
-    "course": "ingestion",
-    "section": "cdc-recovery",
-    "title": "CDC recovery and safe replay",
-    "scene": "ingestion-cdc-recovery"
-  },
-  {
-    "course": "ingestion",
-    "section": "topics-and-contracts",
-    "title": "Streaming event contracts",
-    "scene": "ingestion-topics-and-contracts"
-  },
-  {
-    "course": "ingestion",
-    "section": "connector-to-bronze",
-    "title": "MSK Connect to Bronze",
-    "scene": "ingestion-connector-to-bronze"
-  },
-  {
-    "course": "ingestion",
-    "section": "event-time-and-hot-path",
-    "title": "Spark event processing and operational output",
-    "scene": "stream-pipeline"
-  },
-  {
-    "course": "consumption",
-    "section": "lake-to-warehouse",
-    "title": "Warehouse loading and dbt",
-    "scene": "warehouse-model"
-  },
-  {
-    "course": "consumption",
-    "section": "star-schema",
-    "title": "Dimensional model",
-    "scene": "consumption-star-schema"
-  },
-  {
-    "course": "consumption",
-    "section": "customer-scd2",
-    "title": "Customer history: SCD Type 2",
-    "scene": "consumption-customer-scd2"
-  },
-  {
-    "course": "consumption",
-    "section": "analytics-and-science",
-    "title": "BI and lakehouse exploration",
-    "scene": "consumption-analytics-and-science"
-  },
-  {
-    "course": "consumption",
-    "section": "ofgem-delivery",
-    "title": "Regulatory reporting",
-    "scene": "consumption-ofgem-delivery"
-  },
-  {
-    "course": "consumption",
-    "section": "operational-lookups",
-    "title": "Operational consumption",
-    "scene": "consumption-operational-lookups"
-  },
-  {
-    "course": "transformation",
-    "section": "landing-versus-tables",
-    "title": "Transformation overview: Bronze \u2192 Silver \u2192 Gold",
-    "scene": "medallion-pipeline"
-  },
-  {
-    "course": "transformation",
-    "section": "schema-gate",
-    "title": "Schema compatibility",
-    "scene": "transformation-schema-gate"
-  },
-  {
-    "course": "transformation",
-    "section": "validation-and-exceptions",
-    "title": "Validation and exceptions",
-    "scene": "transformation-validation-and-exceptions"
-  },
-  {
-    "course": "transformation",
-    "section": "cleansing-and-enrichment",
-    "title": "Cleansing and enrichment",
-    "scene": "transformation-cleansing-and-enrichment"
-  },
-  {
-    "course": "transformation",
-    "section": "dedupe-and-change-order",
-    "title": "Deduplication and change order",
-    "scene": "transformation-dedupe-and-change-order"
-  },
-  {
-    "course": "transformation",
-    "section": "reporting-grain",
-    "title": "Reporting grain",
-    "scene": "transformation-reporting-grain"
-  },
-  {
-    "course": "transformation",
-    "section": "business-metrics",
-    "title": "Business metrics",
-    "scene": "transformation-business-metrics"
-  },
-  {
-    "course": "transformation",
-    "section": "reconciliation-and-release",
-    "title": "Reconciliation and release",
-    "scene": "transformation-reconciliation-and-release"
+    "course": "requirements",
+    "section": "source-contract-example",
+    "title": "Implementation: a versioned source contract",
+    "scene": "requirements-source-contract-example"
   },
   {
     "course": "architecture",
@@ -241,8 +61,374 @@
   },
   {
     "course": "architecture",
+    "section": "iceberg-table-example",
+    "title": "Implementation: create the Bronze table",
+    "scene": "architecture-iceberg-table-example"
+  },
+  {
+    "course": "architecture",
     "section": "retention-and-maintenance",
     "title": "Data lifecycle and replay",
     "scene": "architecture-retention-and-maintenance"
+  },
+  {
+    "course": "architecture",
+    "section": "maintenance-example",
+    "title": "Implementation: raw retention and table maintenance",
+    "scene": "architecture-maintenance-example"
+  },
+  {
+    "course": "ingestion",
+    "section": "platform-context",
+    "title": "Ingestion in the full platform",
+    "scene": "edf-aws-codex"
+  },
+  {
+    "course": "ingestion",
+    "section": "dms-service",
+    "title": "AWS DMS in brief",
+    "scene": "dms-service"
+  },
+  {
+    "course": "ingestion",
+    "section": "full-load-and-cdc",
+    "title": "Batch ingestion: full load and CDC",
+    "scene": "batch-pipeline"
+  },
+  {
+    "course": "ingestion",
+    "section": "database-readiness",
+    "title": "Source database: PostgreSQL readiness",
+    "scene": "dms-source-code"
+  },
+  {
+    "course": "ingestion",
+    "section": "dms-task-settings",
+    "title": "DMS task: full load + CDC settings",
+    "scene": "dms-task-code"
+  },
+  {
+    "course": "ingestion",
+    "section": "s3-target-settings",
+    "title": "S3 target: ordered CDC landing",
+    "scene": "dms-s3-code"
+  },
+  {
+    "course": "ingestion",
+    "section": "bronze-acceptance",
+    "title": "Bronze acceptance",
+    "scene": "ingestion-bronze-acceptance"
+  },
+  {
+    "course": "ingestion",
+    "section": "manifest-example",
+    "title": "Implementation: a bounded Bronze manifest",
+    "scene": "ingestion-manifest-example"
+  },
+  {
+    "course": "ingestion",
+    "section": "dms-verification",
+    "title": "DMS verification before release",
+    "scene": "dms-verification"
+  },
+  {
+    "course": "ingestion",
+    "section": "cdc-recovery",
+    "title": "CDC recovery and safe replay",
+    "scene": "ingestion-cdc-recovery"
+  },
+  {
+    "course": "ingestion",
+    "section": "cdc-resume-example",
+    "title": "Implementation: inspect and resume DMS capture",
+    "scene": "ingestion-cdc-resume-example"
+  },
+  {
+    "course": "ingestion",
+    "section": "topics-and-contracts",
+    "title": "Streaming event contracts",
+    "scene": "ingestion-topics-and-contracts"
+  },
+  {
+    "course": "ingestion",
+    "section": "event-schema-example",
+    "title": "Implementation: an Avro meter-event contract",
+    "scene": "ingestion-event-schema-example"
+  },
+  {
+    "course": "ingestion",
+    "section": "connector-to-bronze",
+    "title": "MSK Connect to Bronze",
+    "scene": "ingestion-connector-to-bronze"
+  },
+  {
+    "course": "ingestion",
+    "section": "connector-settings-example",
+    "title": "Implementation: MSK Connect S3 sink settings",
+    "scene": "ingestion-connector-settings-example"
+  },
+  {
+    "course": "ingestion",
+    "section": "event-time-and-hot-path",
+    "title": "Spark event processing and operational output",
+    "scene": "stream-pipeline"
+  },
+  {
+    "course": "ingestion",
+    "section": "spark-stream-example",
+    "title": "Implementation: event time and checkpoints",
+    "scene": "ingestion-spark-stream-example"
+  },
+  {
+    "course": "transformation",
+    "section": "landing-versus-tables",
+    "title": "Transformation overview: Bronze \u2192 Silver \u2192 Gold",
+    "scene": "medallion-pipeline"
+  },
+  {
+    "course": "transformation",
+    "section": "schema-gate",
+    "title": "Schema compatibility",
+    "scene": "transformation-schema-gate"
+  },
+  {
+    "course": "transformation",
+    "section": "validation-and-exceptions",
+    "title": "Validation and exceptions",
+    "scene": "transformation-validation-and-exceptions"
+  },
+  {
+    "course": "transformation",
+    "section": "validation-code-example",
+    "title": "Implementation: schema and reason-coded validation",
+    "scene": "transformation-validation-code-example"
+  },
+  {
+    "course": "transformation",
+    "section": "cleansing-and-enrichment",
+    "title": "Cleansing and enrichment",
+    "scene": "transformation-cleansing-and-enrichment"
+  },
+  {
+    "course": "transformation",
+    "section": "normalisation-code-example",
+    "title": "Implementation: units and effective-date enrichment",
+    "scene": "transformation-normalisation-code-example"
+  },
+  {
+    "course": "transformation",
+    "section": "dedupe-and-change-order",
+    "title": "Deduplication and change order",
+    "scene": "transformation-dedupe-and-change-order"
+  },
+  {
+    "course": "transformation",
+    "section": "merge-code-example",
+    "title": "Implementation: correction ordering and tombstones",
+    "scene": "transformation-merge-code-example"
+  },
+  {
+    "course": "transformation",
+    "section": "reporting-grain",
+    "title": "Reporting grain",
+    "scene": "transformation-reporting-grain"
+  },
+  {
+    "course": "transformation",
+    "section": "business-metrics",
+    "title": "Business metrics",
+    "scene": "transformation-business-metrics"
+  },
+  {
+    "course": "transformation",
+    "section": "gold-model-example",
+    "title": "Implementation: settlement grain and metrics",
+    "scene": "transformation-gold-model-example"
+  },
+  {
+    "course": "transformation",
+    "section": "reconciliation-and-release",
+    "title": "Reconciliation and release",
+    "scene": "transformation-reconciliation-and-release"
+  },
+  {
+    "course": "transformation",
+    "section": "reconciliation-code-example",
+    "title": "Implementation: a release gate with a zero baseline",
+    "scene": "transformation-reconciliation-code-example"
+  },
+  {
+    "course": "consumption",
+    "section": "lake-to-warehouse",
+    "title": "Warehouse loading and dbt",
+    "scene": "warehouse-model"
+  },
+  {
+    "course": "consumption",
+    "section": "warehouse-load-example",
+    "title": "Implementation: staged Redshift loading",
+    "scene": "consumption-warehouse-load-example"
+  },
+  {
+    "course": "consumption",
+    "section": "star-schema",
+    "title": "Dimensional model",
+    "scene": "consumption-star-schema"
+  },
+  {
+    "course": "consumption",
+    "section": "customer-scd2",
+    "title": "Customer history: SCD Type 2",
+    "scene": "consumption-customer-scd2"
+  },
+  {
+    "course": "consumption",
+    "section": "history-join-example",
+    "title": "Implementation: event-time dimension assignment",
+    "scene": "consumption-history-join-example"
+  },
+  {
+    "course": "consumption",
+    "section": "analytics-and-science",
+    "title": "BI and lakehouse exploration",
+    "scene": "consumption-analytics-and-science"
+  },
+  {
+    "course": "consumption",
+    "section": "athena-snapshot-example",
+    "title": "Implementation: query the accepted Iceberg version",
+    "scene": "consumption-athena-snapshot-example"
+  },
+  {
+    "course": "consumption",
+    "section": "ofgem-delivery",
+    "title": "Regulatory reporting",
+    "scene": "consumption-ofgem-delivery"
+  },
+  {
+    "course": "consumption",
+    "section": "delivery-state-example",
+    "title": "Implementation: reporting delivery evidence",
+    "scene": "consumption-delivery-state-example"
+  },
+  {
+    "course": "consumption",
+    "section": "operational-lookups",
+    "title": "Operational consumption",
+    "scene": "consumption-operational-lookups"
+  },
+  {
+    "course": "consumption",
+    "section": "dynamodb-query-example",
+    "title": "Implementation: version-safe writes and latest reads",
+    "scene": "consumption-dynamodb-query-example"
+  },
+  {
+    "course": "platform-operations",
+    "section": "dependency-graph",
+    "title": "Orchestration and dependencies",
+    "scene": "platform-operations-dependency-graph"
+  },
+  {
+    "course": "platform-operations",
+    "section": "dag-code-example",
+    "title": "Implementation: orchestration with version handoff",
+    "scene": "platform-operations-dag-code-example"
+  },
+  {
+    "course": "platform-operations",
+    "section": "quarantine-and-dlq",
+    "title": "Quality controls and exceptions",
+    "scene": "platform-operations-quarantine-and-dlq"
+  },
+  {
+    "course": "platform-operations",
+    "section": "data-health",
+    "title": "Monitoring and alerting",
+    "scene": "platform-operations-data-health"
+  },
+  {
+    "course": "platform-operations",
+    "section": "cloudwatch-example",
+    "title": "Implementation: publish and alarm on consumer freshness",
+    "scene": "platform-operations-cloudwatch-example"
+  },
+  {
+    "course": "platform-operations",
+    "section": "access-boundaries",
+    "title": "Security and access",
+    "scene": "platform-operations-access-boundaries"
+  },
+  {
+    "course": "platform-operations",
+    "section": "iam-policy-example",
+    "title": "Implementation: scope a raw-reader policy",
+    "scene": "platform-operations-iam-policy-example"
+  },
+  {
+    "course": "platform-operations",
+    "section": "audit-lineage",
+    "title": "Audit and lineage",
+    "scene": "platform-operations-audit-lineage"
+  },
+  {
+    "course": "platform-operations",
+    "section": "cloudtrail-example",
+    "title": "Implementation: capture S3 object data events",
+    "scene": "platform-operations-cloudtrail-example"
+  },
+  {
+    "course": "platform-operations",
+    "section": "environment-contract",
+    "title": "Terraform environments",
+    "scene": "platform-operations-environment-contract"
+  },
+  {
+    "course": "platform-operations",
+    "section": "terraform-state-example",
+    "title": "Implementation: environment-separated Terraform state",
+    "scene": "platform-operations-terraform-state-example"
+  },
+  {
+    "course": "platform-operations",
+    "section": "release-pipeline",
+    "title": "CI/CD and safe promotion",
+    "scene": "platform-operations-release-pipeline"
+  },
+  {
+    "course": "platform-operations",
+    "section": "ci-workflow-example",
+    "title": "Implementation: contract checks before promotion",
+    "scene": "platform-operations-ci-workflow-example"
+  },
+  {
+    "course": "platform-operations",
+    "section": "rollback-and-cost",
+    "title": "Rollback and operating cost",
+    "scene": "platform-operations-rollback-and-cost"
+  },
+  {
+    "course": "platform-operations",
+    "section": "schema-incident",
+    "title": "Schema incident recovery",
+    "scene": "platform-operations-schema-incident"
+  },
+  {
+    "course": "platform-operations",
+    "section": "exception-ledger-example",
+    "title": "Implementation: quarantine and repair evidence",
+    "scene": "platform-operations-exception-ledger-example"
+  },
+  {
+    "course": "platform-operations",
+    "section": "restart-and-backfill",
+    "title": "Restart, replay and backfill",
+    "scene": "platform-operations-restart-and-backfill"
+  },
+  {
+    "course": "platform-operations",
+    "section": "recovery-plan-example",
+    "title": "Implementation: bounded backfill and rollback",
+    "scene": "platform-operations-recovery-plan-example"
   }
 ]

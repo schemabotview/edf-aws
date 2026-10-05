@@ -1,0 +1,10 @@
+## DMS task: full load + CDC settings
+
+Keep migration mode, table selection and task settings explicit.
+
+- **Mode** — Set API `MigrationType` to `full-load-and-cdc`; this is separate from task-settings JSON.
+- **Selection** — Table mappings include only agreed schemas / tables, such as `public.meter_readings`.
+- **Full load** — Eight parallel subtasks are an illustrative starting point; tune against source load and replication capacity.
+- **Continuous capture** — Both stop flags stay false. S3 targets use `BatchApplyEnabled=false`.
+
+**Replay:** `DO_NOTHING` can leave duplicate raw records after interrupted loads; downstream acceptance and change application must be idempotent.

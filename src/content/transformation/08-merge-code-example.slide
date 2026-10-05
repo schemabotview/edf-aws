@@ -1,0 +1,10 @@
+## Implementation: correction ordering and tombstones
+
+Keep the highest accepted source version even when that version is a delete.
+
+- **Rank first** — Resolve each bounded change set by business key, source sequence and a documented tie-breaker.
+- **Idempotence** — Equal or older versions do not rewrite the accepted state; equal-version conflicts must be quarantined.
+- **Deletes** — Keep a versioned tombstone so an older replay cannot resurrect a deleted key.
+- **Engine contract** — Use supported Spark / Iceberg MERGE with one source match per target row; test concurrent writers.
+
+**Implementation scope:** DMS sequence extraction is source-specific. Do not invent a version from S3 file order or arrival timestamps.

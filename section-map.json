@@ -122,5 +122,98 @@
   "ingestion-platform-context": {
     "scene": "edf-aws-codex",
     "focus": "ingestion"
+  },
+  "ingestion-dms-service": {
+    "scene": "dms-service"
+  },
+  "ingestion-database-readiness": {
+    "scene": "dms-source-code"
+  },
+  "ingestion-dms-task-settings": {
+    "scene": "dms-task-code"
+  },
+  "ingestion-s3-target-settings": {
+    "scene": "dms-s3-code"
+  },
+  "ingestion-dms-verification": {
+    "scene": "dms-verification"
+  },
+  "requirements-source-contract-example": {
+    "scene": "requirements-source-contract-example"
+  },
+  "architecture-iceberg-table-example": {
+    "scene": "architecture-iceberg-table-example"
+  },
+  "architecture-maintenance-example": {
+    "scene": "architecture-maintenance-example"
+  },
+  "ingestion-manifest-example": {
+    "scene": "ingestion-manifest-example"
+  },
+  "ingestion-cdc-resume-example": {
+    "scene": "ingestion-cdc-resume-example"
+  },
+  "ingestion-event-schema-example": {
+    "scene": "ingestion-event-schema-example"
+  },
+  "ingestion-connector-settings-example": {
+    "scene": "ingestion-connector-settings-example"
+  },
+  "ingestion-spark-stream-example": {
+    "scene": "ingestion-spark-stream-example"
+  },
+  "transformation-validation-code-example": {
+    "scene": "transformation-validation-code-example"
+  },
+  "transformation-normalisation-code-example": {
+    "scene": "transformation-normalisation-code-example"
+  },
+  "transformation-merge-code-example": {
+    "scene": "transformation-merge-code-example"
+  },
+  "transformation-gold-model-example": {
+    "scene": "transformation-gold-model-example"
+  },
+  "transformation-reconciliation-code-example": {
+    "scene": "transformation-reconciliation-code-example"
+  },
+  "consumption-warehouse-load-example": {
+    "scene": "consumption-warehouse-load-example"
+  },
+  "consumption-history-join-example": {
+    "scene": "consumption-history-join-example"
+  },
+  "consumption-athena-snapshot-example": {
+    "scene": "consumption-athena-snapshot-example"
+  },
+  "consumption-delivery-state-example": {
+    "scene": "consumption-delivery-state-example"
+  },
+  "consumption-dynamodb-query-example": {
+    "scene": "consumption-dynamodb-query-example"
+  },
+  "platform-operations-dag-code-example": {
+    "scene": "platform-operations-dag-code-example"
+  },
+  "platform-operations-exception-ledger-example": {
+    "scene": "platform-operations-exception-ledger-example"
+  },
+  "platform-operations-cloudwatch-example": {
+    "scene": "platform-operations-cloudwatch-example"
+  },
+  "platform-operations-iam-policy-example": {
+    "scene": "platform-operations-iam-policy-example"
+  },
+  "platform-operations-cloudtrail-example": {
+    "scene": "platform-operations-cloudtrail-example"
+  },
+  "platform-operations-terraform-state-example": {
+    "scene": "platform-operations-terraform-state-example"
+  },
+  "platform-operations-ci-workflow-example": {
+    "scene": "platform-operations-ci-workflow-example"
+  },
+  "platform-operations-recovery-plan-example": {
+    "scene": "platform-operations-recovery-plan-example"
   }
 }

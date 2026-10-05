@@ -1,0 +1,20 @@
+# Example workflow stored outside .github/workflows.
+name: edf-contract-checks
+on: [pull_request]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r examples/practical/requirements-dev.txt
+      - run: python scripts/verify-examples.py
+
+# Cloud promotion is a separate reviewed workflow:
+# protected environment + approved immutable artifact,
+# OIDC role restricted by repository / branch / env,
+# compatibility, replay and accepted-output gates.

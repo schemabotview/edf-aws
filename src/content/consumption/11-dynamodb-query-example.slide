@@ -1,0 +1,10 @@
+## Implementation: version-safe writes and latest reads
+
+Use conditional per-reading writes and a key-based descending Query for operational access.
+
+- **Key** — Use meter_id + a canonical fixed-width UTC reading_timestamp; source_version orders corrections at the same timestamp.
+- **Retry** — Older writes are held; equal-version payload conflicts must be inspected rather than silently overwritten.
+- **Latest** — Base-table strongly consistent Query returns the newest sort key; expose missing and stale readings to operators.
+- **Retention** — Set an epoch-seconds TTL attribute for the 90-day policy; filter expired records in the application because deletion is asynchronous.
+
+**Implementation scope:** This protects per-reading history. A separate latest-item design needs its own event-time plus correction condition.

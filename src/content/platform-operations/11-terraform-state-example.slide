@@ -1,0 +1,10 @@
+## Implementation: environment-separated Terraform state
+
+Protect state and isolate environment inputs before provisioning platform resources.
+
+- **State** — Use an existing private versioned bucket; S3 lockfile support requires a compatible Terraform version and IAM grants.
+- **Separation** — Use approved account / state key / variables per environment; backend blocks cannot use ordinary input variables.
+- **Secrets** — Treat state and plan files as sensitive; do not put credentials or customer data into repository variables.
+- **Review** — Validate and review the target-account plan, drift and IAM / networking / KMS effects before apply.
+
+**Implementation scope:** This config demonstrates state management only. No resource estate is deployed by the learning repo.

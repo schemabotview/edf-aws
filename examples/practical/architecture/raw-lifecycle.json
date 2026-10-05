@@ -1,0 +1,17 @@
+{
+  "Rules": [
+    {
+      "ID": "raw-archive-90d",
+      "Status": "Enabled",
+      "Filter": {
+        "Prefix": "raw/"
+      },
+      "Transitions": [
+        {
+          "Days": 90,
+          "StorageClass": "GLACIER"
+        }
+      ]
+    }
+  ]
+}

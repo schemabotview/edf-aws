@@ -1,0 +1,12 @@
+{
+  "report_id": "EXAMPLE_PERIOD_REVISION_1",
+  "accepted_run": "EXAMPLE_RUN",
+  "gold_snapshot": "REPLACE_SNAPSHOT_ID",
+  "payload_sha256": "REPLACE_DIGEST",
+  "format_version": "REPLACE_REAL_SPEC",
+  "state": "PREPARED",
+  "attempt": 0,
+  "receipt_id": null,
+  "receipt_received_at": null,
+  "correction_of": null
+}

@@ -1,0 +1,10 @@
+## Implementation: a bounded Bronze manifest
+
+Freeze the exact input set before validation and table acceptance.
+
+- **Immutable scope** — Use object version IDs and content hashes; an S3 ETag is not universally a content checksum.
+- **Account for arrivals** — Input = accepted + rejected; retain rejected row identities and reasons.
+- **Commit and recover** — Use stable arrival IDs in an idempotent acceptance write; then save the committed snapshot and advance progress.
+- **Crash boundary** — A failure after commit but before progress must be safe to retry; a run ID alone is insufficient.
+
+**Implementation scope:** The manifest is a project contract, not an AWS API schema; it deliberately records an uncommitted state.

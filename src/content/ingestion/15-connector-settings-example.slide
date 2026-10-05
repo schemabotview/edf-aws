@@ -1,0 +1,10 @@
+## Implementation: MSK Connect S3 sink settings
+
+Configure the selected plugin separately from the managed MSK Connect runtime.
+
+- **Plugin and converters** — Install a tested Confluent S3 plugin; package the converter matching the Avro producer and registry.
+- **Runtime** — Supply subnets, security groups, TLS / authentication, execution role and worker capacity in the create-connector request.
+- **Flush and identity** — Row count and scheduled rotation bound file delivery; tags expose offset ranges / row counts, not per-row identity.
+- **Acceptance** — Test duplicate and late-record behaviour; validate S3 arrivals before committing Bronze.
+
+**Implementation scope:** Three tasks, 10,000 rows and 60 seconds are proposed tuning values. This is not a complete connector request.

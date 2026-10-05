@@ -1827,5 +1827,190 @@ export const canonicalScenes: Scene[] = [
       }
     ],
     "edges": []
+  },
+  {
+    "id": "dms-service",
+    "title": "AWS DMS: many sources, many targets, one replication task",
+    "flow": "LR",
+    "framed": true,
+    "padding": 0.1,
+    "nodes": [
+      {
+        "id": "dms-sources",
+        "label": "Source endpoints",
+        "icon": "none",
+        "pattern": "group",
+        "flow": "TB",
+        "children": [
+          {
+            "id": "src-relational",
+            "label": "Relational engines",
+            "sub": "Oracle \u00b7 SQL Server \u00b7 MySQL / MariaDB \u00b7 PostgreSQL \u00b7 Db2 \u00b7 SAP ASE",
+            "icon": "database",
+            "pattern": "external"
+          },
+          {
+            "id": "src-hosting",
+            "label": "Wherever they run",
+            "sub": "Self-managed \u00b7 RDS / Aurora \u00b7 Azure and Google Cloud",
+            "icon": "rds",
+            "pattern": "external"
+          },
+          {
+            "id": "src-nonrelational",
+            "label": "Non-relational",
+            "sub": "MongoDB \u00b7 DocumentDB \u00b7 Amazon S3",
+            "icon": "layers",
+            "pattern": "external"
+          }
+        ],
+        "edges": []
+      },
+      {
+        "id": "dms-engine",
+        "label": "AWS DMS",
+        "icon": "none",
+        "pattern": "group",
+        "flow": "TB",
+        "children": [
+          {
+            "id": "eng-task",
+            "label": "Replication task",
+            "sub": "Table mappings \u00b7 transformations \u00b7 validation",
+            "icon": "dms",
+            "pattern": "network"
+          },
+          {
+            "id": "eng-type",
+            "label": "Migration type",
+            "sub": "Full load \u00b7 CDC only \u00b7 full load + CDC",
+            "icon": "clock",
+            "pattern": "service"
+          },
+          {
+            "id": "eng-compute",
+            "label": "Replication compute",
+            "sub": "Provisioned instance or DMS Serverless",
+            "icon": "network",
+            "pattern": "service"
+          }
+        ],
+        "edges": []
+      },
+      {
+        "id": "dms-targets",
+        "label": "Target endpoints",
+        "icon": "none",
+        "pattern": "group",
+        "flow": "TB",
+        "children": [
+          {
+            "id": "tgt-databases",
+            "label": "Databases",
+            "sub": "Oracle \u00b7 SQL Server \u00b7 MySQL \u00b7 PostgreSQL \u00b7 Aurora \u00b7 Db2",
+            "icon": "database",
+            "pattern": "storage"
+          },
+          {
+            "id": "tgt-analytics",
+            "label": "Analytics and storage",
+            "sub": "Amazon S3 \u00b7 Redshift \u00b7 OpenSearch",
+            "icon": "redshift",
+            "pattern": "storage"
+          },
+          {
+            "id": "tgt-streaming",
+            "label": "Streaming and NoSQL",
+            "sub": "Kinesis \u00b7 Kafka / MSK \u00b7 DynamoDB \u00b7 Neptune",
+            "icon": "kinesis",
+            "pattern": "storage"
+          }
+        ],
+        "edges": []
+      }
+    ],
+    "edges": [
+      { "source": "dms-sources", "target": "dms-engine", "route": "step" },
+      { "source": "dms-engine", "target": "dms-targets", "route": "step" }
+    ]
+  },
+  {
+    "id": "dms-source-code",
+    "padding": 0.12,
+    "nodes": [
+      {
+        "id": "code",
+        "kind": "code",
+        "filename": "source-readiness.sql",
+        "minCols": 52,
+        "label": "-- Illustrative PostgreSQL inspection\nSHOW wal_level;\nSHOW max_replication_slots;\nSHOW max_wal_senders;\n\nSELECT slot_name, active,\n       restart_lsn, confirmed_flush_lsn\nFROM pg_replication_slots;\n\n-- Confirm table keys / replica identity.\n-- Check grants and retained WAL.\n-- RDS: rds.logical_replication = 1\n-- Apply required parameter-group reboot."
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "dms-task-code",
+    "padding": 0.12,
+    "nodes": [
+      {
+        "id": "code",
+        "kind": "code",
+        "filename": "task-settings.json",
+        "minCols": 52,
+        "label": "{\n  \"FullLoadSettings\": {\n    \"TargetTablePrepMode\": \"DO_NOTHING\",\n    \"MaxFullLoadSubTasks\": 8,\n    \"StopTaskCachedChangesApplied\": false,\n    \"StopTaskCachedChangesNotApplied\": false\n  },\n  \"TargetMetadata\": {\n    \"BatchApplyEnabled\": false\n  },\n  \"Logging\": {\n    \"EnableLogging\": true\n  }\n}"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "dms-s3-code",
+    "padding": 0.12,
+    "nodes": [
+      {
+        "id": "code",
+        "kind": "code",
+        "filename": "s3-settings.json",
+        "minCols": 52,
+        "label": "{\n  \"BucketName\": \"REPLACE_BUCKET\",\n  \"BucketFolder\": \"edf/database-source\",\n  \"ServiceAccessRoleArn\": \"REPLACE_ROLE_ARN\",\n  \"DataFormat\": \"csv\",\n  \"PreserveTransactions\": true,\n  \"CdcPath\": \"cdc\",\n  \"IncludeOpForFullLoad\": true,\n  \"DatePartitionEnabled\": false,\n  \"AddColumnName\": false,\n  \"GlueCatalogGeneration\": false,\n  \"CdcMaxBatchInterval\": 60,\n  \"EncryptionMode\": \"SSE_KMS\",\n  \"ServerSideEncryptionKmsKeyId\": \"REPLACE_KEY_ARN\"\n}"
+      }
+    ],
+    "edges": []
+  },
+  {
+    "id": "dms-verification",
+    "cols": 2,
+    "framed": true,
+    "padding": 0.09,
+    "nodes": [
+      {
+        "id": "dms-verification-0",
+        "label": "Endpoint and table health",
+        "sub": "Test connections; task logs; table statistics and load completion",
+        "icon": "network",
+        "pattern": "service"
+      },
+      {
+        "id": "dms-verification-1",
+        "label": "Insert / update / delete",
+        "sub": "Synthetic keyed changes; raw operations; reconciled Silver state",
+        "icon": "database",
+        "pattern": "storage"
+      },
+      {
+        "id": "dms-verification-2",
+        "label": "Lag and provenance",
+        "sub": "CDC latency; retained WAL; cut-off and input manifests",
+        "icon": "clock",
+        "pattern": "external"
+      },
+      {
+        "id": "dms-verification-3",
+        "label": "Recovery rehearsal",
+        "sub": "Interrupt / resume; deterministic duplicates; completeness gate",
+        "icon": "shieldcheck",
+        "pattern": "network"
+      }
+    ],
+    "edges": []
   }
 ]

@@ -1,0 +1,10 @@
+## DMS verification before release
+
+Verify the capture boundary before promoting data.
+
+- **Connectivity and load** — Test both endpoints; inspect task logs and table statistics for errors and incomplete loads.
+- **Change probe** — Insert, update and delete a synthetic keyed row; inspect landed operations and the reconciled Silver state.
+- **Lag and evidence** — Monitor `CDCLatencySource` / `CDCLatencyTarget`, source WAL retention and S3 delivery; save source cut-off and manifests.
+- **Recovery rehearsal** — Interrupt and resume in a test environment; prove duplicate handling and completeness before publishing.
+
+**Release gate:** A running DMS task and a populated S3 folder do not prove reconciled output.

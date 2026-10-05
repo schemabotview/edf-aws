@@ -1,0 +1,10 @@
+## Implementation: units and effective-date enrichment
+
+Apply an explicit unit conversion and a half-open effective-date reference join.
+
+- **Units** — 1,200 Wh becomes 1.2 kWh; incompatible measurement kinds must fail before this query.
+- **Time** — UTC session interpretation does not fix an ambiguous local timestamp. Parse using its declared source timezone.
+- **History** — Inclusive valid_from / exclusive valid_to resolves the reference version at event time.
+- **Join gate** — Reject missing and overlapping matches; assert joins preserve row counts and totals.
+
+**Implementation scope:** The query assumes validated interval readings and non-overlapping reference history, not cumulative counters.

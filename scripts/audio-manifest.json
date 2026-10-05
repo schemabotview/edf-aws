@@ -1,5 +1,5 @@
 {
-  "count": 41,
+  "count": 72,
   "entries": [
     {
       "course": "requirements",
@@ -32,6 +32,12 @@
       "narration": "Acceptance criteria make the business needs testable. Record the source cut-off, manifest and control totals before processing. Keep accepted and rejected counts so every arrival is accounted for. Compare outputs against the correct population, reporting period and units rather than unrelated totals. Preserve schema checks, exception reasons, job version and committed table snapshot. Publication occurs only after the release gate passes or an authorised exception is recorded. A delivery receipt is separate evidence that the accepted dataset reached its destination. Finally, replay the same inputs and show equivalent accepted results."
     },
     {
+      "course": "requirements",
+      "section": "source-contract-example",
+      "file": "requirements/source-contract-example.wav",
+      "narration": "The example contract makes the requirements testable. It names an owner, the business key, interval measurement semantics and the correction ordering rule. Freshness numbers are targets from the case-study design, not measured results. Define where the clock starts and which accepted output ends it. Relative variance is stored as a fraction: one ten-thousandth is one hundredth of a percent. The absolute tolerance for a zero source total is a proposed teaching value that needs business approval. Source-system inventory, operational priorities and release tests can all refer to this versioned contract."
+    },
+    {
       "course": "architecture",
       "section": "platform-overview",
       "file": "architecture/platform-overview.wav",
@@ -57,9 +63,21 @@
     },
     {
       "course": "architecture",
+      "section": "iceberg-table-example",
+      "file": "architecture/iceberg-table-example.wav",
+      "narration": "The SQL creates a managed Bronze table through a configured Iceberg catalog. The object store holds files; the catalog and Iceberg metadata determine which files belong to a committed snapshot. Bronze retains raw values and arrival identities rather than silently rewriting source measurements. Ingestion-day partitioning is a proposed Bronze choice, not a rule for every medallion table. Enable the Iceberg framework and session extensions before running this example, and configure the Glue catalog warehouse and S3 file implementation. Version two is an explicit compatibility choice. Verify supported engine versions and governance permissions in the target environment."
+    },
+    {
+      "course": "architecture",
       "section": "retention-and-maintenance",
       "file": "architecture/retention-and-maintenance.wav",
       "narration": "The four cards distinguish raw archive, managed table maintenance, replay availability and audit evidence. The supplied case study describes ninety days of raw retention before an archive transition. Apply that policy to the intended raw scope rather than to all Iceberg files. Active table snapshots may still reference data files, so snapshot expiration and orphan cleanup require table-aware maintenance. Historical replay also depends on source availability and archive restoration time. Audit records preserve the input manifest, job version and acceptance decision; retaining those records is different from retaining every queryable table snapshot. Agree these policies together so storage savings do not undermine recovery or historical reporting."
+    },
+    {
+      "course": "architecture",
+      "section": "maintenance-example",
+      "file": "architecture/maintenance-example.wav",
+      "narration": "Table-aware procedures manage committed data safely, while raw lifecycle policies manage independent input objects. The companion lifecycle file targets only the raw prefix and transitions eligible objects after ninety days. Small-object transition defaults and archive retrieval delays affect the economics and recovery plan. Compaction combines files without changing business rows. Snapshot expiration removes versions outside the approved retention window, but the example date and retain-last count are not a production policy. Check concurrent readers, retained tags or branches, replay requirements and audit holds before authorising maintenance. Never apply an ordinary object-deletion rule to active Iceberg storage."
     },
     {
       "course": "ingestion",
@@ -69,9 +87,33 @@
     },
     {
       "course": "ingestion",
+      "section": "dms-service",
+      "file": "ingestion/dms-service.wav",
+      "narration": "It helps to see DMS as a general replication service before narrowing to our use of it. DMS moves data between two endpoints, a source and a target. Those endpoints can run the same database engine, which is a homogeneous migration, or two different engines, which is a heterogeneous one. On the source side DMS reads Oracle, SQL Server, MySQL, MariaDB, PostgreSQL, Db2, SAP ASE and MongoDB, whether the database is self-managed, running on RDS or Aurora, or hosted on another cloud, and it can also read from Amazon S3. On the target side it writes to those same engines and, more interestingly for a data platform, to Amazon S3, Redshift, DynamoDB, OpenSearch, Neptune, Kinesis Data Streams and Kafka. Two limits are worth remembering. One endpoint must be on an AWS service, so DMS will not move data between two on-premises databases. And the supported combinations are a published matrix rather than every pairing, so a source and target must be checked together. Each task also picks a migration type: full load, change capture only, or full load followed by change capture. Our project uses one corner of all that, a PostgreSQL source and an S3 target, and DMS stops at raw files. Reconciliation and the Iceberg commit stay with downstream processing."
+    },
+    {
+      "course": "ingestion",
       "section": "full-load-and-cdc",
       "file": "ingestion/full-load-and-cdc.wav",
-      "narration": "This implementation profile is an illustrative PostgreSQL source, not a claim about EDF’s production database. For self-managed PostgreSQL, enable logical WAL and provision replication slots and WAL senders for the task count. Grant the required replication and table-read permissions, and monitor retained WAL when DMS falls behind. RDS PostgreSQL uses its logical replication parameter and the required instance restart. Create a full-load-and-CDC task with explicit table selection. Start with eight full-load subtasks and keep both stop-after-full-load flags false so change capture continues. The S3 endpoint names a dedicated raw bucket prefix, service role and KMS key. This example preserves CDC transaction order using PreserveTransactions and CdcPath, which writes ordered CDC as CSV. Do not combine that mode with date partitioning, column headers or automatic Glue catalog generation. File rotation is a tuning input, not proof of consumer freshness. A separate acceptance job validates and commits Bronze Iceberg before recording processing progress."
+      "narration": "The first row captures database records and lands raw files. DMS bootstraps the selected tables while capturing changes, then continues replication. The second row turns a bounded set of arrivals into accepted Bronze data and records durable progress after the table commit. These are separate execution boundaries, so a running DMS task does not prove that Bronze or Silver is current. The next three sections show an illustrative PostgreSQL source check, task settings and transaction-preserving CSV endpoint profile. Together they make the implementation concrete without claiming that these are the actual EDF production settings."
+    },
+    {
+      "course": "ingestion",
+      "section": "database-readiness",
+      "file": "ingestion/database-readiness.wav",
+      "narration": "This inspection query checks logical replication settings and existing slot health. Configuration changes are made through the appropriate PostgreSQL configuration or RDS parameter group, with a planned restart where required. Slots and WAL senders must cover the workload rather than copying arbitrary example values. Confirm access using the AWS instructions for the exact database version. Primary keys and replica identity matter for updates and deletes. Retained WAL is also an operational risk: an inactive replication slot can hold logs until storage fills. Test the source endpoint from the replication compute before starting a migration."
+    },
+    {
+      "course": "ingestion",
+      "section": "dms-task-settings",
+      "file": "ingestion/dms-task-settings.wav",
+      "narration": "The scene shows the task-settings file, not a complete create-task request. Set full-load-and-cdc separately on the API request and supply source, target and replication instance identifiers plus table mappings. Eight parallel subtasks are a starting configuration, not a measured EDF tuning result. Both cached-change stop flags remain false for ongoing capture. Batch apply is disabled for the S3 target. DO_NOTHING avoids assuming a destructive target preparation operation, but an interrupted full load can leave duplicates. Preserve arrival evidence and enforce deterministic replay downstream. Enable task logging and investigate errors rather than treating a running task as proof of complete data."
+    },
+    {
+      "course": "ingestion",
+      "section": "s3-target-settings",
+      "file": "ingestion/s3-target-settings.wav",
+      "narration": "The S3 endpoint profile preserves transaction ordering in CDC files. It needs a CDC path and writes those ordered changes as CSV. Date partitioning, column-name headers and Glue catalog generation are disabled because they conflict with this profile. Full-load operation markers make the initial records explicit inserts. The sixty-second interval is one flush threshold; file size, source lag and downstream scheduling also affect freshness. The replication instance and target bucket must be in the same AWS region. Validate the service role trust, bucket access and KMS permissions using the real environment identifiers. Keep schema interpretation in the input contract because this CSV profile has no column-name header."
     },
     {
       "course": "ingestion",
@@ -81,9 +123,27 @@
     },
     {
       "course": "ingestion",
+      "section": "manifest-example",
+      "file": "ingestion/manifest-example.wav",
+      "narration": "This sample manifest pins object versions, content hashes, a source cut-off and the contract and job versions. The counts show that ninety-eight accepted rows plus two rejected rows account for the hundred-row input. An S3 ETag cannot always be used as a content checksum, so the contract names a separate digest. At this stage the run is validated but not committed. The acceptance implementation must use stable arrival identities so a repeated write does not duplicate input. Record the actual Iceberg snapshot after commit and only then advance downstream progress. A crash between those steps must be recoverable by consulting committed arrival or run evidence."
+    },
+    {
+      "course": "ingestion",
+      "section": "dms-verification",
+      "file": "ingestion/dms-verification.wav",
+      "narration": "Verification starts with endpoint connectivity and task table statistics. Then a controlled synthetic insert, update and delete exercise the entire change contract. Check the raw operation records, accepted Bronze evidence and final Silver state for the same key. Monitor source and target CDC latency together with retained WAL and arrival evidence. A task can be running while a table is suspended or a downstream consumer is stale. Rehearse interruption and resume in a test environment, reconciling counts and keys and confirming that duplicates do not change the final result. Save the manifest and cut-off used for acceptance. The following recovery section explains what happens when the required source logs are no longer available."
+    },
+    {
+      "course": "ingestion",
       "section": "cdc-recovery",
       "file": "ingestion/cdc-recovery.wav",
       "narration": "There are multiple progress markers: the source log position, DMS task progress, landed files and the processing job commit. Treating them as one watermark loses information. A processing crash after output but before state update must be safe to retry, while advancing state before durable output risks data loss. Keep arrival identities and source sequences, reconcile the resumed interval and apply deletes explicitly in Silver. If source logs have expired, define a controlled resnapshot and reconciliation procedure instead of pretending a checkpoint can reconstruct missing source history."
+    },
+    {
+      "course": "ingestion",
+      "section": "cdc-resume-example",
+      "file": "ingestion/cdc-resume-example.wav",
+      "narration": "The first commands inspect task-level progress and table statistics. Use the real task ARN from the target environment, and verify that the source still retains the required logs. Resuming a previously started task is different from starting a new full load or reloading the target. The task checkpoint does not prove that downstream Bronze has accepted all landed changes. Compare source continuity, object manifests and committed table evidence before replay. If the necessary history has expired, stop unsafe publication and reconcile a controlled resnapshot. No command in this walkthrough is executed against AWS."
     },
     {
       "course": "ingestion",
@@ -93,15 +153,33 @@
     },
     {
       "course": "ingestion",
+      "section": "event-schema-example",
+      "file": "ingestion/event-schema-example.wav",
+      "narration": "The schema represents one synthetic interval reading. It deliberately names interval energy rather than a generic value whose unit is ambiguous. Event time is epoch milliseconds, while source version identifies corrections. Publish the meter identifier as the Kafka key when the required ordering is per meter. This does not create a global order across partitions. Schema registration and converter configuration depend on the chosen registry and plugin. Structural compatibility tests do not check whether a reading is finite, whether corrections are ordered, or whether a source changed measurement meaning. Keep those rules in the versioned source contract."
+    },
+    {
+      "course": "ingestion",
       "section": "connector-to-bronze",
       "file": "ingestion/connector-to-bronze.wav",
       "narration": "MSK Connect runs a Kafka Connect plugin; an S3 sink writes Kafka records to object storage. Plugin packaging, authentication, permissions, output format and file rotation are deployment choices that must be configured and tested. Preserve topic, partition and offset in the landing envelope wherever the connector supports it, or define an equivalent deterministic record identity. Rotation affects end-to-end latency. The generic S3 sink does not perform an Iceberg commit, so a separate Bronze ingestion job creates the managed table snapshot."
     },
     {
       "course": "ingestion",
+      "section": "connector-settings-example",
+      "file": "ingestion/connector-settings-example.wav",
+      "narration": "The scene is a plugin configuration fragment. MSK Connect separately needs the custom plugin revision, network placement, cluster authentication and service execution role. Package and configure the converter matching the producer serialization and schema registry; Avro file output does not automatically decode arbitrary wire formats. Scheduled rotation and the flush count influence file arrival, but do not prove the end-to-end service objective. Object tags describe file offset ranges and counts. They do not replace a stable row identity carried in the event or derived by a tested parser. Landing remains independent of the downstream Bronze commit."
+    },
+    {
+      "course": "ingestion",
       "section": "event-time-and-hot-path",
       "file": "ingestion/event-time-and-hot-path.wav",
       "narration": "Spark processes Kafka events independently from raw S3 landing. The guide uses a thirty-second trigger and ten-minute watermark, but a watermark is a lateness policy rather than a guarantee that every older event is retained. Store a distinct checkpoint per query and keep the source available for recovery. DynamoDB writes need an idempotent key and a condition that prevents an old reading from replacing the latest one. A Spark checkpoint does not create one atomic transaction across DynamoDB and the lakehouse; reconcile those sinks independently."
+    },
+    {
+      "course": "ingestion",
+      "section": "spark-stream-example",
+      "file": "ingestion/spark-stream-example.wav",
+      "narration": "This Spark excerpt demonstrates the query boundaries rather than pretending to implement a complete connector or sink. A project decoder validates the wire format, retains offsets and resolves measurement semantics. Watermarking manages event-time aggregation state. Update mode can emit revised window totals, so these operational summaries are not final reconciled reporting facts. The source-version deduplication policy must run before summing corrected readings. Each compatible query needs its own checkpoint location. When a checkpoint exists, stored offsets take precedence over the starting-offset option. The foreachBatch callback may repeat after failure, so the DynamoDB adapter must write stable identities with revision-aware conditions."
     },
     {
       "course": "transformation",
@@ -123,15 +201,33 @@
     },
     {
       "course": "transformation",
+      "section": "validation-code-example",
+      "file": "transformation/validation-code-example.wav",
+      "narration": "The first check inspects required column types before running row-level expressions. It intentionally fails on a missing required column or incompatible type. Additive fields still need a declared compatibility policy. The row split uses a reason expression so failed rows retain an explanation rather than disappearing in a filter. Null units need their own branch because SQL null logic can otherwise miss them. This small example does not cover every rule: event time, non-finite numbers, measurement-specific ranges and effective reference joins remain necessary. Persist both partitions with arrival and run identities, then reconcile the counts to the bounded input set."
+    },
+    {
+      "course": "transformation",
       "section": "cleansing-and-enrichment",
       "file": "transformation/cleansing-and-enrichment.wav",
       "narration": "Silver standardises timestamps and measurement units before applying business rules. A source value of twelve hundred watt-hours becomes 1.2 kilowatt-hours only when the source contract declares watt-hours. Enrichment uses the relevant meter and tariff references, with effective-date handling when history matters. Missing mandatory fields and unresolved relationships create rejection records with a reason, source identity and run ID. Count those records in reconciliation; quietly filtering them out makes a clean table look correct while hiding missing consumption."
     },
     {
       "course": "transformation",
+      "section": "normalisation-code-example",
+      "file": "transformation/normalisation-code-example.wav",
+      "narration": "This query normalises accepted measurements using the declared unit and joins the reference version effective at event time. UTC session configuration is useful, but it cannot recover a timezone that the source never supplied. Parse timestamps according to their source contract, including daylight-saving ambiguity handling. Effective intervals are half-open: the start is included and the end is excluded. A left join retains missing references so the quality gate can report them. Overlapping reference intervals can duplicate readings, so require exactly one match before promoting rows. Preserve the source values and rule version alongside the normalised measure."
+    },
+    {
+      "course": "transformation",
       "section": "dedupe-and-change-order",
       "file": "transformation/dedupe-and-change-order.wav",
       "narration": "The original guide deduplicates meter ID and reading timestamp while keeping the latest reading. Define latest using source version or event sequence, then a deterministic tie-breaker, not whichever Spark partition happens to finish last. The revised design also contains database CDC; those records use the database business key and change sequence rather than the meter key universally. Apply delete operations and late corrections explicitly. Re-run the same input set and verify that accepted keys and values remain unchanged."
+    },
+    {
+      "course": "transformation",
+      "section": "merge-code-example",
+      "file": "transformation/merge-code-example.wav",
+      "narration": "The merge preserves a high-water mark for every business key, including deletes. Physically deleting a row without retaining its last source version can let an older replay insert it again. A tombstone prevents that resurrection. Rank the bounded changes first so only one winner reaches the merge for each key. Equal-version conflicting payloads need quarantine rather than an arbitrary winner. The sample assumes a trusted monotonic source version; database CDC needs an engine-specific sequence contract. The serving view excludes tombstones. Validate the exact Spark and Iceberg runtime and test concurrent writes before applying this pattern to a shared production table."
     },
     {
       "course": "transformation",
@@ -147,15 +243,33 @@
     },
     {
       "course": "transformation",
+      "section": "gold-model-example",
+      "file": "transformation/gold-model-example.wav",
+      "narration": "The Gold query uses a settlement calendar rather than deriving periods from arrival dates. Calendar boundaries account for the agreed market rules and daylight-saving transitions. Each accepted meter-period has a consumption total and an observed interval count. Completeness requires comparison with the expected meter-period population; an aggregate alone cannot show meters that are entirely missing. Resolve duplicates and corrections before this query, and exclude tombstones. Generation utilisation uses its own explicit capacity denominator and exclusion policy. The SQL is a proposed model whose calendar and release rules must be agreed with the business."
+    },
+    {
+      "course": "transformation",
       "section": "reconciliation-and-release",
       "file": "transformation/reconciliation-and-release.wav",
       "narration": "Reconciliation compares Gold consumption with the source billing control total for the same scope. Express the percentage variance relative to a documented baseline, and define a separate absolute-tolerance rule for a zero source total. The case-study gate blocks Ofgem submission when variance exceeds 0.01 percent. Preserve the input snapshots and reject counts with the decision. Late data may require a corrected reporting version; do not silently replace a previously submitted regulatory result without a revision record. A failed publication gate preserves the last trustworthy output and links every held result to a reason and an owner."
+    },
+    {
+      "course": "transformation",
+      "section": "reconciliation-code-example",
+      "file": "transformation/reconciliation-code-example.wav",
+      "narration": "The function compares matched totals using decimal arithmetic. The same-scope flag represents a prerequisite that the caller must establish from population, period and units, not simply set to true. A relative threshold cannot be computed against zero, so that case uses a separate proposed absolute tolerance. The function also uses the absolute magnitude of a nonzero source total for the denominator. Passing a totals comparison does not prove completeness: both sides could omit the same meters. Store source and Gold versions and apply the remaining quality and population checks before updating the published pointer. A failed decision retains the last accepted output."
     },
     {
       "course": "consumption",
       "section": "lake-to-warehouse",
       "file": "consumption/lake-to-warehouse.wav",
       "narration": "The poster shows dbt and Redshift but does not specify a production transport mechanism from Iceberg to warehouse staging. For this walkthrough, model that boundary as an explicit load adapter and record the accepted lakehouse snapshot it consumes. A COPY-compatible export is one possible implementation to validate, not an undocumented fact about the original system. dbt then transforms relations available to its Redshift adapter. A successful dbt build does not itself prove that every source Iceberg row reached warehouse staging."
+    },
+    {
+      "course": "consumption",
+      "section": "warehouse-load-example",
+      "file": "consumption/warehouse-load-example.wav",
+      "narration": "The example separates lakehouse export, warehouse movement and dbt modeling. A COPY command cannot interpret an Iceberg table metadata directory, so export a pinned Gold version to a compatible file format with an immutable manifest. The table schema and every row must include the exact run identifier. Deleting only that staging run inside the transaction makes a retry bounded. After loading, compare counts and totals with the accepted Gold input. The dbt model selection and run variable illustrate how warehouse transformation follows loading. Tests do not replace reconciliation, and publication stays held until the warehouse output matches the approved input version."
     },
     {
       "course": "consumption",
@@ -171,9 +285,21 @@
     },
     {
       "course": "consumption",
+      "section": "history-join-example",
+      "file": "consumption/history-join-example.wav",
+      "narration": "The first query assigns a customer version using a half-open effective interval. Period-start attribution is an explicit sample decision; it may need a finer fact grain if a tariff changes within the period. A current-row flag cannot preserve this historical meaning. The second query detects overlapping intervals for the same customer. It must return no rows before the join can be trusted. Missing matches remain visible through a left join, while duplicate matches must block publication. The history-building process needs controlled surrogate-key creation, interval closure and late-correction rules. Preserve counts and energy totals across dimension assignment."
+    },
+    {
+      "course": "consumption",
       "section": "analytics-and-science",
       "file": "consumption/analytics-and-science.wav",
       "narration": "Power BI and commercial analysts use the warehouse for governed reporting models. Data scientists can query Iceberg through Athena, which keeps exploratory scans separate from warehouse capacity. Separate access paths should not create conflicting definitions: document the accepted table versions, fact grains and metric contracts each consumer uses. Restrict PII consistently across both paths. Validate consumer freshness against published output, not merely against a successful upstream transformation."
+    },
+    {
+      "course": "consumption",
+      "section": "athena-snapshot-example",
+      "file": "consumption/athena-snapshot-example.wav",
+      "narration": "Athena can query a specific retained Iceberg version. Choose that identifier from the acceptance record rather than assuming the latest commit is approved for reporting. Inspect metadata snapshots when diagnosing differences, and keep the associated input run and contract versions. Configure the workgroup result location and encryption; query output is another data-access surface. Warehouse dashboards should expose the same accepted run identity and consumer freshness. A retained snapshot can support investigation, but expiration eventually removes time-travel availability. The example therefore connects publication policy with table retention and access governance."
     },
     {
       "course": "consumption",
@@ -183,15 +309,33 @@
     },
     {
       "course": "consumption",
+      "section": "delivery-state-example",
+      "file": "consumption/delivery-state-example.wav",
+      "narration": "The ledger records a prepared payload derived from an accepted reporting run. It distinguishes data acceptance from remote delivery acknowledgment. The payload hash and format version identify exactly what was prepared. A timeout after a request was sent creates an ambiguous result: the receiver may already have accepted it. Query receipt or submission status where the real transport supports that, and use its idempotency contract. A local ledger alone cannot provide exactly-once remote submission. Corrections should create linked revisions, keeping both payloads and receipts. Actual regulator fields, transport and acknowledgment requirements need project-specific verification."
+    },
+    {
+      "course": "consumption",
       "section": "operational-lookups",
       "file": "consumption/operational-lookups.wav",
       "narration": "DynamoDB serves point-oriented operational access, while Redshift serves analytical scans. With meter_id as partition key and reading_timestamp as sort key, a latest-reading lookup can use a descending Query limited to one item; GetItem requires the full key. Preserve timestamps so the dashboard can show stale data rather than imply it is current. The ninety-day TTL manages hot-path retention but expiration is asynchronous, so correctness must not depend on an expired row disappearing immediately."
+    },
+    {
+      "course": "consumption",
+      "section": "dynamodb-query-example",
+      "file": "consumption/dynamodb-query-example.wav",
+      "narration": "The write condition prevents an older correction from replacing a newer version of the same meter and timestamp. Equal-version collisions need investigation: an identical retry and a conflicting payload are not the same case. The Query uses the meter partition key and descending timestamp order, avoiding a table scan. Fixed-width canonical UTC timestamps make string sort order meaningful. Strong consistency is available on the base table, not global secondary indexes. An empty or stale result must be visible to the operator. TTL uses epoch seconds and asynchronous deletion, so expired data needs application handling. A separate latest-pointer item would require an additional event-time and revision condition."
     },
     {
       "course": "platform-operations",
       "section": "dependency-graph",
       "file": "platform-operations/dependency-graph.wav",
       "narration": "MWAA runs Airflow dependency graphs across ingestion, validation, transformation, warehouse loading and publication. DMS CDC and Kafka ingestion are ongoing services, so a daily DAG waits for an agreed cut-off or completeness condition rather than launching the entire stream every morning. Sensors need timeouts and meaningful failure messages. Pass run IDs, cut-offs and committed table versions between tasks so a retry resumes the same logical run instead of mixing yesterday's accepted data with today's arrivals."
+    },
+    {
+      "course": "platform-operations",
+      "section": "dag-code-example",
+      "file": "platform-operations/dag-code-example.wav",
+      "narration": "The DAG is manually or externally triggered with the accepted manifest and run identifier. It does not wait for an arbitrary S3 folder to become nonempty. Glue operators run existing configured jobs and wait for completion. Job success must mean the transformation validated its inputs, committed the output and recorded its version; otherwise a process dependency is not a data dependency. Gold resolves the accepted Silver snapshot through the run ledger. The example uses fixed ten-minute retries and therefore does not claim to implement the case-study exponential retry schedule. Add completion sensing, execution timeouts, warehouse and release gates in the configured environment."
     },
     {
       "course": "platform-operations",
@@ -207,9 +351,21 @@
     },
     {
       "course": "platform-operations",
+      "section": "cloudwatch-example",
+      "file": "platform-operations/cloudwatch-example.wav",
+      "narration": "An independent observer measures the age of consumer-visible accepted data and emits it every minute. If the stream has no new messages, the observer must still publish increasing age or a completeness failure. The alarm uses the same namespace, metric name and dimensions. Missing observations breach rather than silently appearing healthy. Two evaluation periods and notification delivery add detection time, so the alarm is not an end-to-end freshness guarantee. Route the SNS action to an owned incident path. Pair this symptom metric with source lag, task health, rejected records and reconciliation variance so operators can identify the failed boundary."
+    },
+    {
+      "course": "platform-operations",
       "section": "access-boundaries",
       "file": "platform-operations/access-boundaries.wav",
       "narration": "The guide separates storage, processing and warehouse access. Use roles scoped to the source and output locations each job actually needs, including KMS permissions where encryption requires them. Lake Formation governs supported table access; it does not eliminate the need to secure raw bucket paths. Warehouse roles expose the marts appropriate to the consumer and exclude PII where required. Test denied access as well as permitted access, using representative analyst and job identities. Keep customer identifying data separate from measurements. Resolve credentials through Secrets Manager; apply KMS encryption and grants to every retained copy."
+    },
+    {
+      "course": "platform-operations",
+      "section": "iam-policy-example",
+      "file": "platform-operations/iam-policy-example.wav",
+      "narration": "S3 bucket listing and object reads use different resources. The list statement targets the bucket and constrains the requested prefix. The read statement targets objects under that prefix. This is an input-reader fragment, not a service execution role for DMS or a transformation writer. Encrypted inputs also need scoped KMS access, and the key policy must allow that identity. Table jobs need catalog and metadata access and any supported Lake Formation permissions. Test both positive and negative access with the real role, including unrelated raw inputs and PII. Warehouse authorization and Athena result locations remain separate surfaces."
     },
     {
       "course": "platform-operations",
@@ -219,15 +375,33 @@
     },
     {
       "course": "platform-operations",
+      "section": "cloudtrail-example",
+      "file": "platform-operations/cloudtrail-example.wav",
+      "narration": "The selector targets object-level data events under the raw meter prefix. This is only one scope, so it does not establish audit coverage for every platform dataset. Merge it with existing management and data-event requirements rather than overwriting configured selectors blindly. Long-term retention requires actual trail delivery, protected storage and tested retrieval; event history is not a seven-year data-event archive. Access logs answer who performed an operation. Transformation lineage must separately link source objects, contracts, job versions, snapshots, accepted warehouse runs and report revisions. Validate both access-event delivery and historical evidence retrieval."
+    },
+    {
+      "course": "platform-operations",
       "section": "environment-contract",
       "file": "platform-operations/environment-contract.wav",
       "narration": "Terraform defines the supporting AWS estate described by the case study. The revised design also needs DMS endpoints, tasks and MSK Connect plugin configuration where supported by the selected provider resources. Keep development and production inputs separate and protect state because it can contain sensitive configuration. This repo describes resource boundaries rather than provisioning a live account. Before deployment, validate network access, IAM policies, KMS use and source connectivity in the target environment."
     },
     {
       "course": "platform-operations",
+      "section": "terraform-state-example",
+      "file": "platform-operations/terraform-state-example.wav",
+      "narration": "The backend stores state under an environment-specific key and enables locking. The state bucket must exist before initialization, with private access, versioning and appropriate encryption and lockfile permissions. Terraform state and saved plans can contain sensitive values. Production should use its approved account boundary, backend key and variables rather than sharing development state. Backend blocks cannot interpolate ordinary input variables, so supply environment-specific backend configuration through the intended initialization flow. Pin provider dependencies in the lockfile and inspect the actual target-account plan. This example does not provision the EDF platform."
+    },
+    {
+      "course": "platform-operations",
       "section": "release-pipeline",
       "file": "platform-operations/release-pipeline.wav",
       "narration": "GitHub Actions can coordinate reviewed deployment artifacts and environment approvals. Validate code, contracts and representative output before promotion. A data pipeline release also needs compatibility checks for catalog schema, checkpoint state and consumer models; application rollback alone may not undo a table migration. Record the deployed job and infrastructure versions with each run. Keep the previous accepted output available while validating the new release so a technically successful deployment does not immediately expose unreconciled data. Terraform provisions separate environments with protected state. Promote reviewed code only after contract checks and a compatible data release; retain versioned rollback evidence."
+    },
+    {
+      "course": "platform-operations",
+      "section": "ci-workflow-example",
+      "file": "platform-operations/ci-workflow-example.wav",
+      "narration": "The sample pull-request workflow runs the local example verifier without cloud credentials. It stays in the examples directory so authoring the course does not activate automation unexpectedly. Production repositories should resolve and pin action revisions according to their policy. A separate promotion workflow can use GitHub OIDC with a trust policy restricted to the intended repository and environment. That workflow also needs the reviewed immutable artifact, compatibility checks and accepted-output evidence. A successful code deployment does not authorise publication of unreconciled data. Keep the previous accepted version available until the new release passes its consumer gates."
     },
     {
       "course": "platform-operations",
@@ -243,9 +417,21 @@
     },
     {
       "course": "platform-operations",
+      "section": "exception-ledger-example",
+      "file": "platform-operations/exception-ledger-example.wav",
+      "narration": "The ledger gives quarantine an enforceable lifecycle. It records the affected source and exact scope manifest, an owner and a publication hold. A record by itself does not stop unsafe jobs, so processing and publication must check the control state. Confirm what the source unit means before approving conversion. Retain the old contract and arrival, then record the new contract, repair artifact, replay run and reconciliation decision. Clear the hold only through an authorised conditional transition after all gates pass. This connects record-level exceptions and source-level schema incidents without erasing the original failure evidence."
+    },
+    {
+      "course": "platform-operations",
       "section": "restart-and-backfill",
       "file": "platform-operations/restart-and-backfill.wav",
       "narration": "The final exercise compares an uninterrupted run with a run interrupted near a commit boundary. Use the same synthetic input, code and contracts, then compare accepted business keys, values, counts and totals after recovery. Test a historical backfill separately and confirm that it cannot overwrite a newer operational reading. This repository supplies the teaching scenario and expected assertions, not a production fault-injection environment. The full architecture is complete only when its recovery claims can be supported by repeatable integration evidence. MWAA retries repeat a bounded run safely. Backfills declare source intervals and input versions, rebuild held results, reconcile them and promote only after acceptance. Trace the synthetic reading through its preserved meter and timestamp identity."
+    },
+    {
+      "course": "platform-operations",
+      "section": "recovery-plan-example",
+      "file": "platform-operations/recovery-plan-example.wav",
+      "narration": "The plan fixes a half-open event interval, immutable input manifest and exact artifact and contract versions. Candidate output stays separate from the accepted release. Hot-path writes are disabled so a historical backfill cannot overwrite current operational readings. If operational replay is required, the sink must guard event time and source revision. Compare keys, values, counts and totals before moving the published pointer. Rollback requires compatibility with the current schema and checkpoint state, not just an old code artifact. Record recovery costs, including archive retrieval and scanned bytes, and assess them per accepted output while retaining the service objectives."
     }
   ]
 }

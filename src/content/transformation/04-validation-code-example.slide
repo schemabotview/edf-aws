@@ -1,0 +1,10 @@
+## Implementation: schema and reason-coded validation
+
+Check declared fields before splitting accepted rows from reason-coded exceptions.
+
+- **Schema gate** — Required types must match; approval of additive fields and changed meaning remains a contract decision.
+- **Row checks** — Missing identity / unit and unparseable measurements receive explicit reasons.
+- **Extend rules** — Validate event time, finite values, measurement-specific ranges and effective reference joins.
+- **Evidence** — Persist rejected rows with provenance and assert bounded input accounting before promotion.
+
+**Implementation scope:** This is a minimal Spark fragment, not a complete quality suite; accepted rows still need the remaining checks.

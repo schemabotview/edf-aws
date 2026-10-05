@@ -1,0 +1,14 @@
+{
+  "recovery_id": "EXAMPLE_RECOVERY_001",
+  "event_interval": [
+    "2026-10-01T00:00:00Z", "2026-10-02T00:00:00Z"
+  ],
+  "input_manifest": "REPLACE_IMMUTABLE_URI",
+  "contract_version": "1.0",
+  "job_version": "REPLACE_ARTIFACT_SHA",
+  "baseline_release": "REPLACE_ACCEPTED_RUN",
+  "output_namespace": "recovery_candidate",
+  "hot_path_writes": false,
+  "checks": ["keys", "values", "counts", "totals"],
+  "promotion": "HOLD_UNTIL_RECONCILED"
+}

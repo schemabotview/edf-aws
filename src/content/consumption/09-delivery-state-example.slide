@@ -1,0 +1,10 @@
+## Implementation: reporting delivery evidence
+
+Separate reconciled data, prepared payload, attempted transport and acknowledged delivery.
+
+- **Prepare** — Validate the real specification and persist immutable payload identity before transport.
+- **Send** — Record attempts and correlation IDs; use receiver-supported idempotency when available.
+- **Ambiguous result** — A timeout after sending needs receipt / status lookup before retry; local state alone cannot prevent remote duplicates.
+- **Correction** — Create a new revision linked to the prior report; retain payload, response and decision history.
+
+**Implementation scope:** This is a proposed project ledger, not an Ofgem request format or a live submission integration.

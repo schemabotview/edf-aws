@@ -1,0 +1,10 @@
+## Implementation: scope a raw-reader policy
+
+Separate bucket-list permissions from object-read permissions and constrain both to the intended input.
+
+- **Scope** — The example reader can list / read the meter raw prefix; it has no write or delete permissions.
+- **Encryption** — Add narrowly scoped KMS decrypt permission and key-policy access for the real encrypted input.
+- **Table access** — Glue Catalog, supported Lake Formation controls and Iceberg metadata / file paths need separate grants.
+- **Verify** — Test allowed meter reads and denied unrelated / PII reads with the actual role; warehouse grants are independent.
+
+**Implementation scope:** This policy fragment is not a complete DMS, Spark or connector execution role.

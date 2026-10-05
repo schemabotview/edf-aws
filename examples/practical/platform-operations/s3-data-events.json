@@ -1,0 +1,16 @@
+{
+  "AdvancedEventSelectors": [{
+    "Name": "MeterRawObjectAccess",
+    "FieldSelectors": [{
+      "Field": "eventCategory", "Equals": ["Data"]
+    }, {
+      "Field": "resources.type",
+      "Equals": ["AWS::S3::Object"]
+    }, {
+      "Field": "resources.ARN",
+      "StartsWith": [
+        "arn:aws:s3:::REPLACE_BUCKET/raw/meter/"
+      ]
+    }]
+  }]
+}

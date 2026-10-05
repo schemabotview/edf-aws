@@ -1,0 +1,10 @@
+## Implementation: create the Bronze table
+
+Make the distinction between S3 objects, catalog metadata and committed table rows concrete.
+
+- **Runtime** — Enable Glue `--datalake-formats=iceberg` and configure Spark Iceberg extensions, GlueCatalog and S3FileIO.
+- **Table contract** — Preserve raw measurement values and provenance; parse and normalise in Silver.
+- **Partitioning** — Bronze uses ingestion day in this example; Silver / Gold use workload-specific event partitions.
+- **Compatibility** — Validate the chosen Glue, Iceberg and Athena versions plus Lake Formation access.
+
+**Implementation scope:** This DDL assumes a configured catalog, warehouse path and job permissions; it is not a complete Glue deployment.

@@ -1,0 +1,14 @@
+{
+  "incident_id": "EXAMPLE_INCIDENT_001",
+  "source": "meter_interval_example",
+  "scope_manifest": "REPLACE_IMMUTABLE_URI",
+  "reason": "UNEXPECTED_UNIT",
+  "contract_before": "1.0",
+  "state": "QUARANTINED",
+  "owner": "metering-data-team",
+  "publication_hold": true,
+  "approved_contract_after": null,
+  "repair_job_version": null,
+  "replay_run_id": null,
+  "reconciliation_decision": null
+}

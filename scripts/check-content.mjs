@@ -8,7 +8,7 @@ await build({ stdin: { contents: "export { COURSES, SPINE } from './src/content'
 const { COURSES, SPINE, SCENES } = await import(pathToFileURL(resolve('.tmp/check.mjs')))
 assert.deepEqual(Object.keys(COURSES), [...SPINE])
 assert.equal(SPINE.length, 6)
-assert.equal(Object.keys(SCENES).length, 40)
+assert.equal(Object.keys(SCENES).length, 71)
 const bindings = JSON.parse(await readFile('section-map.json','utf8'))
 const uses = {}
 let sections = 0
@@ -33,7 +33,7 @@ for (const c of Object.values(COURSES)) {
     sections++
   }
 }
-assert.equal(sections,41)
+assert.equal(sections,72)
 assert.deepEqual(new Set(Object.keys(uses)), new Set(Object.keys(SCENES)), 'Every registered scene must be used')
 const poster=SCENES['edf-aws-codex']; assert(poster)
 const find=(ns,id)=>ns.flatMap(n=>[n,...(n.children?find(n.children,id):[])]).filter(n=>n.id===id)
@@ -41,3 +41,12 @@ const find=(ns,id)=>ns.flatMap(n=>[n,...(n.children?find(n.children,id):[])]).fi
 function all(ns){return ns.flatMap(n=>[n,...all(n.children??[])])}
 for (const id of ['batch-proc','stream']) { const panel=all(poster.nodes).find(n=>n.id===id); assert(panel.cols===3 && panel.children.length===3) }
 console.log(`Validated ${SPINE.length} courses, ${sections} sections and the architecture poster`)
+
+// Code scenes and reference artifacts must not drift apart.
+const practical = JSON.parse(await readFile('examples/practical/coverage.json','utf8'))
+for (const x of practical) {
+  const node = SCENES[x.course+'-'+x.id].nodes[0]
+  assert.equal(node.kind,'code')
+  assert.equal(node.label, (await readFile('examples/practical/'+x.course+'/'+x.file,'utf8')).trimEnd())
+  for (const id of x.coverage) assert(COURSES[x.course].sections.some(s=>s.id===id))
+}

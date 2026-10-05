@@ -1,0 +1,10 @@
+## Implementation: staged Redshift loading
+
+Load a version-pinned export into isolated staging before building warehouse models.
+
+- **Transport** — COPY reads exported files, not an Iceberg metadata directory. Pin Gold and export schema first.
+- **Retry scope** — Delete only the same staging run and reload transactionally; all exported rows must carry that run_id.
+- **dbt** — Models filter the accepted run and build facts / dimensions; companion YAML demonstrates uniqueness and relationship tests.
+- **Gate** — Reconcile staging and mart counts / totals to Gold before exposing the new published version.
+
+**Implementation scope:** The CSV adapter is proposed, not confirmed EDF infrastructure. Role, table DDL, manifest and credentials must be supplied.
